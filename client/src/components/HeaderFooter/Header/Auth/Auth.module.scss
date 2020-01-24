@@ -1,0 +1,26 @@
+.auth{
+  &__wrapper{
+    display: flex;
+    align-items: center;
+  }
+  &__item{
+    display: flex;
+    color: #000;
+    align-items: center;
+    border: none; 
+    font-size: 1.6rem;
+    background: transparent;
+    cursor: pointer;
+    &:not(:last-child){
+      margin-right: 1rem;
+    }
+  }
+}
+
+.icon{
+  width: 2rem;
+  height: 2rem;
+  & path{
+    fill: currentColor;
+  }
+}

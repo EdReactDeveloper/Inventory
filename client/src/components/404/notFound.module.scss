@@ -1,0 +1,10 @@
+.wrapper{
+  display: flex;
+  justify-content: center;
+  padding-top: 20rem;
+  width: 100%;
+  &_heading{
+    color: cornflowerblue;
+    text-transform: uppercase;
+  }
+}
