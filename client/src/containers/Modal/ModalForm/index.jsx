@@ -15,16 +15,16 @@ const FormContainer = (props) => {
   const url = props.location.pathname
 
   const [state, setState] = useState({
-    name: 'edward', 
-    description: 'desription ', 
-    tags: 'tag1 tag2',  
-    location: 'drawer', 
-    category: 'medicine', 
+    name: '', 
+    description: ' ', 
+    tags: '',  
+    location: '', 
+    category: '', 
     checked: false, 
     shared: false, 
     sharedWith: [], 
     count: 1, 
-    type: 'some type', 
+    type: '', 
     status: 'away', 
     img: ''
   })

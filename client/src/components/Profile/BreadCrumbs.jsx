@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import style from './profile.module.scss'; 
+import style from './profile.module.scss';
 
-const BreadCrumbs = ({ items, profile, ...props }) => {
- console.log(items)
+const BreadCrumbs = ({ items }) => {
   return (
     <div className={style.bread}>
       <Link to="/">home</Link>
