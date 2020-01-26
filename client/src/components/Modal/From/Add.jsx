@@ -1,8 +1,10 @@
 import React from 'react';
 import { add } from './formData';
+import style from './Forms.module.scss'; 
 
 const Add = ({ name, description, tags, category, status, statusArray, count, location, type, onChange, submitFrom, changeCheckBox, shared }) => {
   const payload = { name, description, tags, category, count, location, type, }
+  
   return (
     <form onSubmit={submitFrom}>
       {add(payload).map(item => {
@@ -27,8 +29,12 @@ const Add = ({ name, description, tags, category, status, statusArray, count, lo
           })}
         </select>
       </label>
-      <input type="checkbox" checked={shared} name="shared" onChange={(e)=> changeCheckBox(e) }/>
-      <button type="submit">save</button>
+      <label htmlFor="status">
+        <h4>shared</h4>
+        <input type="checkbox" checked={shared} name="shared" onChange={(e)=> changeCheckBox(e) }/>
+      </label>
+          
+      <button type="submit" className={style.submit}>save</button>
     </form>
   );
 };

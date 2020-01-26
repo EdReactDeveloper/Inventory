@@ -11,17 +11,9 @@ import style from '../App.module.scss';
 
 import Alert from '../containers/Alert';
 import ErrorBoundry from '../containers/ErrorBoundry';
-
+import Profile from '../containers/Profile'; 
 import Modal from '../containers/Modal';
 
-const BoardsContainer = () => {
-  return (
-    <div className={style.board}>
-      {/* <PrivateRoute path="/" component={Toolbar} /> */}
-
-    </div>
-  )
-}
 
 const Routes = ({ loading }) => {
 
@@ -36,8 +28,8 @@ const Routes = ({ loading }) => {
               <Switch>
                 <AuthRoute exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
-                {/* <Route render={() => <BoardsContainer />} /> */}
-                <PrivateRoute path='/' component={Main}/>
+                <PrivateRoute exact path='/' component={Main}/>
+                <PrivateRoute path='/:id' component={Profile}/>
               </Switch>
             </div>
           </ErrorBoundry>

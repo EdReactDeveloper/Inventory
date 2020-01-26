@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = '/api/items';
+const baseURL = '/api/item';
 
 const body = (payload) => {
 	return JSON.stringify(payload)
@@ -11,20 +11,20 @@ const instance = axios.create({
 });
 
 // ITEM
-export const getItemApi = async (id) => {
+export const getItemsApi = async (id) => {
 	const result = await axios.get(`${baseURL}/${id}`);
 	return result.data;
 };
 
-export const getAllItemsApi  = async () => {
-	const result = await axios.get(`${baseURL}/`);
+export const getProfileApi  = async () => {
+	const result = await axios.get(`/api/profile/me`);
 	return result.data;
 };
 
-export const addItemApi  = async (payload, type) => {
-	const result = await instance.post(`${baseURL}/`, body(payload, type));
+export const addItemApi  = async (payload) => {
+	const result = await instance.post(`${baseURL}/add`, body(payload));
 	return result.data;
-};
+};	
 
 export const removeItemApi  = async (id) =>{
 	const result = await axios.delete(`${baseURL}/${id}`)

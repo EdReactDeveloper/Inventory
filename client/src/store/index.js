@@ -8,6 +8,8 @@ import dropdown from './reducers/dropdown';
 import inProgress from './reducers/inprogress';
 import alerts from './reducers/alert';
 import search from './reducers/search';
+import profile from './reducers/profile'; 
+import items from './reducers/items'; 
 
 const reducers = combineReducers({
 	auth,
@@ -16,6 +18,8 @@ const reducers = combineReducers({
 	dropdown,
 	search,
 	inProgress,
+	profile,
+	items,
 	form: reduxForm
 });
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

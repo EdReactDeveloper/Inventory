@@ -1,0 +1,24 @@
+.profile__wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  &_wrapper {
+    display: flex;
+    padding: 1rem 2rem;
+    border: 1px solid #ccc;
+    margin: 1rem 0;
+    width: 50%;
+  }
+
+  &__details {
+    margin-left: 1rem;
+
+    & span{
+      font-size: 1.4rem; 
+      color: #bbb;
+    }
+  }
+}
