@@ -9,7 +9,6 @@ const Item = require('../../models/Item');
 router.get('/:id', async (req, res) => {
 	const { id } = req.params;
 	const items = await Item.find({parentId: id });
-	console.log(items)
 		res.json(items);
 	
 });

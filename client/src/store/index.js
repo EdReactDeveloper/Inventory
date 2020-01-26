@@ -10,6 +10,7 @@ import alerts from './reducers/alert';
 import search from './reducers/search';
 import profile from './reducers/profile'; 
 import items from './reducers/items'; 
+import bread from './reducers/bread'; 
 
 const reducers = combineReducers({
 	auth,
@@ -20,6 +21,7 @@ const reducers = combineReducers({
 	inProgress,
 	profile,
 	items,
+	bread,
 	form: reduxForm
 });
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

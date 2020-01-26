@@ -22,3 +22,16 @@
     }
   }
 }
+
+.bread{
+  padding: 1rem 0; 
+
+  & a{
+    color: #bbb; 
+    font-size: 1.4rem;
+    transition: color .2s;
+    &:hover{
+      color: blue
+    }
+  }
+}

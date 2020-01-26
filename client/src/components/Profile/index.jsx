@@ -2,11 +2,12 @@ import React from 'react';
 import style from './profile.module.scss';
 import Button from '../misc/Elements/Button';
 import Item from '../../containers/Item';
+import BreadCrumbs from '../../containers/BreadCrumbs'; 
 
 const Profile = ({ loading, items, ...props }) => {
   return (
     <div className={style.profile__wrapper}>
-      <div>bread cumbs</div>
+      <BreadCrumbs {...props} />
       <ul>
       <Button type="add"> add item</Button>
         {loading ? <div>loading data...</div> :
