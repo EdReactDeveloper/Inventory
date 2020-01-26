@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Form from '../../../components/Modal/From/Add'; 
 import {addItemAction } from '../../../store/actions/profile'; 
+import {modalHandler} from '../../../store/actions/modal'; 
 
 const statusArray = [
   {name: 'away', value: 'away'},
@@ -9,6 +10,8 @@ const statusArray = [
 ]
 const FormContainer = (props) => {
   const dispatch = useDispatch()
+  const items = useSelector(state=> state.items)
+  const fetchingItem = items.itemsLoading
   const url = props.location.pathname
 
   const [state, setState] = useState({
@@ -50,9 +53,18 @@ const FormContainer = (props) => {
     dispatch(addItemAction({...state, path: url, 
       parentId: url.split('/').slice(-1).join(''), 
       collectionId}))
+    setTimeout(()=>{
+      if(!fetchingItem){
+        dispatch(modalHandler())
+      } 
+    }, 100)
   
   }
-  return <Form onChange={onChange} {...state} submitFrom={submitFrom} statusArray={statusArray} changeCheckBox={changeCheckBox}/>
+  return <Form onChange={onChange} {...state} 
+  submitFrom={submitFrom} 
+  statusArray={statusArray} 
+  changeCheckBox={changeCheckBox} 
+  fetchingItem={fetchingItem}/>
 };
 
 export default FormContainer;
