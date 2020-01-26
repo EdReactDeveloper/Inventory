@@ -1,45 +1,76 @@
 import {
-  ADD_ITEM, 
-  ADD_ITEM_SUCCESS, 
-  ADD_ITEM_FAIL, 
-  GET_ITEMS,
-  GET_ITEMS_SUCCESS,
-  GET_ITEMS_FAIL
-} from '../actions/types'; 
+	ADD_ITEM,
+	ADD_ITEM_SUCCESS,
+	ADD_ITEM_FAIL,
+	GET_ITEMS,
+	GET_ITEMS_SUCCESS,
+	GET_ITEMS_FAIL,
+	UPDATE_ITEM_SUCCESS,
+	UPDATE_ITEM_FAIL,
+	UPDATE_ITEM	
+} from '../actions/types';
 
 const initialState = {
-  data: [],
-  itemsLoading: true,
-  error: null
-}
+	data: [],
+	page: {},
+	itemsLoading: true,
+	pageLoading: false,
+	error: null
+};
 
 const reducer = (state = initialState, action) => {
-  const {type, payload} = action
-  switch(type){
-    case ADD_ITEM: {
-      return {
-        ...state, itemsLoading: true
-      }
-    }
-    case ADD_ITEM_SUCCESS: {
-      return {
-        ...state, data: [...state.data, payload], itemsLoading: false
-      }
-    }
+	const { type, payload } = action;
+	switch (type) {
+		case ADD_ITEM:
+		case GET_ITEMS: {
+			return {
+				...state,
+				itemsLoading: true
+			};
+		}
+		case ADD_ITEM_SUCCESS: {
+			return {
+				...state,
+				data: [ ...state.data, payload ],
+				itemsLoading: false
+			};
+		}
 
-    case GET_ITEMS_SUCCESS: {
-      return {
-        ...state, data: payload, itemsLoading: false
-      }
-    }
+		case UPDATE_ITEM: {
+			return {
+				...state, pageLoading: true
+			}
+		}
 
-    case ADD_ITEM_FAIL: {
-      return {
-        ...state, error: payload, itemsLoading: false
-      }
-    }
-    default: return state
-  }
-}
+		case UPDATE_ITEM_SUCCESS: {
+			return {
+				...state, page: payload, pageLoading: false
+			}
+		}
 
-export default reducer; 
+		case GET_ITEMS_SUCCESS: {
+			return {
+				...state,
+				data: payload.items,
+				page: payload.page,
+				itemsLoading: false
+			};
+		}
+
+		case ADD_ITEM_FAIL:
+		case GET_ITEMS_FAIL:
+		case UPDATE_ITEM_FAIL:	
+		{
+			return {
+				...state,
+				error: payload,
+				itemsLoading: false,
+				pageLoading: false
+			};
+		}
+		default:
+			return state;
+	}
+};
+
+export default reducer;

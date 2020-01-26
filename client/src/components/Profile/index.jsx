@@ -1,21 +1,29 @@
 import React from 'react';
 import style from './profile.module.scss';
-import Button from '../misc/Elements/Button';
-import Item from '../../containers/Item';
-import BreadCrumbs from '../../containers/BreadCrumbs'; 
 
-const Profile = ({ loading, items, ...props }) => {
+
+import BreadCrumbs from '../../containers/BreadCrumbs';
+import ProfileInfo from './Info/Profile';
+import ItemInfo from './Info/Item';
+import List from './List';
+import Buttons from './Buttons'; 
+
+const Profile = ({ profile, items, page, ...props }) => {
+
+
   return (
     <div className={style.profile__wrapper}>
-      <BreadCrumbs {...props} />
-      <ul>
-      <Button type="add"> add item</Button>
-        {loading ? <div>loading data...</div> :
-          items && items.map(item => {
-            return <Item key={item._id} {...item} />
-          })
-        }
-      </ul>
+      <div className={style.content}>
+        {items && profile ? <>
+        <BreadCrumbs {...props} page={page} profile={profile} />
+        <Buttons {...props}/>
+        <List items={items} page={page} profile={profile} />
+        </> : <div>loading...</div>
+      }
+      </div>
+      <div className={style.info}>
+        {page ? <ItemInfo page={page} /> : <ProfileInfo profile={profile} />}
+      </div>
     </div>
   );
 };

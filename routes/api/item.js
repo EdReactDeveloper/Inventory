@@ -8,12 +8,40 @@ const Item = require('../../models/Item');
 // GET ITEMS
 router.get('/:id', async (req, res) => {
 	const { id } = req.params;
-	const items = await Item.find({parentId: id });
-		res.json(items);
+	try {
+			const items = await Item.find({parentId: id });
+	const page = await Item.findById({_id: id})
+	const payload = {page, items}
+		res.json(payload);
+	} catch (error) {
+		res.status(400).json({error})
+	}
+
 	
 });
 
-// ADD ITEMS
+// UPDATE ITEM
+
+router.post('/edit', async (req, res) => {
+	const {payload} = req.body
+	let page = await Item.findById({_id: payload._id})
+	try {
+		if(page){
+		page = {...payload}
+		await page.save()
+		res.json(page)
+	}
+	} catch (error) {
+		res.status(400).json({error})
+	}
+	
+	
+	
+	
+});
+
+
+// ADD ITEM
 router.post(
 	'/add',
 	[
@@ -48,9 +76,15 @@ router.post(
 			updated: new Date(),
 			created: new Date()
 		});
-	
-    await item.save()
+
+		try {
+			 await item.save()
     res.json(item)
+		} catch (error) {
+			res.status(400).json({error})
+		}
+	
+   
 	}
 );
 

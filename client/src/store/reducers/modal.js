@@ -3,10 +3,10 @@ import { MODAL, EDIT } from '../actions/types';
 const initialState = {
 	isOpen: false,
 	form:{
-		id: null,
+		pageId: null,
 		parentId: null,
 		formType: '',
-		formPage: ''
+
 	}
 };	
 

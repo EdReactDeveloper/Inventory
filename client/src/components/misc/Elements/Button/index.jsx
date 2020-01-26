@@ -11,31 +11,32 @@ const Button = ({ type,
   modalHandler,
   editMode,
   editHandler, onClick, ...props }) => {
-  const { item, formPage, itemId, parentId } = payload
+
+  const { page, parentId } = payload
   switch (type) {
 
     case 'edit':
       return <button
         type="button"
         className={style.edit}
-        onClick={() => modalHandler({ formType: FORM_TYPE.edit, formPage, itemId })}
+        onClick={() => modalHandler({ formType: FORM_TYPE.edit, page })}
       >
         <Icon d={Item.edit} className={style.icon} />
       </button>;
 
-    case 'move':
-      return <button
-        type="button"
-        className={style.edit}
-        onClick={() => modalHandler({ formType: FORM_TYPE.move, formPage, itemId, parentId })}
-      >
-        {props.children}
-      </button>
+    // case 'move':
+    //   return <button
+    //     type="button"
+    //     className={style.edit}
+    //     onClick={() => modalHandler({ formType: FORM_TYPE.move, itemId, parentId })}
+    //   >
+    //     {props.children}
+    //   </button>
 
     case 'add':
       return <button
         type='button'
-        onClick={() => modalHandler({ formType: FORM_TYPE.add, formPage, parentId })}
+        onClick={() => modalHandler({ formType: FORM_TYPE.add, parentId })}
         className={style.add}
       >{props.children}</button>
 
@@ -45,7 +46,7 @@ const Button = ({ type,
       <button type="button" className={style.info_btn}>
         i
     </button>
-      <div className={style.info_block}>{item.description}</div>
+ 
     </div>
 
     case 'editAll': return <button

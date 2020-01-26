@@ -8,8 +8,11 @@ import {
   GET_PROFILE, 
   GET_PROFILE_SUCCESS, 
   GET_PROFILE_FAIL,
+  UPDATE_ITEM,
+  UPDATE_ITEM_SUCCESS,
+  UPDATE_ITEM_FAIL
 } from './types'; 
-import {getItemApi, getProfileApi, addItemApi, removeItemApi, getItemsApi} from '../api/items'; 
+import {updateItemApi, getProfileApi, addItemApi, removeItemApi, getItemsApi} from '../api/items'; 
 
 
 export const getProfileAction = () => async dispatch => {
@@ -43,7 +46,13 @@ export const addItemAction = (payload) => async dispatch => {
   }
 } 
 
-export const updateItemAction = (payload, type) => dispatch => {
-
+export const updateItemAction = (payload) => async dispatch => {
+  dispatch({type: UPDATE_ITEM})
+  try {
+    const result = await updateItemApi(payload)
+    dispatch({type: UPDATE_ITEM_SUCCESS, payload: result})
+  } catch (error) {
+    dispatch({type: UPDATE_ITEM_FAIL, error: payload})
+  }
 }
 

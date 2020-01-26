@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Form from '../../../components/Modal/From/Add'; 
-import {addItemAction } from '../../../store/actions/profile'; 
+import {addItemAction, updateItemAction } from '../../../store/actions/profile'; 
 import {modalHandler} from '../../../store/actions/modal'; 
+import {FORM_TYPE} from '../../../components/misc/configs'; 
 
 const statusArray = [
   {name: 'away', value: 'away'},
@@ -11,8 +12,9 @@ const statusArray = [
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const items = useSelector(state=> state.items)
-  const fetchingItem = items.itemsLoading
-  const url = props.location.pathname
+  const {itemsLoading, page} = items
+const {formType} = useSelector(state=> state.modal.form)
+  const {location: {pathname}} = props
 
   const [state, setState] = useState({
     name: '', 
@@ -28,6 +30,12 @@ const FormContainer = (props) => {
     status: 'away', 
     img: ''
   })
+
+  useEffect(() => {
+    if(formType === FORM_TYPE.edit && page){
+      setState({...state, ...page})
+    }
+  }, [formType])
 
   const onChange = (e)=>{
     setState({...state, [e.target.name]: e.target.value})
@@ -46,15 +54,19 @@ const FormContainer = (props) => {
     if(path.length < 2){
       collectionId = state.name
     }else {
-      collectionId = url.split('/')[0].join('')
+      collectionId = pathname.split('/')[0].join('')
     }
 
+    switch(formType){
+      case FORM_TYPE.add: dispatch(addItemAction({...state, path: pathname, 
+      parentId: pathname.split('/').slice(-1).join(''), 
+      collectionId})); break; 
+      case FORM_TYPE.edit: dispatch(updateItemAction(state));break;
+      default: dispatch(modalHandler()); break;
+    }
     
-    dispatch(addItemAction({...state, path: url, 
-      parentId: url.split('/').slice(-1).join(''), 
-      collectionId}))
     setTimeout(()=>{
-      if(!fetchingItem){
+      if(!itemsLoading){
         dispatch(modalHandler())
       } 
     }, 100)
@@ -64,7 +76,7 @@ const FormContainer = (props) => {
   submitFrom={submitFrom} 
   statusArray={statusArray} 
   changeCheckBox={changeCheckBox} 
-  fetchingItem={fetchingItem}/>
+  fetchingItem={itemsLoading}/>
 };
 
 export default FormContainer;

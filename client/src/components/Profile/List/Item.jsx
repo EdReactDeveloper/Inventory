@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import style from './profile.module.scss';
+import style from '../profile.module.scss';
 
 const Item = (props) => {
   const { name, path, status, tags, _id } = props

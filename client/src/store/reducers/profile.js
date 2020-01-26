@@ -8,7 +8,7 @@ import {
 } from '../actions/types'; 
 
 const initialState = {
-  data: {},
+  profile: {},
   profileLoading: true,
   error: null
 }
@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
     }
     case GET_PROFILE_SUCCESS: {
       return {
-        ...state, data: payload, profileLoading: false
+        ...state, profile: payload, profileLoading: false
       }
     }
 

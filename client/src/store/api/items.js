@@ -26,6 +26,11 @@ export const addItemApi  = async (payload) => {
 	return result.data;
 };	
 
+export const updateItemApi  = async (payload) => {
+	const result = await instance.post(`${baseURL}/edit`, body(payload));
+	return result.data;
+};	
+
 export const removeItemApi  = async (id) =>{
 	const result = await axios.delete(`${baseURL}/${id}`)
 	return result.data

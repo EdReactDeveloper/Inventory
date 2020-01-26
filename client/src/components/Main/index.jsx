@@ -1,12 +1,11 @@
 import React from 'react';
-import style from './main.module.scss'; 
-import Button from '../misc/Elements/Button'; 
 import {Link } from 'react-router-dom'; 
+import style from './main.module.scss'; 
 
-const Main = ({id, ...props}) => {
+const Main = ({id}) => {
   return (
     <div className={style.main__wrapper}>
-      <Link to={id}> go to profile</Link>
+      {id  ? <Link to={id}> go to profile</Link> : 'loading'}
     </div>
   );
 };
