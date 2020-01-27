@@ -40,8 +40,7 @@ const payload={
   itemsLoading
 }
 
-
-return <>{!profile.profileLoading && payload ? <Profile {...props} {...payload}  /> : <div>loading...</div>}</>
+return <>{profile.profileLoading && itemsLoading ? <div>loading...</div> : <Profile {...props} {...payload}  /> }</>
 };
 
 export default ProfileContainer;

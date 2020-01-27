@@ -8,13 +8,13 @@ import ItemInfo from './Info/Item';
 import List from './List';
 import Buttons from './Buttons'; 
 
-const Profile = ({ profile, items, page, ...props }) => {
+const Profile = ({ profile, items, page, itemsLoading, ...props }) => {
 
-
+  
   return (
     <div className={style.profile__wrapper}>
       <div className={style.content}>
-        {items && profile ? <>
+        {items && profile && !itemsLoading ? <>
         <BreadCrumbs {...props} page={page} profile={profile} />
         <Buttons {...props}/>
         <List items={items} page={page} profile={profile} />

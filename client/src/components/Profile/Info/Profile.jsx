@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ProfileInfo = ({ profile: { profile: { name, description }, profileLoading } }) => {
+const ProfileInfo = ({ profile: { profile: { name, description }, profileUpdating } }) => {
 
   return (
     <div>
-      {!profileLoading ?
+      {!profileUpdating ?
         <div>
           <h3>{name}</h3>
           <p>{description}</p>
