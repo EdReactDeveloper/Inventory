@@ -1,6 +1,6 @@
 import React from 'react';
 import { add } from './formData';
-import style from './Forms.module.scss'; 
+import Button from '../../misc/Elements/Button';
 
 const Add = ({ name, description, tags, category, status, statusArray, count, location, type, onChange, submitFrom, changeCheckBox, shared, fetchingItem }) => {
   const payload = { name, description, tags, category, count, location, type, }
@@ -34,9 +34,9 @@ const Add = ({ name, description, tags, category, status, statusArray, count, lo
         <input type="checkbox" checked={shared} name="shared" onChange={(e)=> changeCheckBox(e) }/>
       </label>
           
-      <button type="submit" className={style.submit}>
+      <Button type="submit">
         {fetchingItem ? 'loading...' : 'save'}
-        </button>
+        </Button>
     </form>
   );
 };

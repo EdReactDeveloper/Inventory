@@ -4,7 +4,7 @@ import style from './Button.module.scss';
 import Icon from '../../icon/Icon';
 import { Item } from '../../icon/Selection';
 import { modalHandler, editHandler } from '../../../../store/actions/modal';
-import {FORM_TYPE} from '../../configs'; 
+import { FORM_TYPE } from '../../configs';
 
 const Button = ({ type,
   payload = '',
@@ -40,13 +40,17 @@ const Button = ({ type,
         className={style.add}
       >{props.children}</button>
 
-   
+    case 'submit':
+      return <button
+        type='submit'
+        className={style.submit}
+      >{props.children}</button>
 
     case 'info': return <div className={style.info}>
       <button type="button" className={style.info_btn}>
         i
     </button>
- 
+
     </div>
 
     case 'editAll': return <button

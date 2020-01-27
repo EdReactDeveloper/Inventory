@@ -1,12 +1,4 @@
-export const add = ({
-	name,
-	description,
-	tags,
-	category,
-	count,
-	location,
-	type
-}) => [
+export const add = ({ name, description, tags, category, count, location, type }) => [
 	{
 		heading: 'name',
 		value: name,
@@ -48,5 +40,26 @@ export const add = ({
 		value: type,
 		name: 'type',
 		type: 'input'
+	}
+];
+
+export const renderProfile = ({ name, description, hidden }) => [
+	{
+		heading: 'name',
+		name: 'name',
+		type: 'input',
+		value: name
+	},
+	{
+		heading: 'name',
+		name: 'description',
+		type: 'textarea',
+		value: description
+	},
+	{
+		heading: 'hidden',
+		name: 'hidden',
+		type: 'checkbox',
+		checked: hidden
 	}
 ];

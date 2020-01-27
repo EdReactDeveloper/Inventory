@@ -1,17 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Profile from '../components/Profile'; 
-import {getProfileAction, getItemsAction} from '../store/actions/profile'; 
+import {getProfileAction} from '../store/actions/profile'; 
+import {getItemsAction} from '../store/actions/items';
 
 const extractId = (path) =>{
   return path.split('/').slice(-1).join('')
-}
-
-const isPage = (page, profile) =>{
-  if(!page){
-    return profile
-  }
-  return page
 }
 
 const ProfileContainer = (props) => {
@@ -39,7 +33,6 @@ const payload={
   profile,
   itemsLoading
 }
-
 
 
 return <>{!profile.profileLoading && payload ? <Profile {...props} {...payload}  /> : <div>loading...</div>}</>

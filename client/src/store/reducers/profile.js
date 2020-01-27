@@ -1,39 +1,57 @@
 import {
-  ADD_ITEM, 
-  ADD_ITEM_SUCCESS, 
-  ADD_ITEM_FAIL, 
-  GET_PROFILE, 
-  GET_PROFILE_SUCCESS, 
-  GET_PROFILE_FAIL
-} from '../actions/types'; 
+	GET_PROFILE,
+	GET_PROFILE_SUCCESS,
+	GET_PROFILE_FAIL,
+	UPDATE_PROFILE,
+	UPDATE_PROFILE_SUCCESS,
+	UPDATE_PROFILE_FAIL
+} from '../actions/types';
 
 const initialState = {
-  profile: {},
-  profileLoading: true,
-  error: null
-}
+	profile: {},
+	profileLoading: true,
+	profileUpdating: false,
+	error: null
+};
 
 const reducer = (state = initialState, action) => {
-  const {type, payload} = action
-  switch(type){
-    case GET_PROFILE: {
-      return {
-        ...state, profileLoading: true
-      }
-    }
-    case GET_PROFILE_SUCCESS: {
-      return {
-        ...state, profile: payload, profileLoading: false
-      }
-    }
+	const { type, payload } = action;
+	switch (type) {
+		case GET_PROFILE: {
+			return {
+				...state,
+				profileLoading: true
+			};
+		}
 
-    case GET_PROFILE_FAIL: {
-      return {
-        ...state, error: payload, profileLoading: false
-      }
-    }
-    default: return state
-  }
-}
+		case UPDATE_PROFILE: {
+			return {
+				...state,
+				profileUpdating: true
+			};
+		}
 
-export default reducer; 
+		case GET_PROFILE_SUCCESS:
+		case UPDATE_PROFILE_SUCCESS: {
+			return {
+				...state,
+				profile: payload,
+				profileLoading: false,
+				profileUpdating: false
+			};
+		}
+
+		case GET_PROFILE_FAIL:
+		case UPDATE_PROFILE_FAIL: {
+			return {
+				...state,
+				error: payload,
+				profileLoading: false
+			};
+		}
+		default:
+			return state;
+	}
+};
+
+export default reducer;

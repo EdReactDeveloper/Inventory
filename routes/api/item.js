@@ -23,21 +23,16 @@ router.get('/:id', async (req, res) => {
 // UPDATE ITEM
 
 router.post('/edit', async (req, res) => {
-	const {payload} = req.body
-	let page = await Item.findById({_id: payload._id})
+	const payload = req.body
 	try {
+		let page = await Item.findById({_id: payload._id})
 		if(page){
-		page = {...payload}
-		await page.save()
+		page = await Item.findOneAndUpdate({_id: payload._id}, {$set: payload}, {new: true})
 		res.json(page)
 	}
 	} catch (error) {
 		res.status(400).json({error})
 	}
-	
-	
-	
-	
 });
 
 

@@ -16,11 +16,6 @@ export const getItemsApi = async (id) => {
 	return result.data;
 };
 
-export const getProfileApi  = async () => {
-	const result = await axios.get(`/api/profile/me`);
-	return result.data;
-};
-
 export const addItemApi  = async (payload) => {
 	const result = await instance.post(`${baseURL}/add`, body(payload));
 	return result.data;
