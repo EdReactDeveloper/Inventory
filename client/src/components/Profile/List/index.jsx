@@ -2,7 +2,7 @@ import React from 'react';
 import Item from '../../../containers/Item';
 
 
-const List = ({ items, profile }) => {
+const List = ({ items, profile, fetchingItem }) => {
 
   const renderItems = () => {
     if (items) {
@@ -18,6 +18,7 @@ const List = ({ items, profile }) => {
       {profile.profileLoading ? <div>loading data...</div> :
         renderItems()
       }
+      {fetchingItem && <div>adding item...</div>}
     </ul>
   );
 };

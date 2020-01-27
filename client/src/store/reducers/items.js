@@ -16,24 +16,31 @@ const initialState = {
 	page: {},
 	itemsLoading: true,
 	pageLoading: false,
+	fetchingItem: false,
 	error: null
 };
 
 const reducer = (state = initialState, action) => {
 	const { type, payload } = action;
 	switch (type) {
-		case ADD_ITEM:
 		case GET_ITEMS: {
 			return {
 				...state,
 				itemsLoading: true
 			};
 		}
+
+		case ADD_ITEM:{
+			return {
+				...state, fetchingItem: true
+			}
+		}
+
 		case ADD_ITEM_SUCCESS: {
 			return {
 				...state,
 				data: [ ...state.data, payload ],
-				itemsLoading: false
+				fetchingItem: false
 			};
 		}
 

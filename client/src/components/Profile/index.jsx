@@ -8,7 +8,7 @@ import ItemInfo from './Info/Item';
 import List from './List';
 import Buttons from './Buttons'; 
 
-const Profile = ({ profile, items, page, itemsLoading, ...props }) => {
+const Profile = ({ profile, items, fetchingItem, itemsLoading,  page, ...props }) => {
 
   
   return (
@@ -17,7 +17,7 @@ const Profile = ({ profile, items, page, itemsLoading, ...props }) => {
         {items && profile && !itemsLoading ? <>
         <BreadCrumbs {...props} page={page} profile={profile} />
         <Buttons {...props}/>
-        <List items={items} page={page} profile={profile} />
+        <List items={items} page={page} profile={profile} fetchingItem={fetchingItem} />
         </> : <div>loading...</div>
       }
       </div>

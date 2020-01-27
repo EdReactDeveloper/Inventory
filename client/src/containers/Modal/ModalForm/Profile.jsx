@@ -59,6 +59,7 @@ const FormContainer = (props) => {
     submitFrom={submitFrom}
     profile={state}
     profileLoading={profileLoading}
+    {...props}
   />
 
 };

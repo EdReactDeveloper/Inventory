@@ -12,7 +12,7 @@ const ProfileContainer = (props) => {
   const dispatch = useDispatch(); 
   const profile = useSelector(state=> state.profile) 
   const items = useSelector(state=>state.items)
-  const {data, page, itemsLoading} = items
+  const {data, page, itemsLoading, fetchingItem} = items
 
   const path = props.location.pathname
   useEffect(() => {
@@ -37,7 +37,8 @@ const payload={
   items: data, 
   page, 
   profile,
-  itemsLoading
+  itemsLoading,
+  fetchingItem
 }
 
 return <>{profile.profileLoading && itemsLoading ? <div>loading...</div> : <Profile {...props} {...payload}  /> }</>

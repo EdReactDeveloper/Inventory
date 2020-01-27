@@ -13,7 +13,7 @@ const statusArray = [
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.items)
-  const { itemsLoading, page } = items
+  const { itemsLoading, fetchingItem, pageLoading, page } = items
   const { formType } = useSelector(state => state.modal.form)
   const { location: { pathname } } = props
 
@@ -65,16 +65,24 @@ const FormContainer = (props) => {
         ...state, path: pathname,
         parentId: pathname.split('/').slice(-1).join(''),
         collectionId
-      })); break;
-      case FORM_TYPE.edit: dispatch(updateItemAction(state)); break;
+      }));
+        setTimeout(() => {
+          if (!fetchingItem) {
+            dispatch(modalHandler())
+          }
+        }, 100);
+        break;
+      case FORM_TYPE.edit: dispatch(updateItemAction(state));
+        setTimeout(() => {
+          if (!pageLoading) {
+            dispatch(modalHandler())
+          }
+        }, 100);
+        break;
       default: dispatch(modalHandler()); break;
     }
 
-    setTimeout(() => {
-      if (!itemsLoading) {
-        dispatch(modalHandler())
-      }
-    }, 100)
+
   }
 
 
@@ -86,7 +94,6 @@ const FormContainer = (props) => {
     statusArray={statusArray}
     changeCheckBox={changeCheckBox}
     fetchingItem={itemsLoading} />
-
 };
 
 export default FormContainer;
