@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Form from '../../../components/Modal/From/Add';
 import ProfileForm from '../../../components/Modal/From/Profile';
 import { addItemAction, updateItemAction } from '../../../store/actions/items';
-import {updateProfileAction} from '../../../store/actions/profile';
+import { updateProfileAction } from '../../../store/actions/profile';
 import { modalHandler } from '../../../store/actions/modal';
 import { FORM_TYPE } from '../../../components/misc/configs';
 
@@ -11,6 +11,7 @@ const statusArray = [
   { name: 'away', value: 'away' },
   { name: 'inplace', value: 'inplace' },
 ]
+
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.items)
@@ -79,7 +80,7 @@ const FormContainer = (props) => {
     } else {
       collectionId = pathname.split('/')[0].join('')
     }
-    if(page){
+    if (page) {
 
       switch (formType) {
         case FORM_TYPE.add: dispatch(addItemAction({
@@ -90,13 +91,13 @@ const FormContainer = (props) => {
         case FORM_TYPE.edit: dispatch(updateItemAction(state)); break;
         default: dispatch(modalHandler()); break;
       }
-      
+
       setTimeout(() => {
         if (!itemsLoading) {
           dispatch(modalHandler())
         }
       }, 100)
-    }else{
+    } else {
       switch (formType) {
         case FORM_TYPE.add: dispatch(updateProfileAction(profileState)); break;
         case FORM_TYPE.edit: dispatch(updateProfileAction(profileState)); break;
@@ -106,22 +107,25 @@ const FormContainer = (props) => {
 
   }
 
-  // render form
-  return <> {page ?
-    <Form
-      onChange={onChange} {...state}
-      submitFrom={submitFrom}
-      statusArray={statusArray}
-      changeCheckBox={changeCheckBox}
-      fetchingItem={itemsLoading} />
-    : <ProfileForm
+
+// render form
+  if (formType === FORM_TYPE.edit && !page) {
+    return <ProfileForm
       changeCheckBox={changeCheckBox}
       onChange={onChange}
       submitFrom={submitFrom}
       profile={profileState}
       profileLoading={profileLoading}
     />
-  } </>
+  }
+    
+  return <Form
+    onChange={onChange} {...state}
+    submitFrom={submitFrom}
+    statusArray={statusArray}
+    changeCheckBox={changeCheckBox}
+    fetchingItem={itemsLoading} />
+
 };
 
 export default FormContainer;

@@ -66,3 +66,6 @@ export const REMOVE_ITEM_SUCCESS = 'REMOVE_ITEM_SUCCESS'
 export const REMOVE_ITEM_FAIL = 'REMOVE_ITEM_FAIL'
 
 
+// UTILS
+
+export const CLEAN_UP = 'CLEAN_UP'

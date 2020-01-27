@@ -4,7 +4,8 @@ import {
 	GET_PROFILE_FAIL,
 	UPDATE_PROFILE,
 	UPDATE_PROFILE_SUCCESS,
-	UPDATE_PROFILE_FAIL
+	UPDATE_PROFILE_FAIL,
+	CLEAN_UP
 } from '../actions/types';
 
 const initialState = {
@@ -48,6 +49,10 @@ const reducer = (state = initialState, action) => {
 				error: payload,
 				profileLoading: false
 			};
+		}
+
+		case CLEAN_UP: {
+			return initialState
 		}
 		default:
 			return state;

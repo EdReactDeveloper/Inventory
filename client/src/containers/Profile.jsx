@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Profile from '../components/Profile'; 
-import {getProfileAction} from '../store/actions/profile'; 
+import {getProfileAction, componentUnmount} from '../store/actions/profile'; 
 import {getItemsAction} from '../store/actions/items';
 
 const extractId = (path) =>{
@@ -25,6 +25,12 @@ const ProfileContainer = (props) => {
       dispatch(getItemsAction(parentId))
       
   }, [path])  
+
+  useEffect(() => {
+    return () => {
+      dispatch(componentUnmount())
+    };
+  }, [])
 
   
 const payload={

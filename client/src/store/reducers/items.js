@@ -7,7 +7,8 @@ import {
 	GET_ITEMS_FAIL,
 	UPDATE_ITEM_SUCCESS,
 	UPDATE_ITEM_FAIL,
-	UPDATE_ITEM	
+	UPDATE_ITEM,
+	CLEAN_UP	
 } from '../actions/types';
 
 const initialState = {
@@ -67,6 +68,10 @@ const reducer = (state = initialState, action) => {
 				itemsLoading: false,
 				pageLoading: false
 			};
+		}
+
+		case CLEAN_UP: {
+			return initialState
 		}
 		default:
 			return state;

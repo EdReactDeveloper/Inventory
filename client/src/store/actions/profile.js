@@ -4,7 +4,8 @@ import {
   GET_PROFILE_FAIL,
   UPDATE_PROFILE,
   UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAIL
+  UPDATE_PROFILE_FAIL,
+  CLEAN_UP
 } from './types'; 
 import {getProfileApi, updateProfileApi } from '../api/profile'; 
 
@@ -30,4 +31,6 @@ export const updateProfileAction = (payload) => async dispatch =>{
   }
 } 
  
-
+export const componentUnmount = () => dispatch=>{
+  dispatch({type: CLEAN_UP})
+}

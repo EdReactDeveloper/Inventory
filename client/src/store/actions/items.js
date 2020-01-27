@@ -7,7 +7,7 @@ import {
 	ADD_ITEM_FAIL,
 	UPDATE_ITEM,
 	UPDATE_ITEM_SUCCESS,
-	UPDATE_ITEM_FAIL
+	UPDATE_ITEM_FAIL,
 } from './types';
 import { updateItemApi, addItemApi, removeItemApi, getItemsApi } from '../api/items';
 
