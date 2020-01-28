@@ -12,7 +12,7 @@ const Button = ({ type,
   editMode,
   editHandler, onClick, ...props }) => {
 
-  const { page, parentId } = payload
+  const { page, parentId, itemId } = payload
   switch (type) {
 
     case 'edit':
@@ -59,6 +59,13 @@ const Button = ({ type,
       className={`${style.editAll} ${editMode ? style.yellow : ''}`}
     >
       {editMode ? 'edit off' : 'edit on'}
+    </button>
+
+    case 'delete': 
+    return <button 
+    className={style.delete}
+    type="button" onClick={onClick} >
+      <Icon className={style.btn_delete_icon} d={Item.delete} />
     </button>
 
     case 'dropMenu':

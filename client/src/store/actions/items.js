@@ -8,8 +8,12 @@ import {
 	UPDATE_ITEM,
 	UPDATE_ITEM_SUCCESS,
 	UPDATE_ITEM_FAIL,
+	REMOVE_ITEM,
+	REMOVE_ITEM_SUCCESS,
+	REMOVE_ITEM_FAIL
 } from './types';
 import { updateItemApi, addItemApi, removeItemApi, getItemsApi } from '../api/items';
+import inProgressAction from './inprogress'; 
 
 export const getItemsAction = (path) => async (dispatch) => {
 	dispatch({ type: GET_ITEMS });
@@ -38,5 +42,24 @@ export const updateItemAction = (payload) => async (dispatch) => {
 		dispatch({ type: UPDATE_ITEM_SUCCESS, payload: result });
 	} catch (error) {
 		dispatch({ type: UPDATE_ITEM_FAIL, error: payload });
+	}
+};
+
+export const removeItemAction = ({ id, path, history }) => async (dispatch) => {
+	if(path){
+		dispatch({ type: REMOVE_ITEM });
+	}else{
+		dispatch(inProgressAction(true, id))
+	}
+	try {
+		const result = await removeItemApi(id);
+		if (path) {
+			history.push(path);	
+		}else{
+			dispatch(inProgressAction(false, id))
+		}
+		dispatch({type: REMOVE_ITEM_SUCCESS, payload: result})
+	} catch (error) {
+		dispatch({ type: REMOVE_ITEM_FAIL });
 	}
 };

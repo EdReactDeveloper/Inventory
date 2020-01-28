@@ -1,12 +1,14 @@
 import React from 'react';
 import style from './info.module.scss';
 import Loader from '../../misc/Loader/Circle';
+import Button from '../../misc/Elements/Button';
 
-const ItemInfo = ({ page: { name, description, location, status, tags, count, type, shared, updated, created }, pageLoading }) => {
+const ItemInfo = ({ page: { name, description, location, status, tags, count, type, shared, updated, created, _id, path }, pageLoading, removeItem }) => {
   return (
     <div className={style.info__wrapper}>
       {pageLoading ? <div className={style.loader__wrapper}><Loader className={style.loader} /></div> :
         <div>
+          <Button type="delete" onClick={()=>removeItem({id: _id, path})}>remove</Button>
           <h3>{name}</h3>
           <p>
             {description}

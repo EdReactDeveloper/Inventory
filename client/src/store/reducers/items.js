@@ -8,7 +8,10 @@ import {
 	UPDATE_ITEM_SUCCESS,
 	UPDATE_ITEM_FAIL,
 	UPDATE_ITEM,
-	CLEAN_UP	
+	CLEAN_UP,
+	REMOVE_ITEM,
+	REMOVE_ITEM_SUCCESS,
+	REMOVE_ITEM_FAIL	
 } from '../actions/types';
 
 const initialState = {
@@ -44,7 +47,9 @@ const reducer = (state = initialState, action) => {
 			};
 		}
 
-		case UPDATE_ITEM: {
+		case UPDATE_ITEM:
+		case REMOVE_ITEM:	
+		{
 			return {
 				...state, pageLoading: true
 			}
@@ -53,6 +58,12 @@ const reducer = (state = initialState, action) => {
 		case UPDATE_ITEM_SUCCESS: {
 			return {
 				...state, page: payload, pageLoading: false
+			}
+		}
+
+		case REMOVE_ITEM_SUCCESS: {
+			return {
+				...state, data: state.data.filter(item => item._id !== payload), pageLoading: false
 			}
 		}
 

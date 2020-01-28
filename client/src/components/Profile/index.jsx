@@ -8,20 +8,21 @@ import Buttons from './Buttons';
 import Loader from '../misc/Loader/Circle';
 
 
-const Profile = ({ profile, items, fetchingItem, pageLoading, itemsLoading, page, isProfilePage, ...props }) => {
+const Profile = (props) => {
+const { profile, items, itemsLoading, page, isProfilePage } = props
   return (
     <div className={style.profile__wrapper}>
 
       <div className={style.content}>
         {items && profile && !itemsLoading ? <>
-          <BreadCrumbs {...props} page={page} profile={profile} />
+          <BreadCrumbs {...props} />
           <Buttons {...props} />
-          <List items={items} page={page} profile={profile} fetchingItem={fetchingItem} />
+          <List {...props} />
         </> : <div className={style.loader__wrapper}><Loader className={style.loader} /></div>
         }
       </div>
       <div className={style.info}>
-        {isProfilePage ? <ProfileInfo profile={profile} /> : page ? <ItemInfo page={page} pageLoading={pageLoading} /> : <div>loading...</div> }
+        {isProfilePage ? <ProfileInfo profile={profile} /> : page ? <ItemInfo {...props} /> : <div>loading...</div>}
       </div>
     </div>
   );
