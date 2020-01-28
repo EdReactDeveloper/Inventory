@@ -9,7 +9,6 @@
 
 .edit {
   background: #fff;
-  margin-left: 3rem;
   border: none;
   cursor: pointer;
   transition: all .2s;
@@ -68,9 +67,9 @@
   grid-row: 1/2;
   height: 2.5rem;
   width: 2.5rem;
+  margin-left: auto;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
   cursor: pointer;
   transition: all .3s;
   outline: none;

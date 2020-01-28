@@ -15,6 +15,7 @@ const Button = ({ type,
   ...props }) => {
 
   const { page, parentId, itemId } = payload
+
   switch (type) {
 
     case 'edit':

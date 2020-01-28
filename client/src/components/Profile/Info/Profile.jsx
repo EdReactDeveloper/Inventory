@@ -1,14 +1,14 @@
 import React from 'react';
-import Button from '../../misc/Elements/Button';
+import ButtonsBlock from '../ButtonsBlock';
 
 const ProfileInfo = (props) => {
-  const { profile: {profile: { name, description }, profileUpdating }} = props
-  const {profile: {profile}} = props
+  const { profile: { profile: { name, description,  _id }, profileUpdating }, removeItem } = props
+  const { profile: { profile } } = props
   return (
     <div>
       {!profileUpdating ?
         <div>
-          <Button type="edit" editData={profile}>edit</Button>
+          <ButtonsBlock editData={profile} removeItem={removeItem} id={_id} path='/' />
           <h3>{name}</h3>
           <p>{description}</p>
 
