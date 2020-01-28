@@ -10,7 +10,9 @@ const Button = ({ type,
   payload = '',
   modalHandler,
   editMode,
-  editHandler, onClick, ...props }) => {
+  editHandler, onClick,
+  editData,
+  ...props }) => {
 
   const { page, parentId, itemId } = payload
   switch (type) {
@@ -19,7 +21,7 @@ const Button = ({ type,
       return <button
         type="button"
         className={style.edit}
-        onClick={() => modalHandler({ formType: FORM_TYPE.edit, page })}
+        onClick={() => modalHandler({ formType: FORM_TYPE.edit, editData })}
       >
         <Icon d={Item.edit} className={style.icon} />
       </button>;
