@@ -1,6 +1,6 @@
 import React from 'react';
 import Item from '../../../containers/Item';
-
+import Loader from './ItemLoader'; 
 
 const List = ({ items, profile, fetchingItem }) => {
 
@@ -10,7 +10,7 @@ const List = ({ items, profile, fetchingItem }) => {
         return <Item key={item._id} {...item} />
       })
     }
-    return <div>loading...</div>
+    return <Loader/>
   }
 
   return (
@@ -18,7 +18,7 @@ const List = ({ items, profile, fetchingItem }) => {
       {profile.profileLoading ? <div>loading data...</div> :
         renderItems()
       }
-      {fetchingItem && <div>adding item...</div>}
+      {fetchingItem && <Loader/>}
     </ul>
   );
 };

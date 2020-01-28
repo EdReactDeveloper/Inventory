@@ -8,11 +8,15 @@ const BreadCrumbs = ({ items: {items, itemsLoading}, profile }) => {
       {profile && !itemsLoading ?
         <div>
           <Link to="/">home</Link>
-          {items.map(item => {
-            return <Link to={item.path} key={item.id}>
-              /{item.name}
+          {items.map((item, index) => {
+            if(index < items.length-1){
+              return <Link to={item.path} key={item.id}>
+              \{item.name}
             </Link>
-          })}
+            }
+            return <span key={item.id}>\...</span>
+          }
+          )}
         </div>
       : <div>loading...</div>
       }

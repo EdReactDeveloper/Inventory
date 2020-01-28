@@ -1,5 +1,7 @@
 .info{
   &__wrapper{
+    width: 100%;
+    height: 100%;
    & h3{
 
    }
@@ -18,4 +20,15 @@
    }
   }
   
+}
+
+.loader{
+  font-size: 6px;
+  &__wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
+  }
 }
