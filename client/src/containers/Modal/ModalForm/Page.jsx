@@ -91,7 +91,7 @@ const FormContainer = (props) => {
     }
 
   }
-  console.log(state)
+
   // render form
 
   return <Form

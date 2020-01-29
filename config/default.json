@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://User:password1234567@cluster0-fozib.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://EdReact:edreact1234567@cluster0-fozib.mongodb.net/test?retryWrites=true&w=majority"
 }
 

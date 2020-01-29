@@ -3,7 +3,6 @@ import style from './Input.module.scss';
 
 const Field = ({ item, onChange, changeCheckBox, required, statusArray }) => {
   let field = null
-  console.log(item)
   switch (item.field) {
 
     case 'input':

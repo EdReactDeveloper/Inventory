@@ -59,7 +59,7 @@ export const add = ({ name, description, tags, category, count, location, type, 
 		heading: 'shared',
 		value: shared,
 		name: 'shared',
-		field: 'input',
+		field: 'checkbox',
 		type: 'checkbox'
 	}
 ];
@@ -73,7 +73,7 @@ export const renderProfile = ({ name, description, hidden }) => [
 		type: 'text'
 	},
 	{
-		heading: 'name',
+		heading: 'description',
 		name: 'description',
 		field: 'textarea',
 		value: description,
@@ -82,7 +82,7 @@ export const renderProfile = ({ name, description, hidden }) => [
 	{
 		heading: 'hidden',
 		name: 'hidden',
-		field: 'input',
+		field: 'checkbox',
 		value: hidden,
 		type: 'checkbox'
 	}

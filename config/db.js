@@ -12,7 +12,7 @@ const connectDB = async()=>{
       useFindAndModify: false
     })
   } catch (error) {
-    console.error(error.message)
+    console.error('error in db connection: ', error.message)
     process.exit(1)
   }
 }
