@@ -1,14 +1,50 @@
 import React from 'react';
-import styles from './Input.module.scss'; 
+import style from './Input.module.scss';
 
-const Input = ({meta, input, ...props}) => {
-  const hasError = meta.touched && meta.error
+const Field = ({ item, onChange, changeCheckBox, required, statusArray }) => {
+  let field = null
+  console.log(item)
+  switch (item.field) {
+
+    case 'input':
+      field = <input type={item.type}
+        name={item.name}
+        value={item.value}
+        onChange={(e) => onChange(e)}
+        className={`${style.input} ${required[item.name] ? style.input_required : ''}`}
+      />; break;
+
+    case 'textarea':
+      field = <textarea type="text"
+        name={item.name} value={item.value}
+        onChange={(e) => onChange(e)}
+        className={style.textarea}
+      />; break;
+
+    case 'checkbox':
+      field = <input
+        type={item.type}
+        name={item.name} checked={item.value} onChange={(e) => changeCheckBox(e)} />; break;
+
+    case 'select':
+      field = <select name='status' value={item.value} onChange={(e) => onChange(e)} className={style.input} >
+        {statusArray && statusArray.map(item => {
+          return <option key={item.name} value={item.value}>{item.value}</option>
+        })}
+      </select>;break
+
+
+    default: return null
+  }
+
+
   return (
-    <div className={hasError ? styles.error : ''}>
-      <input  {...input} {...props} />
-      { hasError && <span>{meta.error}</span>}
-    </div>
-  );
+    <label key={item.name} htmlFor={item.name} className={style.heading}>
+      <h4>{item.heading}</h4>
+      {field}
+      <div className={style.danger}>{required[item.name]}</div>
+    </label>
+  )
 };
 
-export default Input;
+export default Field

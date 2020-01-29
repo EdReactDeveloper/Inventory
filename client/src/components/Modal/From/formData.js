@@ -1,4 +1,4 @@
-export const add = ({ name, description, tags, category, count, location, type }) => [
+export const add = ({ name, description, tags, category, count, location, type, status, shared }) => [
 	{
 		heading: 'name',
 		value: name,
@@ -47,6 +47,20 @@ export const add = ({ name, description, tags, category, count, location, type }
 		name: 'type',
 		field: 'input',
 		type: 'text'
+	},
+	{
+		heading: 'status',
+		value: status,
+		name: 'status',
+		field: 'select',
+		type: 'text'
+	},
+	{
+		heading: 'shared',
+		value: shared,
+		name: 'shared',
+		field: 'input',
+		type: 'checkbox'
 	}
 ];
 

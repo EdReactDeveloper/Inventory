@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { func } from 'prop-types'
 import Login from '../components/Auth/Login';
 import { loginAction } from '../store/actions/auth';
 import { validateLength, isEmail } from '../validators'
@@ -44,11 +43,5 @@ const LoginContainer = ({ ...props }) => {
     handleSubmit={submitHandler} onChange={onChange}
   />
 }
-
-LoginContainer.propTypes = {
-  login: func.isRequired
-}
-
-
 
 export default LoginContainer;
