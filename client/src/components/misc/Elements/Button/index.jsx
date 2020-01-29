@@ -4,7 +4,7 @@ import style from './Button.module.scss';
 import Icon from '../../icon/Icon';
 import { Item } from '../../icon/Selection';
 import { modalHandler, editHandler } from '../../../../store/actions/modal';
-import { FORM_TYPE } from '../../configs';
+import { FORM_TYPE } from '../../../../configs';
 
 const Button = ({ type,
   payload = '',

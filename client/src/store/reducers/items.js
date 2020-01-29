@@ -29,7 +29,8 @@ const reducer = (state = initialState, action) => {
 		case GET_ITEMS: {
 			return {
 				...state,
-				itemsLoading: true
+				itemsLoading: true,
+				pageLoading: true
 			};
 		}
 
@@ -72,7 +73,8 @@ const reducer = (state = initialState, action) => {
 				...state,
 				data: payload.items,
 				page: payload.page,
-				itemsLoading: false
+				itemsLoading: false,
+				pageLoading: false
 			};
 		}
 

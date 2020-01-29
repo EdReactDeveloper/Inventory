@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProfileForm from '../../../components/Modal/From/Profile';
 import { updateProfileAction } from '../../../store/actions/profile';
 import { modalHandler } from '../../../store/actions/modal';
-import { FORM_TYPE } from '../../../components/misc/configs';
+import { FORM_TYPE } from '../../../configs';
 
 
 const FormContainer = (props) => {

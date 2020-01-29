@@ -9,3 +9,10 @@ export const FORM_TYPE = {
   add: 'ADD',
   move: 'MOVE'
 }
+
+export const STATUSES = [
+  { name: 'away', value: 'away' },
+  { name: 'inplace', value: 'inplace' },
+]
+
+

@@ -7,21 +7,21 @@ const Item = new Schema({
 		ref: 'User'
 	},
 	name: { type: String, required: true },
-	description: { type: String, required: true },
-	tags: { type: String, required: true }, // words to search by
+	description: { type: String },
+	tags: { type: String }, // words to search by
 	parentId: { type: String, required: true },
 	collectionId: { type: String }, // id of the global object
 	img: { type: String },
 	updated: { type: Date, required: true },
 	created: { type: Date, defualt: Date.now, required: true },
 	path: { type: String, required: true }, // /id/id/id - url to the object
-	category: { type: String, required: true }, // filter by category
+	category: { type: String }, // filter by category
 	status: { type: String, required: true }, // filter by status
 	type: { type: String }, // ???
-	location: { type: String, required: true }, // ???
-	count: { type: Number, required: true },
-	checked: { type: Boolean, required: true }, // ???
-	shared: { type: Boolean, required: true },
+	location: { type: String }, // ???
+	count: { type: Number },
+	checked: { type: Boolean }, // ???
+	shared: { type: Boolean },
 	sharedWith: { type: Array },
 });
 

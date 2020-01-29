@@ -1,7 +1,3 @@
-export const required = value => {
-  if(value) return ''
-  return 'Field is required'
-}
 
 export const validateLength = (minLength, maxLength) => (value)=>{
   if(value.length < minLength) return `min length is ${minLength} chars`
@@ -16,3 +12,18 @@ export const isEmail = (value)=>{
   return 'should be a valid email'
 }
 
+export const isRequired = (fields, required) => {
+  const errors = {valid: true}
+  const fieldsKeys = Object.keys(fields)
+  const requiredKeys = Object.keys(required)
+  for(let i = 0 ; i < fieldsKeys.length; i++){
+    for(let j = 0; j < requiredKeys.length; j++){
+      if(fieldsKeys[i] == requiredKeys[j] && fields[fieldsKeys[i]].length < 1){
+        errors[requiredKeys[j]] = 'field is required'
+        errors.valid = false
+      }
+    }
+  }
+
+  return errors
+}

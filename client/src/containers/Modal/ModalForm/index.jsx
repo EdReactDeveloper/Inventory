@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ProfileForm from './Profile';
 import PageForm from './Page';
-import { FORM_TYPE } from '../../../components/misc/configs';
+import { FORM_TYPE } from '../../../configs';
 
 const FormContainer = (props) => {
   const items = useSelector(state => state.items)
