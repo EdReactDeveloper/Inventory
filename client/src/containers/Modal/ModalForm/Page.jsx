@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Form from '../../../components/Modal/From/Add';
+import Form from '../../../components/Modal/From/Page';
 import { addItemAction, updateItemAction } from '../../../store/actions/items';
 import { modalHandler } from '../../../store/actions/modal';
 import { FORM_TYPE, STATUSES } from '../../../configs';
@@ -29,9 +29,9 @@ const FormContainer = (props) => {
     checked: false,
     shared: false,
     sharedWith: [],
-    count: '',
+    count: 1,
     type: '',
-    status: 'away',
+    status: 'inplace',
     img: ''
   })
 
@@ -57,6 +57,7 @@ const FormContainer = (props) => {
     e.preventDefault()
     const fields = isRequired(state, required)
     setRequired({ ...required, ...fields })
+    
     if (fields.valid) {
       const { path } = props.match
       let collectionId = ''

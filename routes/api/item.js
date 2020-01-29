@@ -37,7 +37,6 @@ router.post(
 	'/add',
 	[
 		check('name', 'name is required').not().isEmpty(),
-		check('location', 'location is required').not().isEmpty(),
 		check('tags', 'tag is required').not().isEmpty()
 	],
 	async (req, res) => {

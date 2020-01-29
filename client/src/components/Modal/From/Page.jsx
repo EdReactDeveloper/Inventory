@@ -32,7 +32,4 @@ const PageForm = ({
 
 export default PageForm;
 
-  // 1. prop is in the array 
-  // 2. prop.value is required
-  // 3. push the value in the array of empty
 
