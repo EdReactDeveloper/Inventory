@@ -16,7 +16,8 @@ const FormContainer = (props) => {
 
   const [required, setRequired] = useState({
     name: null,
-    tag: null
+    tags: null,
+    count: null
   })
 
   const [state, setState] = useState({

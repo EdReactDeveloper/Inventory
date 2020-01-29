@@ -3,43 +3,50 @@ export const add = ({ name, description, tags, category, count, location, type }
 		heading: 'name',
 		value: name,
 		name: 'name',
-		type: 'input'
+		field: 'input', 
+		type: 'text'
 	},
 	{
 		heading: 'description',
 		value: description,
 		name: 'description',
-		type: 'textarea'
+		field: 'textarea',
+		type: 'text'
 	},
 	{
 		heading: 'tags',
 		value: tags,
 		name: 'tags',
-		type: 'input'
+		field: 'input',
+		type: 'text'
 	},
 	{
 		heading: 'category',
 		value: category,
 		name: 'category',
-		type: 'input'
+		field: 'input',
+		type: 'text'
 	},
 	{
 		heading: 'count',
 		value: count,
 		name: 'count',
-		type: 'input'
+		field: 'input',
+		type: 'number'
 	},
 	{
 		heading: 'location',
 		value: location,
 		name: 'location',
-		type: 'input'
+		field: 'input',
+		type: 'text'
 	},
 	{
 		heading: 'type',
 		value: type,
 		name: 'type',
-		type: 'input'
+		field: 'input',
+		type: 'text'
 	}
 ];
 
@@ -47,19 +54,22 @@ export const renderProfile = ({ name, description, hidden }) => [
 	{
 		heading: 'name',
 		name: 'name',
-		type: 'input',
-		value: name
+		field: 'input',
+		value: name,
+		type: 'text'
 	},
 	{
 		heading: 'name',
 		name: 'description',
-		type: 'textarea',
-		value: description
+		field: 'textarea',
+		value: description,
+		type: 'text'
 	},
 	{
 		heading: 'hidden',
 		name: 'hidden',
-		type: 'checkbox',
-		checked: hidden
+		field: 'input',
+		value: hidden,
+		type: 'checkbox'
 	}
 ];

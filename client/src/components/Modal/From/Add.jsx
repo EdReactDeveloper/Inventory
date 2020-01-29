@@ -15,10 +15,10 @@ import style from './Forms.module.scss';
     return (
       <form onSubmit={submitFrom}>
         {add(payload).map(item => {
-          switch (item.type) {
+          switch (item.field) {
             case 'input': return <label key={item.name} htmlFor={item.name} className={style.heading}>
               <h4>{item.heading}</h4>
-              <input type="text"
+              <input type={item.type}
                 name={item.name}
                 value={item.value}
                 onChange={(e) => onChange(e)}
