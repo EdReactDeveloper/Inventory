@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import style from './Button.module.scss';
 import Icon from '../../icon/Icon';
 import { Item } from '../../icon/Selection';
-import { modalHandler, editHandler } from '../../../../store/actions/modal';
+import { modalHandler } from '../../../../store/actions/modal';
+import {editHandler} from '../../../../store/actions/items';
 import { FORM_TYPE } from '../../../../configs';
 
 const Button = ({ type,
@@ -15,7 +16,6 @@ const Button = ({ type,
   ...props }) => {
 
   const { page, parentId, itemId } = payload
-
   switch (type) {
 
     case 'edit':
@@ -27,7 +27,7 @@ const Button = ({ type,
         <Icon d={Item.edit} className={style.icon} />
       </button>;
 
-    // case 'move':
+    // case 'select':
     //   return <button
     //     type="button"
     //     className={style.edit}
@@ -95,7 +95,7 @@ const Button = ({ type,
 }
 
 const mapStateToProps = state => ({
-  editMode: state.modal.editMode
+  editMode: state.items.editMode
 })
 
 export default connect(mapStateToProps, { modalHandler, editHandler })(Button)

@@ -10,13 +10,24 @@ import {
 	UPDATE_ITEM_FAIL,
 	REMOVE_ITEM,
 	REMOVE_ITEM_SUCCESS,
-	REMOVE_ITEM_FAIL
+	REMOVE_ITEM_FAIL,
+	EDIT_MODE,
+	SELECT_ITEM
 } from './types';
 import { updateItemApi, addItemApi, removeItemApi, getItemsApi } from '../api/items';
 import inProgressAction from './inprogress'; 
 import setNotification from './notification'; 
 import setAlert from './alerts'; 
 
+export const editHandler = () => dispatch =>{
+  dispatch({
+    type: EDIT_MODE
+  })
+}
+
+export const selectItemAction = (payload) => dispatch=>{
+	dispatch({type: SELECT_ITEM, payload})
+}
 
 export const getItemsAction = (path) => async (dispatch) => {
 	dispatch({ type: GET_ITEMS });

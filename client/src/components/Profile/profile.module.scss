@@ -27,6 +27,10 @@
     align-items: center;
   }
 
+  &__selected{
+    border: 2px solid #44bd32;
+  }
+
   &__details {
     margin-left: 1rem;
 

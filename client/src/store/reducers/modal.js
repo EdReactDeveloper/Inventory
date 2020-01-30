@@ -1,4 +1,4 @@
-import { MODAL, EDIT } from '../actions/types';
+import { MODAL } from '../actions/types';
 
 const initialState = {
 	isOpen: false,
@@ -18,9 +18,6 @@ const reducer =  (state = initialState, action) => {
 	switch (type) {
 		case MODAL:
 			return { ...state, isOpen: !state.isOpen, form: payload};
-	
-		case EDIT:
-			return { ...state, editMode: !state.editMode };
 
 		default:
 			return state;

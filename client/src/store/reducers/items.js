@@ -11,12 +11,16 @@ import {
 	CLEAN_UP,
 	REMOVE_ITEM,
 	REMOVE_ITEM_SUCCESS,
-	REMOVE_ITEM_FAIL	
+	REMOVE_ITEM_FAIL,
+	SELECT_ITEM,
+	EDIT_MODE
 } from '../actions/types';
 
 const initialState = {
 	data: [],
 	page: {},
+	selectedItems: [],
+	editMode: false,
 	itemsLoading: true,
 	pageLoading: false,
 	fetchingItem: false,
@@ -26,6 +30,21 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 	const { type, payload } = action;
 	switch (type) {
+		case EDIT_MODE: {
+			return { ...state, editMode: !state.editMode };
+		}
+
+		case SELECT_ITEM: {
+			const isSelected = state.selectedItems.some((item) => item.id === payload.id);
+			if (isSelected) {
+				return { ...state, selectedItems: state.selectedItems.filter((item) => item.id !== payload.id) };
+			}
+			return {
+				...state,
+				selectedItems: [ ...state.selectedItems, payload ]
+			};
+		}
+
 		case GET_ITEMS: {
 			return {
 				...state,
@@ -34,10 +53,11 @@ const reducer = (state = initialState, action) => {
 			};
 		}
 
-		case ADD_ITEM:{
+		case ADD_ITEM: {
 			return {
-				...state, fetchingItem: true
-			}
+				...state,
+				fetchingItem: true
+			};
 		}
 
 		case ADD_ITEM_SUCCESS: {
@@ -49,23 +69,27 @@ const reducer = (state = initialState, action) => {
 		}
 
 		case UPDATE_ITEM:
-		case REMOVE_ITEM:	
-		{
+		case REMOVE_ITEM: {
 			return {
-				...state, pageLoading: true
-			}
+				...state,
+				pageLoading: true
+			};
 		}
 
 		case UPDATE_ITEM_SUCCESS: {
 			return {
-				...state, page: payload, pageLoading: false
-			}
+				...state,
+				page: payload,
+				pageLoading: false
+			};
 		}
 
 		case REMOVE_ITEM_SUCCESS: {
 			return {
-				...state, data: state.data.filter(item => item._id !== payload), pageLoading: false
-			}
+				...state,
+				data: state.data.filter((item) => item._id !== payload),
+				pageLoading: false
+			};
 		}
 
 		case GET_ITEMS_SUCCESS: {
@@ -80,8 +104,8 @@ const reducer = (state = initialState, action) => {
 
 		case ADD_ITEM_FAIL:
 		case GET_ITEMS_FAIL:
-		case UPDATE_ITEM_FAIL:	
-		{
+		case UPDATE_ITEM_FAIL:
+		case REMOVE_ITEM_FAIL: {
 			return {
 				...state,
 				error: payload,
@@ -91,7 +115,7 @@ const reducer = (state = initialState, action) => {
 		}
 
 		case CLEAN_UP: {
-			return initialState
+			return initialState;
 		}
 		default:
 			return state;
