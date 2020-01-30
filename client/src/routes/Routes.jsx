@@ -13,7 +13,7 @@ import Alert from '../containers/Alert';
 import ErrorBoundry from '../containers/ErrorBoundry';
 import Profile from '../containers/Profile'; 
 import Modal from '../containers/Modal';
-
+import Notification from '../containers/Notifications';
 
 const Routes = ({ loading }) => {
 
@@ -22,6 +22,7 @@ const Routes = ({ loading }) => {
       {!loading && (
         <HeaderFooter>
           <Alert />
+          <Notification />
           <Route path="/" component={Modal} />
           <ErrorBoundry>
             <div className={style.wrapper}>

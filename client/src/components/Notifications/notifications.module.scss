@@ -1,0 +1,33 @@
+.notification {
+
+  &__container {
+    position: absolute;
+    bottom: 13rem;
+    left: 0;
+  }
+
+  &__wrapper {
+    background: #444;
+    color: #fff;
+    padding: 1rem 1.6rem;
+    text-align: center;
+    margin: .5rem;
+    animation: show .5s;
+    transition: all .5s;
+  }
+
+  &__hide {
+    transition: all .3s;
+    transform: translateX(-30rem);
+  }
+}
+
+@keyframes show{
+  0%{
+    transform: translateX(-30rem);
+  }
+
+  100%{
+    transform: translateX(0rem);
+  }
+}

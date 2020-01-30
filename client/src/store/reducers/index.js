@@ -10,6 +10,7 @@ import search from './search';
 import profile from './profile'; 
 import items from './items'; 
 import bread from './bread'; 
+import notification from './notification';
 
 const createRootReducer = history =>{
 	 return combineReducers({
@@ -23,6 +24,7 @@ const createRootReducer = history =>{
 		profile,
 		items,
 		bread,
+		notification,
 		form: reduxForm
 	});
 }
