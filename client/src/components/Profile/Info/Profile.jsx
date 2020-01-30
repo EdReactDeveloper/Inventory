@@ -2,13 +2,20 @@ import React from 'react';
 import ButtonsBlock from '../ButtonsBlock';
 
 const ProfileInfo = (props) => {
-  const { profile: { profile: { name, description,  _id }, profileUpdating }, removeItem, editMode } = props
+  const { profile: { profile: { name, description,  _id }, profileUpdating }, removeItem, moveItemsHandler, editMode, selectedItems } = props
   const { profile: { profile } } = props
   return (
     <div>
       {!profileUpdating ?
         <div>
-          <ButtonsBlock editData={profile} removeItem={removeItem} id={_id} editMode={editMode} path='/' />
+          <ButtonsBlock 
+          editData={profile} 
+          removeItem={removeItem} id={_id} 
+          editMode={editMode} 
+          path='/' 
+          selectedItems={selectedItems}
+          moveItemsHandler={moveItemsHandler}
+          />
           <h3>{name}</h3>
           <p>{description}</p>
 

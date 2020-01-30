@@ -12,22 +12,45 @@ import {
 	REMOVE_ITEM_SUCCESS,
 	REMOVE_ITEM_FAIL,
 	EDIT_MODE,
-	SELECT_ITEM
+	SELECT_ITEM,
+	MOVE_ITEMS,
+	MOVE_ITEMS_SUCCESS,
+	MOVE_ITEMS_FAIL,
+	UNSELECT_ITEMS
 } from './types';
-import { updateItemApi, addItemApi, removeItemApi, getItemsApi } from '../api/items';
-import inProgressAction from './inprogress'; 
-import setNotification from './notification'; 
-import setAlert from './alerts'; 
+import { updateItemApi, addItemApi, removeItemApi, getItemsApi, moveSelectedItemsApi } from '../api/items';
+import inProgressAction from './inprogress';
+import setNotification from './notification';
+import setAlert from './alerts';
 
-export const editHandler = () => dispatch =>{
-  dispatch({
-    type: EDIT_MODE
-  })
-}
+export const editHandler = () => (dispatch) => {
+	dispatch({
+		type: EDIT_MODE
+	});
+};
 
-export const selectItemAction = (payload) => dispatch=>{
-	dispatch({type: SELECT_ITEM, payload})
-}
+export const selectItemAction = (payload) => (dispatch) => {
+	dispatch({ type: SELECT_ITEM, payload });
+};
+
+export const moveItemsAction = ({ id, items, path }) => async (dispatch) => {
+	dispatch({ type: MOVE_ITEMS });
+	const docs = [];
+	for (let i = 0; i < items.length; i++) {
+		if (items[i].parentId !== id) {
+			docs.push(items[i].id);
+		}
+	}
+	try {
+		const result = await moveSelectedItemsApi({ id, docs, path });
+		dispatch({ type: MOVE_ITEMS_SUCCESS, payload: result });
+		setTimeout(() => {
+			dispatch({ type: UNSELECT_ITEMS });
+		}, 1500);
+	} catch (error) {
+		dispatch({ type: MOVE_ITEMS_FAIL, payload: error });
+	}
+};
 
 export const getItemsAction = (path) => async (dispatch) => {
 	dispatch({ type: GET_ITEMS });
@@ -36,7 +59,7 @@ export const getItemsAction = (path) => async (dispatch) => {
 		dispatch({ type: GET_ITEMS_SUCCESS, payload: result });
 	} catch (error) {
 		dispatch({ type: GET_ITEMS_FAIL, payload: error });
-		dispatch(setAlert(error))
+		dispatch(setAlert(error));
 	}
 };
 
@@ -44,12 +67,12 @@ export const addItemAction = (payload) => async (dispatch) => {
 	dispatch({ type: ADD_ITEM });
 	try {
 		const result = await addItemApi(payload);
-		dispatch(setNotification('added new item'))
+		dispatch(setNotification('added new item'));
 		dispatch({ type: ADD_ITEM_SUCCESS, payload: result });
 	} catch (error) {
 		dispatch({ type: ADD_ITEM_FAIL, payload: error });
-		dispatch(setAlert(error))
-		dispatch(setNotification('Failed to add new item'))
+		dispatch(setAlert(error));
+		dispatch(setNotification('Failed to add new item'));
 	}
 };
 
@@ -58,32 +81,32 @@ export const updateItemAction = (payload) => async (dispatch) => {
 	try {
 		const result = await updateItemApi(payload);
 		dispatch({ type: UPDATE_ITEM_SUCCESS, payload: result });
-		dispatch(setNotification('Page updaged!'))
+		dispatch(setNotification('Page updaged!'));
 	} catch (error) {
 		dispatch({ type: UPDATE_ITEM_FAIL, paylod: error });
-		dispatch(setAlert(error))
-		dispatch(setNotification('Failed to updated the page'))
+		dispatch(setAlert(error));
+		dispatch(setNotification('Failed to updated the page'));
 	}
 };
 
 export const removeItemAction = ({ id, path, history }) => async (dispatch) => {
-	if(path){
+	if (path) {
 		dispatch({ type: REMOVE_ITEM });
-	}else{
-		dispatch(inProgressAction(true, id))
+	} else {
+		dispatch(inProgressAction(true, id));
 	}
 	try {
 		const result = await removeItemApi(id);
 		if (path) {
-			history.push(path);	
-		}else{
-			dispatch(inProgressAction(false, id))
+			history.push(path);
+		} else {
+			dispatch(inProgressAction(false, id));
 		}
-		dispatch(setNotification('item removed!'))
-		dispatch({type: REMOVE_ITEM_SUCCESS, payload: result})
+		dispatch(setNotification('item removed!'));
+		dispatch({ type: REMOVE_ITEM_SUCCESS, payload: result });
 	} catch (error) {
 		dispatch({ type: REMOVE_ITEM_FAIL });
-		dispatch(setAlert(error))
-		dispatch(setNotification('Failed to remove the item'))
+		dispatch(setAlert(error));
+		dispatch(setNotification('Failed to remove the item'));
 	}
 };

@@ -69,6 +69,12 @@ export const REMOVE_ITEM_FAIL = 'REMOVE_ITEM_FAIL'
 
 export const EDIT_MODE = 'EDIT_MODE'
 export const SELECT_ITEM = 'SELECT_ITEM'
+export const UNSELECT_ITEMS = 'UNSELECT_ITEMS'
+
+export const MOVE_ITEMS = 'MOVE_ITEMS'
+export const MOVE_ITEMS_SUCCESS = 'MOVE_ITEMS_SUCCESS'
+export const MOVE_ITEMS_FAIL = 'MOVE_ITEMS_FAIL'
+
 
 // UTILS
 

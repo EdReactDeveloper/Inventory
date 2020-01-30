@@ -92,9 +92,25 @@ router.post(
 	}
 );
 
+router.post('/move', async (req, res)=>{
+	const {docs, id, path} = req.body
+	try {
+		const updatedItems = await Item.find({_id: {$in: docs}})
+		await Item.updateMany({_id: {$in: docs}}, {$set: {parentId: id, path}})
+
+		for(let i = 0; i < updatedItems.length; i++){
+			updatedItems[i].path = path
+			updatedItems[i].parentId =id
+		}
+
+		res.json(updatedItems)
+	} catch (error) {
+		res.status(400).json({ error });
+	}
+})	
+
 router.delete('/:id', async (req, res) => {
 	try {
-		console.log(req.params.id)
 		await Item.findByIdAndRemove(req.params.id);
 		await Item.deleteMany({ parentId: req.params.id });
 		res.json(req.params.id);

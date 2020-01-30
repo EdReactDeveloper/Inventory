@@ -5,28 +5,39 @@ import Button from '../../misc/Elements/Button';
 import Loader from '../../misc/Loader/Lines';
 
 const Item = (props) => {
-  const { name, path, status, tags, _id, removeItem, inProgress, editMode, selectItemHandler, selectedItems } = props
+  const { name, path, status, tags, _id, parentId, removeItem, inProgress, editMode, selectItemHandler, selectedItems } = props
+  console.log(parentId)
+  const selectedItem={id: _id, name, parentId}
   const checked = selectedItems.some(item => item.id === _id)
   return (
-    <li className={`${style.item_wrapper} ${checked && editMode ? style.item__selected: ''}`}>
+    <li className={`${style.item_wrapper} ${checked ? style.item__selected : ''}`}>
       {inProgress.some(item => item === _id) ? <Loader className={style.loader__item} /> :
         <>
-          {editMode ?
+          {checked ?
             (<div>
               <h4>{name}</h4>
               <div className={style.item__details}><span>tags:</span> {tags}</div>
               <div className={style.item__details}><span>status:</span> {status}</div>
               <Button type='delete' onClick={() => removeItem({ id: _id })}>remove</Button>
-              <input 
-              type="checkbox" 
-              checked={checked} 
-              onChange={()=> selectItemHandler({id: _id, name})} />
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={() => selectItemHandler(selectedItem)} />
             </div>) :
-            (<Link to={`${path}/${_id}`}>
-              <h4>{name}</h4>
-              <div className={style.item__details}><span>tags:</span> {tags}</div>
-              <div className={style.item__details}><span>status:</span> {status}</div>
-            </Link>)
+            (
+              <div>
+                <Link to={`${path}/${_id}`}>
+                  <h4>{name}</h4>
+                  <div className={style.item__details}><span>tags:</span> {tags}</div>
+                  <div className={style.item__details}><span>status:</span> {status}</div>
+                </Link>
+                <Button type='delete' onClick={() => removeItem({ id: _id })}>remove</Button>
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => selectItemHandler(selectedItem)} />
+              </div>
+            )
 
           }
         </>

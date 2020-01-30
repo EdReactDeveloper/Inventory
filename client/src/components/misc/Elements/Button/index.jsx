@@ -11,6 +11,7 @@ const Button = ({ type,
   payload = '',
   modalHandler,
   editMode,
+  selectedItems,
   editHandler, onClick,
   editData,
   ...props }) => {
@@ -27,14 +28,14 @@ const Button = ({ type,
         <Icon d={Item.edit} className={style.icon} />
       </button>;
 
-    // case 'select':
-    //   return <button
-    //     type="button"
-    //     className={style.edit}
-    //     onClick={() => modalHandler({ formType: FORM_TYPE.move, itemId, parentId })}
-    //   >
-    //     {props.children}
-    //   </button>
+    case 'move':
+      return <button
+        type="button"
+        className={style.edit}
+        onClick={onClick}
+      >
+        {props.children}
+      </button>
 
     case 'add':
       return <button
@@ -95,7 +96,8 @@ const Button = ({ type,
 }
 
 const mapStateToProps = state => ({
-  editMode: state.items.editMode
+  editMode: state.items.editMode,
+  selectedItems: state.items.selectedItems
 })
 
 export default connect(mapStateToProps, { modalHandler, editHandler })(Button)

@@ -13,7 +13,11 @@ import {
 	REMOVE_ITEM_SUCCESS,
 	REMOVE_ITEM_FAIL,
 	SELECT_ITEM,
-	EDIT_MODE
+	EDIT_MODE,
+	MOVE_ITEMS,
+	MOVE_ITEMS_SUCCESS,
+	MOVE_ITEMS_FAIL,
+	UNSELECT_ITEMS
 } from '../actions/types';
 
 const initialState = {
@@ -24,6 +28,7 @@ const initialState = {
 	itemsLoading: true,
 	pageLoading: false,
 	fetchingItem: false,
+	movedItemsFetching: false,
 	error: null
 };
 
@@ -42,6 +47,24 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				selectedItems: [ ...state.selectedItems, payload ]
+			};
+		}
+
+		case UNSELECT_ITEMS: {
+			return {
+				...state, selectedItems: []
+			}
+		}
+
+		case MOVE_ITEMS: {
+			return { ...state, movedItemsFetching: true };
+		}
+
+		case MOVE_ITEMS_SUCCESS: {
+			return {
+				...state,
+				data: [ ...payload, ...state.data ],
+				movedItemsFetching: false
 			};
 		}
 
@@ -105,12 +128,14 @@ const reducer = (state = initialState, action) => {
 		case ADD_ITEM_FAIL:
 		case GET_ITEMS_FAIL:
 		case UPDATE_ITEM_FAIL:
+		case MOVE_ITEMS_FAIL:
 		case REMOVE_ITEM_FAIL: {
 			return {
 				...state,
 				error: payload,
 				itemsLoading: false,
-				pageLoading: false
+				pageLoading: false,
+				movedItemsFetching: false
 			};
 		}
 

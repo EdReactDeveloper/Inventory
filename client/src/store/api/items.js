@@ -31,3 +31,7 @@ export const removeItemApi  = async (id) =>{
 	return result.data
 }
 
+export const moveSelectedItemsApi = async (payload) => {
+	const result = await instance.post(`${baseURL}/move`, body(payload))
+	return result.data
+}

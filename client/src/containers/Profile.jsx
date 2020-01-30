@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Profile from '../components/Profile';
 import { getProfileAction, componentUnmount } from '../store/actions/profile';
-import { getItemsAction, removeItemAction, selectItemAction } from '../store/actions/items';
+import { getItemsAction, removeItemAction, selectItemAction, moveItemsAction } from '../store/actions/items';
 import Loader from '../components/Profile/Loader';
 
 const extractId = (path) => {
@@ -53,6 +53,10 @@ const ProfileContainer = (props) => {
     dispatch(selectItemAction(payload))
   }
 
+  const moveItemsHandler = (payload)=>{
+    dispatch(moveItemsAction(payload))
+  }
+
   const payload = {
     items: data,
     page,
@@ -65,7 +69,8 @@ const ProfileContainer = (props) => {
     removeItem,
     inProgress,
     selectItemHandler,
-    selectedItems
+    selectedItems,
+    moveItemsHandler
   }
 
   return <>{profile.profileLoading && itemsLoading ? <Loader /> : <Profile {...props} {...payload} />}</>
