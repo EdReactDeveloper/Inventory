@@ -6,7 +6,6 @@ import Loader from '../../misc/Loader/Lines';
 
 const Item = (props) => {
   const { name, path, status, tags, _id, parentId, removeItem, inProgress, editMode, selectItemHandler, selectedItems } = props
-  console.log(parentId)
   const selectedItem={id: _id, name, parentId}
   const checked = selectedItems.some(item => item.id === _id)
   return (
@@ -26,7 +25,7 @@ const Item = (props) => {
             </div>) :
             (
               <div>
-                <Link to={`${path}/${_id}`}>
+                <Link to={_id}>
                   <h4>{name}</h4>
                   <div className={style.item__details}><span>tags:</span> {tags}</div>
                   <div className={style.item__details}><span>status:</span> {status}</div>

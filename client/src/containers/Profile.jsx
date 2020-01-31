@@ -5,13 +5,6 @@ import { getProfileAction, componentUnmount } from '../store/actions/profile';
 import { getItemsAction, removeItemAction, selectItemAction, moveItemsAction } from '../store/actions/items';
 import Loader from '../components/Profile/Loader';
 
-const extractId = (path) => {
-  return path.split('/').slice(-1).join('')
-}
-
-const profilePage = (location) => {
-  return location.split('/').length === 2
-}
 
 const ProfileContainer = (props) => {
   const dispatch = useDispatch();
@@ -19,13 +12,12 @@ const ProfileContainer = (props) => {
   // reducers
   const profile = useSelector(state => state.profile)
   const items = useSelector(state => state.items)
-  const { data, page, itemsLoading, fetchingItem, pageLoading, editMode, selectedItems } = items
+  const { data, page, bread, itemsLoading, fetchingItem, pageLoading, editMode, selectedItems } = items
   const {inProgress} = useSelector(state=> state.inProgress)
 
   // props
-  const path = props.location.pathname
   const {history} = props
-  const isProfilePage = profilePage(path)
+  const {match: {params: {id}}} = props
 
 
   useEffect(() => {
@@ -33,10 +25,9 @@ const ProfileContainer = (props) => {
   }, [])
 
   useEffect(() => {
-    const parentId = extractId(path)
-    dispatch(getItemsAction(parentId))
+    dispatch(getItemsAction(id))
 
-  }, [path])
+  }, [id])
 
   useEffect(() => {
     return () => {
@@ -65,12 +56,12 @@ const ProfileContainer = (props) => {
     itemsLoading,
     fetchingItem,
     pageLoading,
-    isProfilePage,
     removeItem,
     inProgress,
     selectItemHandler,
     selectedItems,
-    moveItemsHandler
+    moveItemsHandler,
+    bread
   }
 
   return <>{profile.profileLoading && itemsLoading ? <Loader /> : <Profile {...props} {...payload} />}</>

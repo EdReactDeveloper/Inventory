@@ -23,6 +23,7 @@ import {
 const initialState = {
 	data: [],
 	page: {},
+	bread: [],
 	selectedItems: [],
 	editMode: false,
 	itemsLoading: true,
@@ -120,6 +121,7 @@ const reducer = (state = initialState, action) => {
 				...state,
 				data: payload.items,
 				page: payload.page,
+				bread: payload.bread,
 				itemsLoading: false,
 				pageLoading: false
 			};

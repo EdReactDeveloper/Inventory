@@ -3,14 +3,36 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const Item = require('../../models/Item');
+const Profile = require('../../models/Profile'); 
+
+const getBread = async (page, path) => {
+	if(!page){
+		return;
+	}
+	try {
+		let item = await Item.findOne({_id: page.parentId})
+		if(!item){
+			item = await Profile.findOne({_id: page.parentId})
+		}
+	path.unshift({name: item.name, id: item._id})
+	await getBread(item, path)
+	} catch (error) {
+		console.log(error)
+	}
+}
 
 // GET ITEMS
 router.get('/:id', async (req, res) => {
 	const { id } = req.params;
 	try {
+		let page = await Item.findById(id);
+		if(!page){
+			page = await Profile.findById(id) 
+		}
+		const bread = []
+		await getBread(page, bread)
 		const items = await Item.find({ parentId: id });
-		const page = await Item.findById({ _id: id });
-		const payload = { page, items };
+		const payload = { page, items, bread };
 		res.json(payload);
 	} catch (error) {
 		res.status(400).json({ error });

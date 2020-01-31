@@ -52,10 +52,10 @@ export const moveItemsAction = ({ id, items, path }) => async (dispatch) => {
 	}
 };
 
-export const getItemsAction = (path) => async (dispatch) => {
+export const getItemsAction = (id) => async (dispatch) => {
 	dispatch({ type: GET_ITEMS });
 	try {
-		const result = await getItemsApi(path);
+		const result = await getItemsApi(id);
 		dispatch({ type: GET_ITEMS_SUCCESS, payload: result });
 	} catch (error) {
 		dispatch({ type: GET_ITEMS_FAIL, payload: error });

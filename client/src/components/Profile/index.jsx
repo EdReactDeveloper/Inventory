@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './profile.module.scss';
-import BreadCrumbs from '../../containers/BreadCrumbs';
+import BreadCrumbs from './BreadCrumbs'; 
 import ProfileInfo from './Info/Profile';
 import ItemInfo from './Info/Item';
 import List from './List';

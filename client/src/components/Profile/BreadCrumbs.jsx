@@ -2,24 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './profile.module.scss';
 
-const BreadCrumbs = ({ items: {items, itemsLoading}, profile }) => {
+const BreadCrumbs = ({bread}) => {
   return (
     <div className={style.bread}>
-      {profile && !itemsLoading ?
         <div>
           <Link to="/">home</Link>
-          {items.map((item, index) => {
-            if(index < items.length-1){
-              return <Link to={item.path} key={item.id}>
-              \{item.name}
-            </Link>
-            }
-            return <span key={item.id}>\...</span>
+          {bread.map((item) => {
+            return <Link to={item.id} key={item.id}>
+            \{item.name}
+          </Link>
           }
           )}
+          <span>\...</span>
         </div>
-      : <div>loading...</div>
-      }
+     
     </div>
 
   );
