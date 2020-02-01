@@ -45,6 +45,7 @@ const ProfileContainer = (props) => {
   }
 
   const moveItemsHandler = (payload)=>{
+    // payload = 
     dispatch(moveItemsAction(payload))
   }
 

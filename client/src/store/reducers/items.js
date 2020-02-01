@@ -47,7 +47,7 @@ const reducer = (state = initialState, action) => {
 			}
 			return {
 				...state,
-				selectedItems: [ ...state.selectedItems, payload ]
+				selectedItems: [ payload, ...state.selectedItems ]
 			};
 		}
 
