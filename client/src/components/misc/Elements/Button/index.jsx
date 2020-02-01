@@ -4,7 +4,7 @@ import style from './Button.module.scss';
 import Icon from '../../icon/Icon';
 import { Item } from '../../icon/Selection';
 import { modalHandler } from '../../../../store/actions/modal';
-import {editHandler} from '../../../../store/actions/items';
+import { editHandler } from '../../../../store/actions/items';
 import { FORM_TYPE } from '../../../../configs';
 
 const Button = ({ type,
@@ -13,8 +13,10 @@ const Button = ({ type,
   editMode,
   selectedItems,
   editHandler, onClick,
+  onChange,
   editData,
   className,
+  checked,
   ...props }) => {
 
   const { parentId } = payload
@@ -67,13 +69,13 @@ const Button = ({ type,
       {editMode ? 'edit off' : 'edit on'}
     </button>
 
-    case 'delete': 
-    return <button 
-    className={style.delete}
-    type="button" onClick={onClick} >
-      <Icon className={style.icon} d={Item.delete} />
-      {props.children}
-    </button>
+    case 'delete':
+      return <button
+        className={style.delete}
+        type="button" onClick={onClick} >
+        <Icon className={style.icon} d={Item.delete} />
+        {props.children}
+      </button>
 
     case 'dropMenu':
       return <button
@@ -81,6 +83,16 @@ const Button = ({ type,
         className={style.dropMenu} onClick={onClick}>
         <div className={style.dropMenu_content} />
       </button>
+
+    case 'check':
+      return <button
+        type="button"
+        onClick={onClick}
+        className={style.check}
+      >
+        {props.children}
+      </button>
+
 
     case 'navigation':
       return <button

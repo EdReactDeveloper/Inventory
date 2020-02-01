@@ -1,5 +1,4 @@
 import React from 'react';
-import style from './profile.module.scss';
 import Button from '../misc/Elements/Button';
 import Menu from '../Menu';
 

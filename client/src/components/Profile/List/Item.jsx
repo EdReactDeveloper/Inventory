@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import style from '../profile.module.scss';
 import Button from '../../misc/Elements/Button';
 import Loader from '../../misc/Loader/Lines';
+import Menu from '../../Menu';
 
 const Item = (props) => {
 
@@ -21,8 +22,14 @@ const Item = (props) => {
     }
   } = props
 
-   const selectedItem = { id: _id, name, parentId }
+  const selectedItem = { id: _id, name, parentId }
   const checked = selectedItems.some(item => item.id === _id)
+
+  const dropMenu = <Menu>
+    <li><Button type='delete' onClick={() => removeItem({ id: _id })}>remove</Button></li>
+<li><Button type='check' checked={checked} onClick={() => selectItemHandler(selectedItem)} >
+  {checked ? 'unselect item' : 'select item' }</Button></li>
+  </Menu>
 
   return (
     <li className={`${style.item_wrapper} ${checked ? style.item__selected : ''}`}>
@@ -33,11 +40,6 @@ const Item = (props) => {
               <h4>{name}</h4>
               <div className={style.item__details}><span>tags:</span> {tags}</div>
               <div className={style.item__details}><span>status:</span> {status}</div>
-              <Button type='delete' onClick={() => removeItem({ id: _id })}>remove</Button>
-              <input
-                type="checkbox"
-                checked={checked}
-                onChange={() => selectItemHandler(selectedItem)} />
             </div>) :
             (
               <div>
@@ -46,17 +48,13 @@ const Item = (props) => {
                   <div className={style.item__details}><span>tags:</span> {tags}</div>
                   <div className={style.item__details}><span>status:</span> {status}</div>
                 </Link>
-                <Button type='delete' onClick={() => removeItem({ id: _id })}>remove</Button>
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={() => selectItemHandler(selectedItem)} />
               </div>
             )
 
           }
         </>
       }
+      {dropMenu}
     </li>
   );
 };

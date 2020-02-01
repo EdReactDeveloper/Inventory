@@ -60,6 +60,17 @@
   opacity: 1;
 }
 
+.check{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  outline: none;
+  
+}
+
 .delete {
   display: flex;
   height: 2.5rem;
