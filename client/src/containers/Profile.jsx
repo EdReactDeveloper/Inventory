@@ -10,15 +10,15 @@ const ProfileContainer = (props) => {
   const dispatch = useDispatch();
 
   // reducers
-  const profile = useSelector(state => state.profile)
+  const {profile, profileLoading, profileUpdating} = useSelector(state => state.profile)
   const items = useSelector(state => state.items)
-  const { data, page, bread, itemsLoading, fetchingItem, pageLoading, editMode, selectedItems } = items
-  const {inProgress} = useSelector(state=> state.inProgress)
+  const { list, page, bread, itemsLoading, fetchingItem, pageLoading, editMode, selectedItems } = items
+  const { inProgress } = useSelector(state => state.inProgress)
 
   // props
-  const {history} = props
-  const {match: {params: {id}}} = props
-
+  const { history } = props
+  const { match: { params: { id } } } = props
+  const isProfilePage = id === profile._id
 
   useEffect(() => {
     dispatch(getProfileAction());
@@ -36,33 +36,44 @@ const ProfileContainer = (props) => {
   }, [])
 
   // methods
-  const removeItem = (payload) =>{
-    dispatch(removeItemAction({...payload, history}))
+  const removeItem = (payload) => {
+    dispatch(removeItemAction({ ...payload, history }))
   }
 
-  const selectItemHandler=(payload)=>{
+  const selectItemHandler = (payload) => {
     dispatch(selectItemAction(payload))
   }
 
-  const moveItemsHandler = (payload)=>{
+  const moveItemsHandler = (payload) => {
     // payload = 
     dispatch(moveItemsAction(payload))
   }
 
   const payload = {
-    items: data,
-    page,
-    editMode,
-    profile,
-    itemsLoading,
-    fetchingItem,
-    pageLoading,
-    removeItem,
-    inProgress,
-    selectItemHandler,
-    selectedItems,
-    moveItemsHandler,
-    bread
+    data: {
+      profile,
+      list,
+      page,
+      bread
+    },
+    loaders: {
+      itemsLoading,
+      fetchingItem,
+      pageLoading,
+      inProgress,
+    },
+    methods:{
+      removeItem,
+      selectItemHandler,
+      selectedItems,
+      moveItemsHandler,
+      profileLoading,
+      profileUpdating
+    },
+    checks: {
+      isProfilePage,
+      editMode
+    }   
   }
 
   return <>{profile.profileLoading && itemsLoading ? <Loader /> : <Profile {...props} {...payload} />}</>

@@ -5,9 +5,25 @@ import Button from '../../misc/Elements/Button';
 import Loader from '../../misc/Loader/Lines';
 
 const Item = (props) => {
-  const { name, status, tags, _id, parentId, removeItem, inProgress, editMode, selectItemHandler, selectedItems } = props
-  const selectedItem={id: _id, name, parentId}
+
+  // PROPS
+  const { item: { name, status, tags, _id, parentId },
+    methods: {
+      removeItem,
+      selectItemHandler,
+      selectedItems
+    },
+    loaders: {
+      inProgress
+    },
+    checks: {
+      editMode
+    }
+  } = props
+
+   const selectedItem = { id: _id, name, parentId }
   const checked = selectedItems.some(item => item.id === _id)
+
   return (
     <li className={`${style.item_wrapper} ${checked ? style.item__selected : ''}`}>
       {inProgress.some(item => item === _id) ? <Loader className={style.loader__item} /> :

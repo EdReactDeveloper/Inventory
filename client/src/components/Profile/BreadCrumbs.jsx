@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './profile.module.scss';
 
-const BreadCrumbs = ({bread}) => {
+const BreadCrumbs = ({data:{bread}}) => {
   return (
     <div className={style.bread}>
         <div>

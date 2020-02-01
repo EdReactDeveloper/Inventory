@@ -21,7 +21,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-	data: [],
+	list: [],
 	page: {},
 	bread: [],
 	selectedItems: [],
@@ -64,7 +64,7 @@ const reducer = (state = initialState, action) => {
 		case MOVE_ITEMS_SUCCESS: {
 			return {
 				...state,
-				data: [ ...payload, ...state.data ],
+				list: [ ...payload, ...state.list ],
 				movedItemsFetching: false
 			};
 		}
@@ -87,7 +87,7 @@ const reducer = (state = initialState, action) => {
 		case ADD_ITEM_SUCCESS: {
 			return {
 				...state,
-				data: [ ...state.data, payload ],
+				list: [ ...state.list, payload ],
 				fetchingItem: false
 			};
 		}
@@ -111,7 +111,7 @@ const reducer = (state = initialState, action) => {
 		case REMOVE_ITEM_SUCCESS: {
 			return {
 				...state,
-				data: state.data.filter((item) => item._id !== payload),
+				list: state.list.filter((item) => item._id !== payload),
 				pageLoading: false
 			};
 		}
@@ -119,7 +119,7 @@ const reducer = (state = initialState, action) => {
 		case GET_ITEMS_SUCCESS: {
 			return {
 				...state,
-				data: payload.items,
+				list: payload.items,
 				page: payload.page,
 				bread: payload.bread,
 				itemsLoading: false,
