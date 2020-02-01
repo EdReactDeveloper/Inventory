@@ -54,7 +54,8 @@ const ProfileContainer = (props) => {
       profile,
       list,
       page,
-      bread
+      bread,
+      selectedItems
     },
     loaders: {
       itemsLoading,
@@ -65,7 +66,6 @@ const ProfileContainer = (props) => {
     methods:{
       removeItem,
       selectItemHandler,
-      selectedItems,
       moveItemsHandler,
       profileLoading,
       profileUpdating

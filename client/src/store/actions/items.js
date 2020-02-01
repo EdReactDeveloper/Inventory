@@ -89,16 +89,17 @@ export const updateItemAction = (payload) => async (dispatch) => {
 	}
 };
 
-export const removeItemAction = ({ id, path, history }) => async (dispatch) => {
-	if (path) {
+export const removeItemAction = ({ id, type, parentId, history }) => async (dispatch) => {
+
+	if (type === 'page') {
 		dispatch({ type: REMOVE_ITEM });
 	} else {
 		dispatch(inProgressAction(true, id));
 	}
 	try {
 		const result = await removeItemApi(id);
-		if (path) {
-			history.push(path);
+		if (type === 'page') {
+			history.push(parentId);
 		} else {
 			dispatch(inProgressAction(false, id));
 		}

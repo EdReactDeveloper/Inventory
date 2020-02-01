@@ -1,17 +1,33 @@
 .icon {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   margin-right: 1rem;
   & path {
-    fill: #666;
+    fill: currentColor;
   }
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: #fff;
+  padding: .5rem 1rem;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: all .1s;
+  color: #666; 
+  &:hover{
+    color: #333;
+  }
+
 }
 
 .edit {
   background: transparent;
   border: none;
   cursor: pointer;
-  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -29,6 +45,8 @@
     opacity: 1;
   }
 }
+
+
 
 .navigation{
   padding: .5rem 1rem; 
@@ -79,11 +97,11 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  transition: all .3s;
+  transition: all .1s;
   outline: none;
 
 
-  &:hover~div {
+  &:hover {
     color: #ff4757;
   }
 }
@@ -195,21 +213,6 @@
 
 }
 
-.add {
-  border: 1px solid #44bd32;
-  background: #4cd137;
-  padding: .5rem 3rem;
-  border-radius: 15rem;
-  outline: none;
-  cursor: pointer;
-  color: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
-  font-size: 1.6rem;
-
-  &:active {
-    transform: translate(0, 1px)
-  }
-}
 
 .submit {
   margin: 1rem auto;

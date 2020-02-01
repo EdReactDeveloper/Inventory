@@ -9,16 +9,15 @@ const Item = (props) => {
 
   // PROPS
   const { item: { name, status, tags, _id, parentId },
+    data: {
+      selectedItems
+    },
     methods: {
       removeItem,
       selectItemHandler,
-      selectedItems
     },
     loaders: {
       inProgress
-    },
-    checks: {
-      editMode
     }
   } = props
 
@@ -26,9 +25,9 @@ const Item = (props) => {
   const checked = selectedItems.some(item => item.id === _id)
 
   const dropMenu = <Menu>
-    <li><Button type='delete' onClick={() => removeItem({ id: _id })}>remove</Button></li>
-<li><Button type='check' checked={checked} onClick={() => selectItemHandler(selectedItem)} >
-  {checked ? 'unselect item' : 'select item' }</Button></li>
+    <li><Button type='delete' onClick={() => removeItem({ id: _id, type: 'item', parentId })}>remove</Button></li>
+    <li><Button type='check' checked={checked} onClick={() => selectItemHandler(selectedItem)} >
+      {checked ? 'unselect item' : 'select item'}</Button></li>
   </Menu>
 
   return (

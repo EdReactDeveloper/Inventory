@@ -1,18 +1,18 @@
 import React from 'react';
 import style from './profile.module.scss';
-import BreadCrumbs from './BreadCrumbs'; 
+import BreadCrumbs from './BreadCrumbs';
 import ProfileInfo from './Info/Profile';
 import ItemInfo from './Info/Item';
 import List from './List';
-import Button from '../misc/Elements/Button';
 import Loader from '../misc/Loader/Circle';
-
+import Tools from './Tools/ListTools';
 
 const Profile = (props) => {
-const { 
-  data:{list, profile, page}, 
-  loaders: { itemsLoading }, 
-  checks:{isProfilePage} } = props
+  const {
+    data: { list, profile, page },
+    loaders: { itemsLoading },
+    checks: { isProfilePage },
+  } = props
 
   return (
     <div className={style.profile__wrapper}>
@@ -20,7 +20,7 @@ const {
       <div className={style.content}>
         {list && profile && !itemsLoading ? <>
           <BreadCrumbs {...props} />
-          <Button type="add" > add item</Button>
+          <Tools {...props} />
           <List {...props} />
         </> : <div className={style.loader__wrapper}><Loader className={style.loader} /></div>
         }

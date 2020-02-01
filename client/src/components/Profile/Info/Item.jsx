@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './info.module.scss';
 import Loader from '../../misc/Loader/Circle';
-import ButtonsBlock from '../ButtonsBlock';
+import ButtonsBlock from '../Tools/PageTools';
 
 
 const ItemInfo = (props) => {
@@ -21,7 +21,7 @@ const ItemInfo = (props) => {
     }
   } = props
 
-  const { name, description, location, status, tags, count, type, shared, updated, created, _id, path } = page
+  const { name, description, location, status, tags, count, type, shared, updated, created, _id, parentId } = page
 
   return (
     <div className={style.info__wrapper}>
@@ -31,7 +31,7 @@ const ItemInfo = (props) => {
             editData={page}
             removeItem={removeItem}
             id={_id}
-            path={path}
+            parentId={parentId}
             editMode={editMode}
             selectedItems={selectedItems}
             moveItemsHandler={moveItemsHandler}

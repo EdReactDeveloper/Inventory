@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonsBlock from '../ButtonsBlock';
+import ButtonsBlock from '../Tools/PageTools';
 
 const ProfileInfo = (props) => {
 
@@ -26,7 +26,7 @@ const ProfileInfo = (props) => {
             editData={profile}
             removeItem={removeItem} id={_id}
             editMode={editMode}
-            path='/'
+            parentId='/'
             selectedItems={selectedItems}
             moveItemsHandler={moveItemsHandler}
           />

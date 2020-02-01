@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import style from './Button.module.scss';
 import Icon from '../../icon/Icon';
-import { Item } from '../../icon/Selection';
+import { Icons } from '../../icon/Selection';
 import { modalHandler } from '../../../../store/actions/modal';
 import { editHandler } from '../../../../store/actions/items';
 import { FORM_TYPE } from '../../../../configs';
@@ -28,16 +28,18 @@ const Button = ({ type,
         className={style.edit}
         onClick={() => modalHandler({ formType: FORM_TYPE.edit, editData })}
       >
-        <Icon d={Item.edit} className={style.icon} />
+        <Icon d={Icons.edit} className={style.icon} size='32' />
         {props.children}
       </button>;
 
     case 'move':
       return <button
         type="button"
+        disabled={selectedItems.length < 1}
         className={style.edit}
         onClick={onClick}
       >
+        <Icon d={Icons.download} className={style.icon} size='32' />
         {props.children}
       </button>
 
@@ -45,8 +47,11 @@ const Button = ({ type,
       return <button
         type='button'
         onClick={() => modalHandler({ formType: FORM_TYPE.add, parentId })}
-        className={className}
-      >{props.children}</button>
+        className={style.add}
+      >
+        <Icon d={Icons.add} className={style.icon} size='32' />
+        {props.children}
+      </button>
 
     case 'submit':
       return <button
@@ -58,7 +63,6 @@ const Button = ({ type,
       <button type="button" className={style.info_btn}>
         i
     </button>
-
     </div>
 
     case 'editAll': return <button
@@ -73,7 +77,7 @@ const Button = ({ type,
       return <button
         className={style.delete}
         type="button" onClick={onClick} >
-        <Icon className={style.icon} d={Item.delete} />
+        <Icon className={style.icon} d={Icons.delete} size='32' />
         {props.children}
       </button>
 
@@ -90,6 +94,7 @@ const Button = ({ type,
         onClick={onClick}
         className={style.check}
       >
+        <Icon className={style.icon} size='32' d={Icons.select} />
         {props.children}
       </button>
 
