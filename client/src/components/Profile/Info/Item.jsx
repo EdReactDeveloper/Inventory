@@ -3,6 +3,7 @@ import style from './info.module.scss';
 import Loader from '../../misc/Loader/Circle';
 import ButtonsBlock from '../ButtonsBlock';
 
+
 const ItemInfo = (props) => {
 
   const {

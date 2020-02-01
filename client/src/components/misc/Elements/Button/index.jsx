@@ -14,9 +14,10 @@ const Button = ({ type,
   selectedItems,
   editHandler, onClick,
   editData,
+  className,
   ...props }) => {
 
-  const { page, parentId, itemId } = payload
+  const { parentId } = payload
   switch (type) {
 
     case 'edit':
@@ -26,6 +27,7 @@ const Button = ({ type,
         onClick={() => modalHandler({ formType: FORM_TYPE.edit, editData })}
       >
         <Icon d={Item.edit} className={style.icon} />
+        {props.children}
       </button>;
 
     case 'move':
@@ -41,7 +43,7 @@ const Button = ({ type,
       return <button
         type='button'
         onClick={() => modalHandler({ formType: FORM_TYPE.add, parentId })}
-        className={style.add}
+        className={className}
       >{props.children}</button>
 
     case 'submit':
@@ -69,7 +71,8 @@ const Button = ({ type,
     return <button 
     className={style.delete}
     type="button" onClick={onClick} >
-      <Icon className={style.btn_delete_icon} d={Item.delete} />
+      <Icon className={style.icon} d={Item.delete} />
+      {props.children}
     </button>
 
     case 'dropMenu':

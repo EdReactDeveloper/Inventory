@@ -1,18 +1,19 @@
 .icon {
   width: 2rem;
   height: 2rem;
-
+  margin-right: 1rem;
   & path {
     fill: #666;
   }
 }
 
 .edit {
-  background: #fff;
+  background: transparent;
   border: none;
   cursor: pointer;
-  transition: all .2s;
-  margin-top: .3rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .editAll {
@@ -61,21 +62,15 @@
 
 .delete {
   display: flex;
-  grid-column: 2/3;
-  grid-row: 1/2;
   height: 2.5rem;
-  width: 2.5rem;
-  margin-left: auto;
   align-items: center;
-  justify-content: center;
+  width: 100%;
+  background: transparent;
+  border: none;
   cursor: pointer;
   transition: all .3s;
   outline: none;
 
-  &_icon {
-    height: 2rem;
-    width: 2rem;
-  }
 
   &:hover~div {
     color: #ff4757;
