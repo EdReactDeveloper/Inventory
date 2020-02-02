@@ -44,16 +44,48 @@
 
 .bread {
   padding: 1rem 0;
+  display: flex;
 
   & a,
   span {
-    color: #bbb;
+    color: #005bff;
+    display: flex;
+    align-items: center;
     font-size: 1.4rem;
-    transition: color .2s;
+    transition: color .3s;
   }
 
   & a:hover {
-    color: blue
+    color: #444
+  }
+
+  &__icon{
+    width: 2rem;
+    height: 2rem;
+    background: #fff; 
+    position: relative;
+    margin: 0 1rem;
+    &::after, &::before{
+      content: "";
+      width: 2px;
+      height: 10px;
+      background: #aaa; 
+      position: absolute;
+    }
+
+    &::after{
+      transform: rotate(-45deg);
+      top: 2px;
+      left: 8px;
+    }
+
+    &::before{
+      transform: rotate(45deg);
+      top: 8px;
+      left: 8px;
+    }
+
+
   }
 }
 

@@ -12,7 +12,7 @@ const Header = (props) => {
       <div className={`${style.wrapper} ${app.container}`}>
         <nav className={style.logo}>
           <h4>
-            <Link to="/">TaskTracker</Link>
+            <Link to="/">Inventory</Link>
           </h4>
         </nav>
           
