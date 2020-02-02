@@ -111,7 +111,7 @@ const reducer = (state = initialState, action) => {
 		case REMOVE_ITEM_SUCCESS: {
 			return {
 				...state,
-				list: state.list.filter((item) => item._id !== payload),
+				list: [...payload.children, ...state.list.filter((item) => item._id !== payload.id)],
 				pageLoading: false
 			};
 		}

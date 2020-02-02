@@ -135,9 +135,14 @@ router.post('/move', async (req, res)=>{
 
 router.delete('/:id', async (req, res) => {
 	try {
-		await Item.findByIdAndRemove(req.params.id);
-		await Item.deleteMany({ parentId: req.params.id });
-		res.json(req.params.id);
+		const item = await Item.findById(req.params.id);
+		const children = await Item.find({parentId: item._id})
+    await Item.updateMany({parentId: item._id}, {$set: {parentId: item.parentId}})
+		for(let i = 0; i < children.length; i++){
+			children[i].parentId = item._id
+		}
+		await Item.findByIdAndRemove(item._id)
+		res.json({id: req.params.id, children});
 	} catch (error) {
 		res.status(400).json({ error });
 	}
