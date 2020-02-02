@@ -89,20 +89,25 @@ export const updateItemAction = (payload) => async (dispatch) => {
 	}
 };
 
-export const removeItemAction = ({ id, type, parentId, history }) => async (dispatch) => {
-
-	if (type === 'page') {
-		dispatch({ type: REMOVE_ITEM });
-	} else {
-		dispatch(inProgressAction(true, id));
-	}
+export const removeItemAction = ({ id }) => async (dispatch) => {
+	dispatch(inProgressAction(true, id));
 	try {
 		const result = await removeItemApi(id);
-		if (type === 'page') {
-			history.push(parentId);
-		} else {
-			dispatch(inProgressAction(false, id));
-		}
+		dispatch(inProgressAction(false, id));
+		dispatch(setNotification('item removed!'));
+		dispatch({ type: REMOVE_ITEM_SUCCESS, payload: result });
+	} catch (error) {
+		dispatch({ type: REMOVE_ITEM_FAIL });
+		dispatch(setAlert(error));
+		dispatch(setNotification('Failed to remove the item'));
+	}
+};
+
+export const removePageAction = ({ id, parentId, history }) => async (dispatch) => {
+	dispatch({ type: REMOVE_ITEM });
+	try {
+		const result = await removeItemApi(id);
+		history.push(parentId);
 		dispatch(setNotification('item removed!'));
 		dispatch({ type: REMOVE_ITEM_SUCCESS, payload: result });
 	} catch (error) {

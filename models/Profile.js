@@ -8,7 +8,8 @@ const Profile = new Schema({
 	},
 	name: { type: String, required: true },
 	description: { type: String },
-	hidden: { type: Boolean }
+	hidden: { type: Boolean },
+	removed: {type: Boolean}
 });
 
 module.exports = mongoose.model('Profile', Profile);

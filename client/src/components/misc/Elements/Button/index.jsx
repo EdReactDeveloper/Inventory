@@ -10,7 +10,6 @@ import { FORM_TYPE } from '../../../../configs';
 const Button = ({ type,
   payload = '',
   modalHandler,
-  editMode,
   selectedItems,
   editHandler, onClick,
   onChange,
@@ -53,6 +52,8 @@ const Button = ({ type,
         {props.children}
       </button>
 
+    
+
     case 'submit':
       return <button
         type='submit'
@@ -64,14 +65,6 @@ const Button = ({ type,
         i
     </button>
     </div>
-
-    case 'editAll': return <button
-      type="button"
-      onClick={() => editHandler()}
-      className={`${style.editAll} ${editMode ? style.yellow : ''}`}
-    >
-      {editMode ? 'edit off' : 'edit on'}
-    </button>
 
     case 'delete':
       return <button
@@ -110,7 +103,7 @@ const Button = ({ type,
       return <button type="submit" className={style.search}>
         {props.children}
       </button>
-    default: return <button type="button">no type specified</button>
+  default: return <button type="button" onClick={onClick}>{props.children}</button>
   }
 
 }

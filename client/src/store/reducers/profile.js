@@ -1,4 +1,7 @@
 import {
+	ADD_PROFILE,
+	ADD_PROFILE_SUCCESS,
+	ADD_PROFILE_FAIL,
 	GET_PROFILE,
 	GET_PROFILE_SUCCESS,
 	GET_PROFILE_FAIL,
@@ -18,7 +21,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 	const { type, payload } = action;
 	switch (type) {
-		case GET_PROFILE: {
+		case GET_PROFILE:
+		case ADD_PROFILE: {
 			return {
 				...state,
 				profileLoading: true
@@ -33,7 +37,8 @@ const reducer = (state = initialState, action) => {
 		}
 
 		case GET_PROFILE_SUCCESS:
-		case UPDATE_PROFILE_SUCCESS: {
+		case UPDATE_PROFILE_SUCCESS:
+		case ADD_PROFILE_SUCCESS: {
 			return {
 				...state,
 				profile: payload,
@@ -43,7 +48,8 @@ const reducer = (state = initialState, action) => {
 		}
 
 		case GET_PROFILE_FAIL:
-		case UPDATE_PROFILE_FAIL: {
+		case UPDATE_PROFILE_FAIL:
+		case ADD_PROFILE_FAIL: {
 			return {
 				...state,
 				error: payload,
@@ -52,7 +58,7 @@ const reducer = (state = initialState, action) => {
 		}
 
 		case CLEAN_UP: {
-			return initialState
+			return initialState;
 		}
 		default:
 			return state;

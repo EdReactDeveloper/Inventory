@@ -26,7 +26,6 @@ const ProfileInfo = (props) => {
             editData={profile}
             removeItem={removeItem} id={_id}
             editMode={editMode}
-            parentId='/'
             selectedItems={selectedItems}
             moveItemsHandler={moveItemsHandler}
           />

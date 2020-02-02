@@ -4,7 +4,6 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
-const Profile = require('../../models/Profile'); 
 
 router.post(
 	'/register',
@@ -33,13 +32,6 @@ router.post(
 			});
 
 			await user.save();
-			if(user){
-				const profile = new Profile({
-					user,
-					items: []
-				})
-				await profile.save()
-			}
 			return res.json(user);
 		} catch (error) {
 			res.status(400).json(error);

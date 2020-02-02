@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileForm from '../../../components/Modal/From/Profile';
-import { updateProfileAction } from '../../../store/actions/profile';
+import { updateProfileAction, addProfileAction } from '../../../store/actions/profile';
 import { modalHandler } from '../../../store/actions/modal';
 import { FORM_TYPE } from '../../../configs';
 import { isRequired } from '../../../validators';
@@ -11,7 +11,7 @@ const FormContainer = (props) => {
   const dispatch = useDispatch()
   const { formType } = useSelector(state => state.modal.form)
   const { profile, profileLoading } = useSelector(state => state.profile)
-
+  const {history} = props
   const [required, setRequired] = useState({
     name: null
   })
@@ -28,6 +28,7 @@ const FormContainer = (props) => {
       setState({ ...state, ...profile })
     }
   }, [formType])
+
 
   // update field
   const onChange = (e) => {
@@ -48,7 +49,7 @@ const FormContainer = (props) => {
     if (fields.valid) {
       const { profileUpdating } = profile
       switch (formType) {
-        case FORM_TYPE.add: dispatch(updateProfileAction(state)); break;
+        case FORM_TYPE.add: dispatch(addProfileAction({state, history})); break;
         case FORM_TYPE.edit: dispatch(updateProfileAction(state)); break;
         default: dispatch(modalHandler()); break;
       }

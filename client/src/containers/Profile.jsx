@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {Redirect} from 'react-router-dom'; 
 import Profile from '../components/Profile';
-import { getProfileAction, componentUnmount } from '../store/actions/profile';
-import { getItemsAction, removeItemAction, selectItemAction, moveItemsAction } from '../store/actions/items';
+import { getProfileAction, componentUnmount, removeProfileAction } from '../store/actions/profile';
+import { getItemsAction, removeItemAction, selectItemAction, moveItemsAction, removePageAction } from '../store/actions/items';
 import Loader from '../components/Profile/Loader';
-
+import setAlert from '../store/actions/alerts';
 
 const ProfileContainer = (props) => {
   const dispatch = useDispatch();
 
   // reducers
-  const {profile, profileLoading, profileUpdating} = useSelector(state => state.profile)
+  const { profile, profileLoading, profileUpdating } = useSelector(state => state.profile)
   const items = useSelector(state => state.items)
   const { list, page, bread, itemsLoading, fetchingItem, pageLoading, editMode, selectedItems } = items
   const { inProgress } = useSelector(state => state.inProgress)
@@ -37,7 +38,14 @@ const ProfileContainer = (props) => {
 
   // methods
   const removeItem = (payload) => {
-    dispatch(removeItemAction({ ...payload, history }))
+    const { type, id, parentId } = payload
+    switch (type) {
+      case 'page': dispatch(removePageAction({ id, parentId, history })); break;
+      case 'item': dispatch(removeItemAction({ id })); break;
+      case 'profile': dispatch(removeProfileAction({ id, history })); break;
+      default: dispatch(setAlert('nothing to remove', 'danger'))
+    }
+
   }
 
   const selectItemHandler = (payload) => {
@@ -63,7 +71,7 @@ const ProfileContainer = (props) => {
       pageLoading,
       inProgress,
     },
-    methods:{
+    methods: {
       removeItem,
       selectItemHandler,
       moveItemsHandler,
@@ -73,9 +81,12 @@ const ProfileContainer = (props) => {
     checks: {
       isProfilePage,
       editMode
-    }   
+    }
   }
 
+  if (profile.removed) {
+    return <Redirect to='/' /> 
+  }
   return <>{profile.profileLoading && itemsLoading ? <Loader /> : <Profile {...props} {...payload} />}</>
 
 };

@@ -14,7 +14,9 @@ const getBread = async (page, path) => {
 		if(!item){
 			item = await Profile.findOne({_id: page.parentId})
 		}
-	path.unshift({name: item.name, id: item._id})
+		if(item){
+			path.unshift({name: item.name, id: item._id})
+		}
 	await getBread(item, path)
 	} catch (error) {
 		console.log(error)

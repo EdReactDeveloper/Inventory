@@ -20,3 +20,12 @@ export const updateProfileApi = async(payload)=>{
 	return result.data;
 }
 
+export const addProfileApi = async (payload) => {
+	const result = await instance.post(`${baseURL}/add`, body(payload));
+	return result.data
+}
+
+export const removeProfileApi = async (id)=> {
+	const result = await instance.delete(`${baseURL}/${id}`, body(id))
+	return result.data
+}

@@ -6,6 +6,7 @@ import { FORM_TYPE } from '../../../configs';
 
 const FormContainer = (props) => {
   const items = useSelector(state => state.items)
+  const {profile} = useSelector(state=> state.profile)
   const { page } = items
   const { formType } = useSelector(state => state.modal.form)
  
@@ -13,7 +14,11 @@ const FormContainer = (props) => {
     return <ProfileForm {...props} />
   }
 
-  return <PageForm {...props} />
+  if(formType === FORM_TYPE.add && profile._id && !profile.removed){
+    return <PageForm {...props} />
+  }
+
+  return <ProfileForm {...props} />
 
 };
 
