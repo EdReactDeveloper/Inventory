@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './main.module.scss';
 import Button from '../misc/Elements/Button';
+import {FORM_INSTANCE} from '../../configs';
 
 const Main = (props) => {
   const {
@@ -17,7 +18,7 @@ const Main = (props) => {
       }
       if (profile._id && profile.removed) {
         return <div>
-          <Button type="add">Create Profile </Button>
+          <Button type="add" payload={{instance: FORM_INSTANCE.profile}}>Create Profile </Button>
           <Button onClick={() =>removeProfileHandler({id: profile._id})}>Restore Profile </Button>
         </div>
       }

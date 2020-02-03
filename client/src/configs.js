@@ -1,7 +1,6 @@
-export const FORM_PAGE = {
-  boards: 'BOARDS',
-  board: 'BOARD',
-  topic: 'TOPIC'
+export const FORM_INSTANCE = {
+  item: 'ITEM',
+  profile: 'PROFILE'
 }
 
 export const FORM_TYPE = {

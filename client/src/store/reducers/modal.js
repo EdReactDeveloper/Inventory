@@ -3,10 +3,7 @@ import { MODAL } from '../actions/types';
 const initialState = {
 	isOpen: false,
 	form:{
-		pageId: null,
-		parentId: null,
 		formType: '',
-
 	}
 };	
 

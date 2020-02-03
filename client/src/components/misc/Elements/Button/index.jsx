@@ -18,14 +18,14 @@ const Button = ({ type,
   checked,
   ...props }) => {
 
-  const { parentId } = payload
+  const { parentId, instance } = payload
   switch (type) {
 
     case 'edit':
       return <button
         type="button"
         className={style.edit}
-        onClick={() => modalHandler({ formType: FORM_TYPE.edit, editData })}
+        onClick={() => modalHandler({ formType: FORM_TYPE.edit, instance, editData })}
       >
         <Icon d={Icons.edit} className={style.icon} size='32' />
         {props.children}
@@ -45,7 +45,7 @@ const Button = ({ type,
     case 'add':
       return <button
         type='button'
-        onClick={() => modalHandler({ formType: FORM_TYPE.add, parentId })}
+        onClick={() => modalHandler({ formType: FORM_TYPE.add, instance, parentId })}
         className={style.add}
       >
         <Icon d={Icons.add} className={style.icon} size='32' />
