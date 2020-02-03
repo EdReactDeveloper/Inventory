@@ -23,16 +23,20 @@ import inProgressAction from './inprogress';
 import setNotification from './notification';
 import setAlert from './alerts';
 
+
+// EDIT
 export const editHandler = () => (dispatch) => {
 	dispatch({
 		type: EDIT_MODE
 	});
 };
 
+// SELECT
 export const selectItemAction = (payload) => (dispatch) => {
 	dispatch({ type: SELECT_ITEM, payload });
 };
 
+// MOVE
 export const moveItemsAction = ({ id, items, path }) => async (dispatch) => {
 	dispatch({ type: MOVE_ITEMS });
 	const docs = [];
@@ -52,6 +56,8 @@ export const moveItemsAction = ({ id, items, path }) => async (dispatch) => {
 	}
 };
 
+
+// GET
 export const getItemsAction = (id) => async (dispatch) => {
 	dispatch({ type: GET_ITEMS });
 	try {
@@ -63,6 +69,8 @@ export const getItemsAction = (id) => async (dispatch) => {
 	}
 };
 
+
+// ADD
 export const addItemAction = (payload) => async (dispatch) => {
 	dispatch({ type: ADD_ITEM });
 	try {
@@ -76,6 +84,8 @@ export const addItemAction = (payload) => async (dispatch) => {
 	}
 };
 
+
+// UPDATE
 export const updateItemAction = (payload) => async (dispatch) => {
 	dispatch({ type: UPDATE_ITEM });
 	try {
@@ -89,6 +99,8 @@ export const updateItemAction = (payload) => async (dispatch) => {
 	}
 };
 
+
+// REMOVE ITEM
 export const removeItemAction = ({ id }) => async (dispatch) => {
 	dispatch(inProgressAction(true, id));
 	try {
@@ -103,6 +115,8 @@ export const removeItemAction = ({ id }) => async (dispatch) => {
 	}
 };
 
+
+// REMOVE PAGE
 export const removePageAction = ({ id, parentId, history }) => async (dispatch) => {
 	dispatch({ type: REMOVE_ITEM });
 	try {

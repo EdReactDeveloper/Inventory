@@ -25,4 +25,8 @@ const Item = new Schema({
 	sharedWith: { type: Array },
 });
 
+Item.methods = function(array){
+	
+}
+
 module.exports = mongoose.model('Item', Item);
