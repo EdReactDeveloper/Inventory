@@ -37,16 +37,14 @@ const ItemInfo = (props) => {
             moveItemsHandler={moveItemsHandler}
           />
           <h3>{name}</h3>
-          <p>
-            {description}
-          </p>
           <ul>
-            <li><span>location: </span>{location}</li>
-            <li><span>tags: </span>{tags}</li>
-            <li><span>status: </span>{status}</li>
-            <li><span>count: </span>{count}</li>
-            <li><span>type: </span>{type}</li>
-            <li><span>shared: </span>{shared ? 'yes' : 'no'}</li>
+            <li>{description}</li>
+            {location && <li><span>location: </span>{location}</li>}
+            {tags && <li><span>tags: </span>{tags}</li>}
+            {status && <li><span>status: </span>{status}</li>}
+            {count && <li><span>count: </span>{count}</li>}
+            {type && <li><span>type: </span>{type}</li>}
+            {shared && <li><span>shared: </span>{shared ? 'yes' : 'no'}</li>}
             <li><span>created on: </span>{created}</li>
             <li><span>updated on: </span>{updated}</li>
           </ul>
