@@ -45,6 +45,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/edit', async (req, res) => {
 	const payload = req.body;
+	payload.updated = new Date()
 	try {
 		let page = await Item.findById({ _id: payload._id });
 		if (page) {

@@ -2,7 +2,7 @@ import React from 'react';
 import style from './info.module.scss';
 import Loader from '../../misc/Loader/Circle';
 import ButtonsBlock from '../Tools/PageTools';
-
+import { formatDate } from '../../misc/utilFuncs';
 
 const ItemInfo = (props) => {
 
@@ -22,7 +22,6 @@ const ItemInfo = (props) => {
   } = props
 
   const { name, description, location, status, tags, count, type, shared, updated, created, _id, parentId } = page
-
   return (
     <div className={style.info__wrapper}>
       {pageLoading ? <div className={style.loader__wrapper}><Loader className={style.loader} /></div> :
@@ -45,8 +44,8 @@ const ItemInfo = (props) => {
             {count && <li><span>count: </span>{count}</li>}
             {type && <li><span>type: </span>{type}</li>}
             {shared && <li><span>shared: </span>{shared ? 'yes' : 'no'}</li>}
-            <li><span>created on: </span>{created}</li>
-            <li><span>updated on: </span>{updated}</li>
+            <li><span>created on: </span><span>{formatDate(created)}</span></li>
+            {created !== updated && <li><span>updated on: </span><span>{formatDate(updated)}</span></li>}
           </ul>
         </div>
       }
