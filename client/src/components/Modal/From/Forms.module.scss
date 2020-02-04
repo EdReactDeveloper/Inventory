@@ -1,13 +1,11 @@
-
-
-.move{
-  &_list{
+.move {
+  &_list {
     max-height: 15rem;
     min-height: 5rem;
     overflow: auto;
   }
 
-  &_item{
+  &_item {
     border: none;
     outline: none;
     background: #fff;
@@ -16,8 +14,22 @@
     cursor: pointer;
   }
 
-  &_select{
+  &_select {
     background: #2980b9;
     color: #fff;
+  }
+}
+
+.cancel {
+  border: none;
+  background: #fdcb6e;
+  color: #fff;
+  padding: 1rem;
+  width: 100%;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+
+  &:hover{
+    background: #f9ca24;
   }
 }

@@ -148,22 +148,32 @@ const getApi = async (item, array) => {
 router.delete('/:id', async (req, res) => {
 	try {
 		const item = await Item.findById(req.params.id);
-		const array = [];
-		if(item){
-			await getApi(item, array);
+	
+		const children = await Item.find({ parentId: item._id });
+		await Item.updateMany({ parentId: item._id }, { $set: { parentId: item.parentId } });
+		for (let i = 0; i < children.length; i++) {
+			children[i].parentId = item._id;
 		}
-
-		await Item.deleteMany({ _id: {$in: array }})
-		// const children = await Item.find({ parentId: item._id });
-		// await Item.updateMany({ parentId: item._id }, { $set: { parentId: item.parentId } });
-		// for (let i = 0; i < children.length; i++) {
-		// 	children[i].parentId = item._id;
-		// }
-		// await Item.findByIdAndRemove(item._id);
-		res.json({ id: req.params.id });
+		await Item.findByIdAndRemove(item._id);
+		res.json({ id: req.params.id, children });
 	} catch (error) {
 		res.status(400).json({ error });
 	}
 });
+
+router.delete('/all/:id', async (req, res) => {	
+	try {
+		const item = await Item.findById(req.params.id);
+		const array = [];
+		if(item){
+			await getApi(item, array);
+		}
+		await Item.deleteMany({ _id: {$in: array }})	
+		res.json({ id: req.params.id, children:[] });
+	} catch (error) {
+		res.status(400).json({ error });
+	}
+});
+
 
 module.exports = router;

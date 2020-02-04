@@ -78,7 +78,6 @@ export const REMOVE_ITEM = 'REMOVE_ITEM'
 export const REMOVE_ITEM_SUCCESS = 'REMOVE_ITEM_SUCCESS'
 export const REMOVE_ITEM_FAIL = 'REMOVE_ITEM_FAIL'
 
-export const EDIT_MODE = 'EDIT_MODE'
 export const SELECT_ITEM = 'SELECT_ITEM'
 export const UNSELECT_ITEMS = 'UNSELECT_ITEMS'
 

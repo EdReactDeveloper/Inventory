@@ -11,7 +11,6 @@ import {
 	REMOVE_ITEM,
 	REMOVE_ITEM_SUCCESS,
 	REMOVE_ITEM_FAIL,
-	EDIT_MODE,
 	SELECT_ITEM,
 	MOVE_ITEMS,
 	MOVE_ITEMS_SUCCESS,
@@ -23,13 +22,6 @@ import inProgressAction from './inprogress';
 import setNotification from './notification';
 import setAlert from './alerts';
 
-
-// EDIT
-export const editHandler = () => (dispatch) => {
-	dispatch({
-		type: EDIT_MODE
-	});
-};
 
 // SELECT
 export const selectItemAction = (payload) => (dispatch) => {
@@ -101,10 +93,11 @@ export const updateItemAction = (payload) => async (dispatch) => {
 
 
 // REMOVE ITEM
-export const removeItemAction = ({ id }) => async (dispatch) => {
+export const removeItemAction = ({ id, deleteAll }) => async (dispatch) => {
+	const payload = {id, deleteAll}
 	dispatch(inProgressAction(true, id));
 	try {
-		const result = await removeItemApi(id);
+		const result = await removeItemApi(payload);
 		dispatch(inProgressAction(false, id));
 		dispatch(setNotification('item removed!'));
 		dispatch({ type: REMOVE_ITEM_SUCCESS, payload: result });
@@ -117,10 +110,11 @@ export const removeItemAction = ({ id }) => async (dispatch) => {
 
 
 // REMOVE PAGE
-export const removePageAction = ({ id, parentId, history }) => async (dispatch) => {
+export const removePageAction = ({ id, parentId, history, deleteAll }) => async (dispatch) => {
+	const payload = { id, deleteAll }
 	dispatch({ type: REMOVE_ITEM });
 	try {
-		const result = await removeItemApi(id);
+		const result = await removeItemApi(payload);
 		history.push(parentId);
 		dispatch(setNotification('item removed!'));
 		dispatch({ type: REMOVE_ITEM_SUCCESS, payload: result });

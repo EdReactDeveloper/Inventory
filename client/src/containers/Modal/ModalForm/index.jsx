@@ -2,17 +2,30 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ProfileForm from './Profile';
 import PageForm from './Page';
-import { FORM_INSTANCE } from '../../../configs';
+import DeleteForm from './Delete'; 
+import { FORM_INSTANCE, FORM_TYPE } from '../../../configs';
 
 const FormContainer = (props) => {
 
-  const { instance } = useSelector(state => state.modal.form)
- 
-  if(instance === FORM_INSTANCE.item){
-    return <PageForm {...props} />
-  }
+  const { instance, formType } = useSelector(state => state.modal.form)
 
-  return <ProfileForm {...props} />
+  // CONDITIONS
+  const pageForms = 
+  (instance === FORM_INSTANCE.page || instance === FORM_INSTANCE.item) && (formType === FORM_TYPE.add || formType === FORM_TYPE.edit)
+  const profileForm = 
+  instance === FORM_INSTANCE.profile && (formType === FORM_TYPE.add || formType === FORM_TYPE.edit)
+  const deletePage = 
+  (instance === FORM_INSTANCE.page || instance === FORM_INSTANCE.item ) && formType === FORM_TYPE.delete
+
+  switch(true){
+    case pageForms: return <PageForm {...props} />
+    case profileForm: return <ProfileForm {...props} />
+    case deletePage: return <DeleteForm {...props} />
+    default: return <ProfileForm {...props} />
+  }
+  
+
+ 
 };
 
 export default FormContainer;

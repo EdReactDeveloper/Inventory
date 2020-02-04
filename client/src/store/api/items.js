@@ -26,8 +26,14 @@ export const updateItemApi  = async (payload) => {
 	return result.data;
 };	
 
-export const removeItemApi  = async (id) =>{
-	const result = await axios.delete(`${baseURL}/${id}`)
+export const removeItemApi  = async (payload) =>{
+	let result = null
+	const {deleteAll, id} = payload
+	if(deleteAll){
+		result = await axios.delete(`${baseURL}/all/${id}`)
+	}else{
+		result = await axios.delete(`${baseURL}/${id}`)
+	}
 	return result.data
 }
 

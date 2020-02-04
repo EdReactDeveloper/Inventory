@@ -4,6 +4,7 @@ import style from '../profile.module.scss';
 import Button from '../../misc/Elements/Button';
 import Loader from '../../misc/Loader/Lines';
 import Menu from '../../Menu';
+import {FORM_INSTANCE} from '../../../configs'; 
 
 const Item = (props) => {
 
@@ -13,7 +14,6 @@ const Item = (props) => {
       selectedItems
     },
     methods: {
-      removeItem,
       selectItemHandler,
     },
     loaders: {
@@ -25,7 +25,7 @@ const Item = (props) => {
   const checked = selectedItems.some(item => item.id === _id)
 
   const dropMenu = <Menu>
-    <li><Button type='delete' onClick={() => removeItem({ id: _id, type: 'item', parentId })}>remove</Button></li>
+    <li><Button type='delete' payload ={{ id: _id, instance: FORM_INSTANCE.item, parentId }}>remove</Button></li>
     <li><Button type='check' checked={checked} onClick={() => selectItemHandler(selectedItem)} >
       {checked ? 'unselect item' : 'select item'}</Button></li>
   </Menu>

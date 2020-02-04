@@ -13,7 +13,6 @@ import {
 	REMOVE_ITEM_SUCCESS,
 	REMOVE_ITEM_FAIL,
 	SELECT_ITEM,
-	EDIT_MODE,
 	MOVE_ITEMS,
 	MOVE_ITEMS_SUCCESS,
 	MOVE_ITEMS_FAIL,
@@ -25,7 +24,6 @@ const initialState = {
 	page: {},
 	bread: [],
 	selectedItems: [],
-	editMode: false,
 	itemsLoading: true,
 	pageLoading: false,
 	fetchingItem: false,
@@ -36,10 +34,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 	const { type, payload } = action;
 	switch (type) {
-		case EDIT_MODE: {
-			return { ...state, editMode: !state.editMode };
-		}
-
+	
 		case SELECT_ITEM: {
 			const isSelected = state.selectedItems.some((item) => item.id === payload.id);
 			if (isSelected) {

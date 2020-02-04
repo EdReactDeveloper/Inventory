@@ -4,33 +4,35 @@ import style from './Button.module.scss';
 import Icon from '../../icon/Icon';
 import { Icons } from '../../icon/Selection';
 import { modalHandler } from '../../../../store/actions/modal';
-import { editHandler } from '../../../../store/actions/items';
 import { FORM_TYPE } from '../../../../configs';
 
 const Button = ({ type,
   payload = '',
   modalHandler,
   selectedItems,
-  editHandler, onClick,
+  onClick,
   onChange,
-  editData,
+  data,
   className,
   checked,
   ...props }) => {
 
-  const { parentId, instance } = payload
+  const { parentId, instance, id } = payload
   switch (type) {
 
+    // EDIT
     case 'edit':
       return <button
         type="button"
         className={style.edit}
-        onClick={() => modalHandler({ formType: FORM_TYPE.edit, instance, editData })}
+        onClick={() => modalHandler({ formType: FORM_TYPE.edit, instance, data })}
       >
         <Icon d={Icons.edit} className={style.icon} size='32' />
         {props.children}
       </button>;
 
+
+    // MOVE
     case 'move':
       return <button
         type="button"
@@ -42,6 +44,8 @@ const Button = ({ type,
         {props.children}
       </button>
 
+
+    // ADD
     case 'add':
       return <button
         type='button'
@@ -52,35 +56,42 @@ const Button = ({ type,
         {props.children}
       </button>
 
-    
 
+    // DELETE
+    case 'delete':
+      return <button
+        className={style.delete}
+        type="button" onClick={() => modalHandler({ formType: FORM_TYPE.delete, instance, id, parentId })} >
+        <Icon className={style.icon} d={Icons.delete} size='32' />
+        {props.children}
+      </button>
+
+
+    // SUBMIT
     case 'submit':
       return <button
         type='submit'
         className={style.submit}
       >{props.children}</button>
 
+    // CLOSE MODAL
+    case 'modal':
+      return <button type="button" onClick={() => modalHandler()}
+        className={className}
+      >
+        {props.children}
+      </button>
+
+
+    // INFO
     case 'info': return <div className={style.info}>
       <button type="button" className={style.info_btn}>
         i
     </button>
     </div>
 
-    case 'delete':
-      return <button
-        className={style.delete}
-        type="button" onClick={onClick} >
-        <Icon className={style.icon} d={Icons.delete} size='32' />
-        {props.children}
-      </button>
 
-    case 'dropMenu':
-      return <button
-        type="button"
-        className={style.dropMenu} onClick={onClick}>
-        <div className={style.dropMenu_content} />
-      </button>
-
+    // CHECK
     case 'check':
       return <button
         type="button"
@@ -92,18 +103,14 @@ const Button = ({ type,
       </button>
 
 
-    case 'navigation':
-      return <button
-        type='button'
-        className={style.navigation}
-        onClick={onClick}>
-        {props.children}
-      </button>
+    // SEARCH
     case 'search':
       return <button type="submit" className={style.search}>
         {props.children}
       </button>
-  default: return <button type="button" onClick={onClick}>{props.children}</button>
+
+
+    default: return <button type="button" onClick={onClick}>{props.children}</button>
   }
 
 }
@@ -113,4 +120,4 @@ const mapStateToProps = state => ({
   selectedItems: state.items.selectedItems
 })
 
-export default connect(mapStateToProps, { modalHandler, editHandler })(Button)
+export default connect(mapStateToProps, { modalHandler })(Button)
