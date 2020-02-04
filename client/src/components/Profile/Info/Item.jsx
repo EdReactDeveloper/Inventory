@@ -10,30 +10,16 @@ const ItemInfo = (props) => {
     data: { page },
     loaders: {
       pageLoading,
-    },
-    methods: {
-      removeItem,
-      selectedItems,
-      moveItemsHandler
-    },
-    checks: {
-      editMode
     }
   } = props
 
-  const { name, description, location, status, tags, count, type, shared, updated, created, _id, parentId } = page
+  const { name, description, location, status, tags, count, type, shared, updated, created } = page
   return (
     <div className={style.info__wrapper}>
       {pageLoading ? <div className={style.loader__wrapper}><Loader className={style.loader} /></div> :
         <div>
           <ButtonsBlock
-            editData={page}
-            removeItem={removeItem}
-            id={_id}
-            parentId={parentId}
-            editMode={editMode}
-            selectedItems={selectedItems}
-            moveItemsHandler={moveItemsHandler}
+            {...props}
           />
           <h3>{name}</h3>
           <ul>

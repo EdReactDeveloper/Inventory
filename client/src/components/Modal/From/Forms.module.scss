@@ -34,6 +34,19 @@
     }
   }
 
+  &__profile{
+    padding: 2rem 0;
+  }
+
+  &__item_wrapper{
+    padding: 2rem 0;
+    & span {
+      color: #2980b9; 
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
+
   &__checkbox_wrapper {
     display: flex;
     align-items: center;

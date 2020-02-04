@@ -17,7 +17,7 @@ const Button = ({ type,
   checked,
   ...props }) => {
 
-  const { parentId, instance, id } = payload
+  const { parentId, instance, id, name } = payload
   switch (type) {
 
     // EDIT
@@ -61,7 +61,7 @@ const Button = ({ type,
     case 'delete':
       return <button
         className={style.delete}
-        type="button" onClick={() => modalHandler({ formType: FORM_TYPE.delete, instance, id, parentId })} >
+        type="button" onClick={() => modalHandler({ formType: FORM_TYPE.delete, instance, id, parentId, name })} >
         <Icon className={style.icon} d={Icons.delete} size='32' />
         {props.children}
       </button>

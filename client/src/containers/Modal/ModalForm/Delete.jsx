@@ -10,7 +10,7 @@ import { modalHandler } from '../../../store/actions/modal';
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const { history } = props
-  const { id, parentId, instance } = useSelector(state => state.modal.form)
+  const { id, parentId, instance, name } = useSelector(state => state.modal.form)
   const [deleteAll, setOption] = useState(true)
 
   const onChangeHandler = () => {
@@ -30,11 +30,15 @@ const FormContainer = (props) => {
 
   const payload = {
     data: {
-      deleteAll
+      deleteAll,
+      name
     },
     methods: {
       removeItem,
       onChangeHandler
+    },
+    checks: {
+      instance
     }
   }
 

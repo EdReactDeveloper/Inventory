@@ -4,18 +4,10 @@ import ButtonsBlock from '../Tools/PageTools';
 const ProfileInfo = (props) => {
 
   const {
-    data: { profile: { name, description, _id }, profile },
+    data: { profile: { name, description } },
     loaders: {
       profileUpdating
     },
-    methods: {
-      removeItem,
-      moveItemsHandler,
-      selectedItems
-    },
-    checks: {
-      editMode
-    }
   } = props
 
   return (
@@ -23,11 +15,7 @@ const ProfileInfo = (props) => {
       {!profileUpdating ?
         <div>
           <ButtonsBlock
-            editData={profile}
-            removeItem={removeItem} id={_id}
-            editMode={editMode}
-            selectedItems={selectedItems}
-            moveItemsHandler={moveItemsHandler}
+            {...props}
           />
           <h3>{name}</h3>
           <p>{description}</p>

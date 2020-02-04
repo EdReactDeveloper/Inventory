@@ -15,7 +15,7 @@ const FormContainer = (props) => {
   const profileForm = 
   instance === FORM_INSTANCE.profile && (formType === FORM_TYPE.add || formType === FORM_TYPE.edit)
   const deletePage = 
-  (instance === FORM_INSTANCE.page || instance === FORM_INSTANCE.item ) && formType === FORM_TYPE.delete
+  formType === FORM_TYPE.delete
 
   switch(true){
     case pageForms: return <PageForm {...props} />
