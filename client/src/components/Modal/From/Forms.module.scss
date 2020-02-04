@@ -20,16 +20,42 @@
   }
 }
 
+.delete {
+
+  &__btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & button {
+      width: 48%;
+      margin: 0;
+    }
+  }
+
+  &__checkbox_wrapper {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+
+    & label {
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+  }
+}
+
 .cancel {
   border: none;
-  background: #fdcb6e;
+  background: #f7d794;
   color: #fff;
   padding: 1rem;
   width: 100%;
   cursor: pointer;
   transition: all .2s ease-in-out;
 
-  &:hover{
-    background: #f9ca24;
+  &:hover {
+    background: #f5cd79;
   }
 }

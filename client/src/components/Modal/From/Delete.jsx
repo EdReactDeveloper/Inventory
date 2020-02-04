@@ -13,17 +13,18 @@ const DeleteForm = (payload) => {
     } } = payload
 
   return (
-    <form onSubmit={removeItem}>
+    <form onSubmit={removeItem} className={style.delete}>
       <div>Remove this item?</div>
-      <input type="checkbox" value={deleteAll} checked={deleteAll} name="deleteAll" onChange={(e) => onChangeHandler(e)} />
-      <label htmlFor="deleteAll">delete all the content inside?</label>
-      <div className="form__btnWrapper">
+      <div className={style.delete__checkbox_wrapper}>
+        <input type="checkbox" value={deleteAll} checked={deleteAll} id="deleteAll" name="deleteAll" onChange={(e) => onChangeHandler(e)} />
+        <label htmlFor="deleteAll">delete all the content inside?</label>
+      </div>
+      <div className={style.delete__btns}>
         <Button type="submit">
           confirm
       </Button>
         <Button type="modal" className={style.cancel}>Cancel</Button>
       </div>
-
     </form>
   );
 };
