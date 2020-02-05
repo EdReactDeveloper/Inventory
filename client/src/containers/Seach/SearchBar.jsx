@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux'; 
 import SearchBar from '../../components/Search/SearchBar'; 
-import {getSearchAction} from '../../store/actions/search'; 
+
 
 const SearchFieldContainer = (props) => {
-  const dispatch = useDispatch()
   const [query, setQuery] = useState('')
+  const {routing: {history}} = props
 
   const queryHandler = (e)=>{
     setQuery(e.target.value)
@@ -13,7 +12,7 @@ const SearchFieldContainer = (props) => {
 
   const searchSubmitHandler = (e) =>{
     e.preventDefault()
-    dispatch(getSearchAction(query))
+    history.push(`/search?query=${query}`)
   }
 
   const payload = {

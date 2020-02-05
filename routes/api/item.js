@@ -26,13 +26,16 @@ const getBread = async (page, path) => {
 // GET ITEMS
 router.get('/:id', async (req, res) => {
 	const { id } = req.params;
+
 	try {
 		let page = await Item.findById(id);
 		if (!page) {
 			page = await Profile.findById(id);
-		}else{
-			res.status(404).json({msg: 'page is not found'})
+			if (!page) {
+				res.status(404).json({ msg: 'page is not found' });
+			}
 		}
+
 		const bread = [];
 		await getBread(page, bread);
 		const items = await Item.find({ parentId: id });
@@ -47,7 +50,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/edit', async (req, res) => {
 	const payload = req.body;
-	payload.updated = new Date()
+	payload.updated = new Date();
 	try {
 		let page = await Item.findById({ _id: payload._id });
 		if (page) {
@@ -134,11 +137,11 @@ router.post('/move', async (req, res) => {
 });
 
 const getApi = async (item, array) => {
-	array.push(item._id)
-	const id = item._id
+	array.push(item._id);
+	const id = item._id;
 	const children = await Item.find({ parentId: id });
-	if(children.length === 0){
-		return ;
+	if (children.length === 0) {
+		return;
 	}
 
 	for (let i = 0; i < children.length; i++) {
@@ -146,11 +149,10 @@ const getApi = async (item, array) => {
 	}
 };
 
-
 router.delete('/:id', async (req, res) => {
 	try {
 		const item = await Item.findById(req.params.id);
-	
+
 		const children = await Item.find({ parentId: item._id });
 		await Item.updateMany({ parentId: item._id }, { $set: { parentId: item.parentId } });
 		for (let i = 0; i < children.length; i++) {
@@ -163,19 +165,18 @@ router.delete('/:id', async (req, res) => {
 	}
 });
 
-router.delete('/all/:id', async (req, res) => {	
+router.delete('/all/:id', async (req, res) => {
 	try {
 		const item = await Item.findById(req.params.id);
 		const array = [];
-		if(item){
+		if (item) {
 			await getApi(item, array);
 		}
-		await Item.deleteMany({ _id: {$in: array }})	
-		res.json({ id: req.params.id, children:[] });
+		await Item.deleteMany({ _id: { $in: array } });
+		res.json({ id: req.params.id, children: [] });
 	} catch (error) {
 		res.status(400).json({ error });
 	}
 });
-
 
 module.exports = router;

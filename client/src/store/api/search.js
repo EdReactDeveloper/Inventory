@@ -10,7 +10,7 @@ const instance = axios.create({
 	headers: { 'Content-Type': 'application/json' }
 });
 
-export const getSearchResults = async (payload) => {
-	const result = await axios.get(`${baseURL}/?query=${payload}`);
+export const getSearchResults = async (query) => {
+	const result = await axios.get(`${baseURL}/?query=${query}`);
 	return result.data;
 };

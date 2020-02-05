@@ -34,7 +34,6 @@ const Routes = ({ loading }) => {
                 <PrivateRoute exact path='/' component={Main} />
                 <PrivateRoute exact path='/profile/:id' component={Profile} />
                 <PrivateRoute component={NotFound} />
-
               </Switch>
             </div>
           </ErrorBoundry>

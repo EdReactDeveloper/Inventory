@@ -6,7 +6,7 @@ import Auth from './Auth';
 import SearchBar from '../../../containers/Seach/SearchBar';
 
 const Header = (props) => {
-
+  const {isLoggedIn} = props
   return (
     <header className={style.main}>
       <div className={`${style.wrapper} ${app.container}`}>
@@ -15,7 +15,7 @@ const Header = (props) => {
             <Link to="/">Inventory</Link>
           </h4>
         </nav>
-        <SearchBar />
+        {isLoggedIn && <SearchBar {...props} />}
         <Auth {...props} />
       </div>
     </header>

@@ -7,7 +7,7 @@ import Menu from '../../Menu';
 import {FORM_INSTANCE} from '../../../configs'; 
 
 const Item = (props) => {
-
+  
   // PROPS
   const { item: { name, status, tags, _id, parentId },
     data: {
