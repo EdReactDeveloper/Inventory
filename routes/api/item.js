@@ -30,6 +30,8 @@ router.get('/:id', async (req, res) => {
 		let page = await Item.findById(id);
 		if (!page) {
 			page = await Profile.findById(id);
+		}else{
+			res.status(404).json({msg: 'page is not found'})
 		}
 		const bread = [];
 		await getBread(page, bread);

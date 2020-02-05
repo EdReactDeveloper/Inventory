@@ -2,7 +2,7 @@ import { GET_QUERY_SUCCESS, GET_QUERY_FAIL, GET_QUERY_LOADING } from '../actions
 
 const initialState = {
 	data: [],
-	loading: true
+	loading: false
 };
 
 const reducer = (state = initialState, action) => {

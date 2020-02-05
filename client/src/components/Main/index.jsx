@@ -14,7 +14,7 @@ const Main = (props) => {
   const renderProfile = () => {
     if (!profileLoading) {
       if (profile._id && !profile.removed) {
-        return <Link to={profile._id}> go to profile</Link>
+        return <Link to={`/profile/${profile._id}`}> go to profile</Link>
       }
       if (profile._id && profile.removed) {
         return <div>

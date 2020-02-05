@@ -6,14 +6,15 @@ import Login from '../containers/Login';
 import Register from '../containers/Register';
 import PrivateRoute from './PrivateRoute';
 import AuthRoute from './AuthRoute';
-import Main from '../containers/Main'; 
+import Main from '../containers/Main';
 import style from '../App.module.scss';
-
+import NotFound from '../components/404'
 import Alert from '../containers/Alert';
 import ErrorBoundry from '../containers/ErrorBoundry';
-import Profile from '../containers/Profile'; 
+import Profile from '../containers/Profile';
 import Modal from '../containers/Modal';
 import Notification from '../containers/Notifications';
+import Search from '../containers/Seach/SearchPage';
 
 const Routes = ({ loading }) => {
 
@@ -21,16 +22,19 @@ const Routes = ({ loading }) => {
     <Router>
       {!loading && (
         <HeaderFooter>
-          <Alert />
+          {/* <Alert /> */}
           <Notification />
           <Route path="/" component={Modal} />
           <ErrorBoundry>
             <div className={style.wrapper}>
               <Switch>
+                <PrivateRoute path='/search' component={Search} />
                 <AuthRoute exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
-                <PrivateRoute exact path='/' component={Main}/>
-                <PrivateRoute path='/:id' component={Profile}/>
+                <PrivateRoute exact path='/' component={Main} />
+                <PrivateRoute exact path='/profile/:id' component={Profile} />
+                <PrivateRoute component={NotFound} />
+
               </Switch>
             </div>
           </ErrorBoundry>

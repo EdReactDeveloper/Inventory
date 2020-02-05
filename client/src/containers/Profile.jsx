@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Redirect} from 'react-router-dom'; 
+import { Redirect } from 'react-router-dom';
 import Profile from '../components/Profile';
 import { getProfileAction, componentUnmount, removeProfileAction } from '../store/actions/profile';
 import { getItemsAction, removeItemAction, selectItemAction, moveItemsAction, removePageAction } from '../store/actions/items';
 import Loader from '../components/Profile/Loader';
 import setAlert from '../store/actions/alerts';
+import NotFound from '../components/404';
 
 const ProfileContainer = (props) => {
   const dispatch = useDispatch();
@@ -13,13 +14,14 @@ const ProfileContainer = (props) => {
   // reducers
   const { profile, profileLoading, profileUpdating } = useSelector(state => state.profile)
   const items = useSelector(state => state.items)
-  const { list, page, bread, itemsLoading, fetchingItem, pageLoading, editMode, selectedItems } = items
+  const { list, page, bread, itemsLoading, fetchingItem, pageLoading, selectedItems } = items
   const { inProgress } = useSelector(state => state.inProgress)
 
   // props
   const { history } = props
   const { match: { params: { id } } } = props
   const isProfilePage = id === profile._id
+  const isItemPage = id === page._id
 
   useEffect(() => {
     dispatch(getProfileAction());
@@ -80,14 +82,17 @@ const ProfileContainer = (props) => {
     },
     checks: {
       isProfilePage,
-      editMode
+      isItemPage
     }
   }
 
-  if (profile.removed) {
-    return <Redirect to='/' /> 
+  switch (true) {
+    case profile.removed: return <Redirect to='/' />
+    case isProfilePage || isItemPage: return <Profile {...props} {...payload} />
+    case profileLoading || itemsLoading: return <Loader />;
+    default: return <NotFound {...props} />
   }
-  return <>{profile.profileLoading && itemsLoading ? <Loader /> : <Profile {...props} {...payload} />}</>
+
 
 };
 
