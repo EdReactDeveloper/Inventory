@@ -82,7 +82,7 @@ const reducer = (state = initialState, action) => {
 		case ADD_ITEM_SUCCESS: {
 			return {
 				...state,
-				list: [ ...state.list, payload ],
+				list: [ payload, ...state.list ],
 				fetchingItem: false
 			};
 		}
@@ -112,9 +112,10 @@ const reducer = (state = initialState, action) => {
 		}
 
 		case GET_ITEMS_SUCCESS: {
+			const updatedList = payload.items.sort((a,b)=> new Date(b.updated) - new Date(a.updated))
 			return {
 				...state,
-				list: payload.items,
+				list: updatedList,
 				page: payload.page,
 				bread: payload.bread,
 				itemsLoading: false,

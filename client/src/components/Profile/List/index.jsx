@@ -19,10 +19,10 @@ const List = (props) => {
 
   return (
     <ul>
+      {fetchingItem && <Loader />}
       {profile.profileLoading ? <div>loading data...</div> :
         renderItems()
       }
-      {fetchingItem && <Loader />}
     </ul>
   );
 };
