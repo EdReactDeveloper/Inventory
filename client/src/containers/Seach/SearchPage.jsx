@@ -6,18 +6,19 @@ import SearchPage from '../../components/Search/Page';
 
 const SearchPageContainer = (props) => {
   const dispatch = useDispatch()
-  const {data, loading} = useSelector(state => state.search)
+  const {data, loading, decodedQuery} = useSelector(state => state.search)
   const {location:{search}} = props
   useEffect(()=>{
     if(search.length > 0){
       const query = search.replace('?query=', '')
       dispatch(getSearchAction(query))
     }
-  }, [dispatch])
+  }, [dispatch, search])
 
   const payload = {
     data: {
-      data
+      data,
+      decodedQuery
     },
     loaders: {
       loading

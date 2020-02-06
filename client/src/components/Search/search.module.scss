@@ -16,16 +16,27 @@
 }
 
 .item{
-  border: 1px solid #ccc;
+  &:not(:last-child){
+    border-bottom: 1px solid #ccc;
+  }
   padding: 1rem;
   margin: 1rem 0;
   width: 100%;
   & h3{
+    color: #0097e6;
 
+    &:hover{
+      text-decoration: underline;
+    }
   }
 
-  & span{
+  &_category{
     color: #bbb;
     font-size: 1.4rem;  
   }
+
+  &_highlight{
+    font-weight: bold;
+  }
 }
+

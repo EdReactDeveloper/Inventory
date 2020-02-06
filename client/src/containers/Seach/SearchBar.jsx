@@ -1,10 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import SearchBar from '../../components/Search/SearchBar'; 
 
 
 const SearchFieldContainer = (props) => {
+  const {decodedQuery} = useSelector(state => state.search)
   const [query, setQuery] = useState('')
   const {routing: {history}} = props
+
+  
+  useEffect(()=>{
+    if(decodedQuery.length > 0){
+      setQuery(decodedQuery)
+    }
+  }, [decodedQuery])
 
   const queryHandler = (e)=>{
     setQuery(e.target.value)
