@@ -5,14 +5,16 @@ import { addItemAction, updateItemAction } from '../../../store/actions/items';
 import { modalHandler } from '../../../store/actions/modal';
 import { FORM_TYPE, STATUSES } from '../../../configs';
 import { isRequired } from '../../../validators';
+import {fileUploadAction} from '../../../store/actions/upload'; 
 
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.items)
   const { itemsLoading, fetchingItem, pageLoading, page } = items
+  const {filePath, filename, isUploading} = useSelector(state => state.upload) 
   const { formType } = useSelector(state => state.modal.form)
   const { location: { pathname } } = props
-
+  const [uploadPersentage, setUploadPersentage] = useState()
   const [required, setRequired] = useState({
     name: null,
     tags: null,
@@ -51,12 +53,19 @@ const FormContainer = (props) => {
     setState({ ...state, [e.target.name]: !state.shared })
   }
 
+  const uploadFile = (e, file) =>{
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append('file', file)
+    dispatch(fileUploadAction(formData, setUploadPersentage))
+  }
+
   // send form
   const submitFrom = (e) => {
     e.preventDefault()
     const fields = isRequired(state, required)
     setRequired({ ...required, ...fields })
-    
+
     if (fields.valid) {
       const { path } = props.match
       let collectionId = ''
@@ -69,7 +78,7 @@ const FormContainer = (props) => {
 
       switch (formType) {
         case FORM_TYPE.add: dispatch(addItemAction({
-          ...state, path: pathname,
+          ...state, img: filePath,
           parentId: pathname.split('/').slice(-1).join(''),
           collectionId
         }));
@@ -79,7 +88,7 @@ const FormContainer = (props) => {
             }
           }, 100);
           break;
-        case FORM_TYPE.edit: dispatch(updateItemAction(state));
+        case FORM_TYPE.edit: dispatch(updateItemAction({...state, img: filePath}));
           setTimeout(() => {
             if (!pageLoading) {
               dispatch(modalHandler())
@@ -94,13 +103,30 @@ const FormContainer = (props) => {
 
   // render form
 
+  const payload = {
+    data: {
+      state,
+      statusArray: STATUSES,
+      uploadPersentage,
+      filePath,
+    },
+    methods: {
+      onChange,
+      submitFrom,
+      changeCheckBox,
+      uploadFile
+    },
+    loaders: {
+      fetchingItem,
+      isUploading
+    },
+    checks: {
+      required
+    }
+  }
+
   return <Form
-    onChange={onChange} {...state}
-    submitFrom={submitFrom}
-    statusArray={STATUSES}
-    changeCheckBox={changeCheckBox}
-    fetchingItem={itemsLoading}
-    required={required}
+    {...payload}
   />
 };
 

@@ -13,7 +13,7 @@ const ItemInfo = (props) => {
     }
   } = props
 
-  const { name, description, location, status, tags, count, type, shared, updated, created } = page
+  const { name, description, location, status, tags, count, type, shared, updated, created, img } = page
   return (
     <div className={style.info__wrapper}>
       {pageLoading ? <div className={style.loader__wrapper}><Loader className={style.loader} /></div> :
@@ -21,6 +21,7 @@ const ItemInfo = (props) => {
           <ButtonsBlock
             {...props}
           />
+          {img && <img className={style.img} src={img} alt={img}/>}
           <h3>{name}</h3>
           <ul>
             <li>{description}</li>

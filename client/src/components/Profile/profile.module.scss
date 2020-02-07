@@ -21,11 +21,23 @@
 .item {
   &_wrapper {
     display: flex;
-    padding: 1rem 2rem;
     border: 1px solid #ccc;
     margin: 1rem 0;
-    justify-content: space-between;
+    height: 10rem;
+  }
 
+  &__info{
+    padding: 1rem 2rem;
+  }
+
+  &__menu{
+    margin-left: auto;
+    padding: 0 1rem;
+  }
+
+  &__img{
+    height: 100%;
+    max-width: 15rem;
   }
 
   &__selected{
@@ -34,7 +46,7 @@
 
   &__details {
     margin-left: 1rem;
-
+    
     & span {
       font-size: 1.4rem;
       color: #bbb;

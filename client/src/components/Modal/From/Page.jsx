@@ -2,31 +2,30 @@ import React from 'react';
 import { add } from './formData';
 import Button from '../../misc/Elements/Button';
 import Field from '../../misc/Elements/Input';
+import FileUpload from '../../misc/Elements/Input/Image';
 
-const PageForm = ({
-  name, description, tags,
-  category, status, statusArray,
-  count, location, type,
-  onChange, submitFrom,
-  changeCheckBox, shared,
-  fetchingItem, required
-}) => {
+const PageForm = (props) => {
 
-
-  const renderPayload = { name, description, tags, category, count, location, type, shared, status, required }
-  const fieldPayload = { onChange, changeCheckBox, required, statusArray }
+  const {
+    data: { state },
+    methods: { submitFrom },
+    loaders: { fetchingItem },
+    checks: { required }
+  } = props
 
   return (
-    <form onSubmit={submitFrom}>
-      {add(renderPayload).map(item => {
-        return <Field {...fieldPayload} item={item} key={item.name} />
-      }
-      )}
-
-      <Button type="submit">
-        {fetchingItem ? 'loading...' : 'save'}
-      </Button>
-    </form>
+    <>
+      <FileUpload {...props} />
+      <form onSubmit={submitFrom}>
+        {add({ ...state, required }).map(item => {
+          return <Field {...props} item={item} key={item.name} />
+        }
+        )}
+        <Button type="submit">
+          {fetchingItem ? 'loading...' : 'save'}
+        </Button>
+      </form>
+    </>
   );
 };
 

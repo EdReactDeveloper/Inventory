@@ -1,7 +1,16 @@
 import React from 'react';
 import style from './Input.module.scss';
 
-const Field = ({ item, onChange, changeCheckBox, required, statusArray }) => {
+const Field = (props) => {
+  const {
+    item,
+    data: { statusArray },
+    methods: {
+      onChange, changeCheckBox,
+    },
+    checks: { required }
+  } = props
+  
   let field = null
   switch (item.field) {
 
@@ -30,7 +39,7 @@ const Field = ({ item, onChange, changeCheckBox, required, statusArray }) => {
         {statusArray && statusArray.map(item => {
           return <option key={item.name} value={item.value}>{item.value}</option>
         })}
-      </select>;break
+      </select>; break
 
 
     default: return null

@@ -30,6 +30,8 @@
   box-sizing: border-box;
   transition: all 0.3s ease-out;
   z-index: 9999;
+  max-height: 90vh;
+  overflow-y: auto;
   @media only screen and (max-width: 600px) {
     top: 10%;
     left: 5vw;

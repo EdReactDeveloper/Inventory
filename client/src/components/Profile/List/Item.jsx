@@ -4,12 +4,12 @@ import style from '../profile.module.scss';
 import Button from '../../misc/Elements/Button';
 import Loader from '../../misc/Loader/Lines';
 import Menu from '../../Menu';
-import {FORM_INSTANCE} from '../../../configs'; 
+import { FORM_INSTANCE } from '../../../configs';
 
 const Item = (props) => {
-  
+
   // PROPS
-  const { item: { name, status, tags, _id, parentId },
+  const { item: { name, img, status, tags, _id, parentId },
     data: {
       selectedItems
     },
@@ -24,8 +24,8 @@ const Item = (props) => {
   const selectedItem = { id: _id, name, parentId }
   const checked = selectedItems.some(item => item.id === _id)
 
-  const dropMenu = <Menu>
-    <li><Button type='delete' payload ={{ id: _id, instance: FORM_INSTANCE.item, parentId, name }}>remove</Button></li>
+  const dropMenu = <Menu className={style.item__menu}>
+    <li><Button type='delete' payload={{ id: _id, instance: FORM_INSTANCE.item, parentId, name }}>remove</Button></li>
     <li><Button type='check' checked={checked} onClick={() => selectItemHandler(selectedItem)} >
       {checked ? 'unselect item' : 'select item'}</Button></li>
   </Menu>
@@ -34,14 +34,15 @@ const Item = (props) => {
     <li className={`${style.item_wrapper} ${checked ? style.item__selected : ''}`}>
       {inProgress.some(item => item === _id) ? <Loader className={style.loader__item} /> :
         <>
+          <img src={img} alt={img} className={style.item__img} />
           {checked ?
-            (<div>
+            (<div className={style.item__info}>
               <h4>{name}</h4>
               <div className={style.item__details}><span>tags:</span> {tags}</div>
               <div className={style.item__details}><span>status:</span> {status}</div>
             </div>) :
             (
-              <div>
+              <div className={style.item__info}>
                 <Link to={_id}>
                   <h4>{name}</h4>
                   <div className={style.item__details}><span>tags:</span> {tags}</div>
