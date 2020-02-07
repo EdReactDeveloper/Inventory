@@ -1,4 +1,6 @@
 {
-  "mongoURI": "mongodb+srv://EdReact:edreact1234567@cluster0-fozib.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://EdReact:edreact1234567@cluster0-fozib.mongodb.net/test?retryWrites=true&w=majority",
+  "drive": "196306518856-o2u2fn0os6k9eeteflmbe4bbhcpg34vi.apps.googleusercontent.com",
+  "driveSecret": "awmtQXun5CEBRZKsXE5cXYzY"
 }
 

@@ -3,6 +3,7 @@ const config = require('config');
 const path = require('path')
 
 const app = express();
+const fileupload = require('express-fileupload'); 
 // initializing the session
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 
 // -----------------------
 
+app.use(fileupload())
 connectDB();
 
 app.use(express.json({ extended: false }));
@@ -53,6 +55,7 @@ app.use('/api/item', require('./routes/api/item'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/bread', require('./routes/api/bread'));
 app.use('/api/search', require('./routes/api/search'));
+app.use('/api/upload', require('./routes/api/upload')); 
 
 // serve static assets in production 
 if(process.env.NODE_ENV === 'production'){
