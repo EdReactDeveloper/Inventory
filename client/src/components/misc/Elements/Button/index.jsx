@@ -4,11 +4,13 @@ import style from './Button.module.scss';
 import Icon from '../../icon/Icon';
 import { Icons } from '../../icon/Selection';
 import { modalHandler } from '../../../../store/actions/modal';
+import { formHandler } from '../../../../store/actions/form';
 import { FORM_TYPE } from '../../../../configs';
 
 const Button = ({ type,
   payload = '',
   modalHandler,
+  formHandler,
   selectedItems,
   onClick,
   onChange,
@@ -25,13 +27,19 @@ const Button = ({ type,
       return <button
         type="button"
         className={style.edit}
-        onClick={() => modalHandler({ formType: FORM_TYPE.edit, instance, data })}
+        onClick={() => formHandler({ formType: FORM_TYPE.edit, instance, data })}
       >
         <Icon d={Icons.edit} className={style.icon} size='32' />
         {props.children}
       </button>;
 
-
+    case 'close':
+      return <button
+        type="button"
+        onClick={() => formHandler()}
+      >
+        {props.children}
+      </button>;
     // MOVE
     case 'move':
       return <button
@@ -120,4 +128,4 @@ const mapStateToProps = state => ({
   selectedItems: state.items.selectedItems
 })
 
-export default connect(mapStateToProps, { modalHandler })(Button)
+export default connect(mapStateToProps, { modalHandler, formHandler })(Button)

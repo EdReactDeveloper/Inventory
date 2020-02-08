@@ -16,6 +16,7 @@ const ProfileContainer = (props) => {
   const items = useSelector(state => state.items)
   const { list, page, bread, itemsLoading, fetchingItem, pageLoading, selectedItems } = items
   const { inProgress } = useSelector(state => state.inProgress)
+  const { form, editMode } = useSelector(state => state.form);
 
   // props
   const { history } = props
@@ -62,6 +63,7 @@ const ProfileContainer = (props) => {
   const payload = {
     data: {
       profile,
+      form,
       list,
       page,
       bread,
@@ -82,7 +84,8 @@ const ProfileContainer = (props) => {
     },
     checks: {
       isProfilePage,
-      isItemPage
+      isItemPage,
+      editMode
     }
   }
 

@@ -94,3 +94,6 @@ export const REMOVE_FILE_FAIL = 'REMOVE_FILE_FAIL'
 // UTILS
 
 export const CLEAN_UP = 'CLEAN_UP'
+
+// FORM 
+export const FORM = 'FORM'

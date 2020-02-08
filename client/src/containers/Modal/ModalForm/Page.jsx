@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Form from '../../../components/Modal/From/Page';
 import { addItemAction, updateItemAction } from '../../../store/actions/items';
-import { modalHandler } from '../../../store/actions/modal';
+import { formHandler } from '../../../store/actions/form';
 import { FORM_TYPE, STATUSES } from '../../../configs';
 import { isRequired } from '../../../validators';
 import { fileUploadAction, removeFileAction } from '../../../store/actions/upload';
@@ -12,7 +12,7 @@ const FormContainer = (props) => {
   const items = useSelector(state => state.items)
   const { itemsLoading, fetchingItem, pageLoading, page } = items
   const { filePath, filename, isUploading } = useSelector(state => state.upload)
-  const { formType } = useSelector(state => state.modal.form)
+  const { formType } = useSelector(state => state.form.form)
   const { location: { pathname } } = props
   const [uploadPersentage, setUploadPersentage] = useState()
   const [required, setRequired] = useState({
@@ -76,35 +76,26 @@ const FormContainer = (props) => {
     setRequired({ ...required, ...fields })
 
     if (fields.valid) {
-      const { path } = props.match
-      let collectionId = ''
-
-      if (path.length < 2) {
-        collectionId = state.name
-      } else {
-        collectionId = pathname.split('/')[0].join('')
-      }
-
+    
       switch (formType) {
         case FORM_TYPE.add: dispatch(addItemAction({
           ...state, img: filePath,
-          parentId: pathname.split('/').slice(-1).join(''),
-          collectionId
+          parentId: pathname.split('/').slice(-1).join('')
         }));
           setTimeout(() => {
             if (!fetchingItem) {
-              dispatch(modalHandler())
+              dispatch(formHandler())
             }
           }, 100);
           break;
         case FORM_TYPE.edit: dispatch(updateItemAction({ ...state, img: filePath }));
           setTimeout(() => {
             if (!pageLoading) {
-              dispatch(modalHandler())
+              dispatch(formHandler())
             }
           }, 100);
           break;
-        default: dispatch(modalHandler()); break;
+        default: dispatch(formHandler()); break;
       }
     }
 

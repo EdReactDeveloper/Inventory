@@ -14,7 +14,8 @@ const PageForm = (props) => {
   } = props
 
   return (
-    <>
+    <div>
+      <Button type="close">X</Button>
       <FileUpload {...props} />
       <form onSubmit={submitFrom}>
         {add({ ...state, required }).map(item => {
@@ -25,7 +26,7 @@ const PageForm = (props) => {
           {fetchingItem ? 'loading...' : 'save'}
         </Button>
       </form>
-    </>
+    </div>
   );
 };
 
