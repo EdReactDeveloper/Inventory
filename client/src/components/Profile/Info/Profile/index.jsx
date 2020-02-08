@@ -1,7 +1,8 @@
 import React from 'react';
 
-import Edit from '../../../../containers/Modal/ModalForm/Profile'; 
+import Edit from '../../../../containers/Form/Profile'; 
 import View from './View'; 
+import {FORM_TYPE} from '../../../../configs'; 
 
 const ProfileInfo = (props) => {
 
@@ -10,12 +11,12 @@ const ProfileInfo = (props) => {
       profileUpdating
     },
     checks:{
-      editMode
+      formType
     }
   } = props
-
+console.log(profileUpdating)
   const renderPage = () => {
-    if (editMode) {
+    if (formType === FORM_TYPE.edit) {
       return <Edit {...props}/>
     }
     return <View {...props} />

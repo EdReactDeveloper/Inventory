@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonsBlock from '../../Tools/PageTools';
 
 const View = (props) => {
-  const { data: { name, description } } = props
+  const { data: {profile: { name, description }} } = props
   return (
     <div>
       <ButtonsBlock

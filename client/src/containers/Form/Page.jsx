@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Form from '../../../components/Modal/From/Page';
-import { addItemAction, updateItemAction } from '../../../store/actions/items';
-import { formHandler } from '../../../store/actions/form';
-import { FORM_TYPE, STATUSES } from '../../../configs';
-import { isRequired } from '../../../validators';
-import { fileUploadAction, removeFileAction } from '../../../store/actions/upload';
+import Form from '../../components/Form/Page';
+import { addItemAction, updateItemAction } from '../../store/actions/items';
+import { formHandler } from '../../store/actions/form';
+import { FORM_TYPE, STATUSES } from '../../configs';
+import { isRequired } from '../../validators';
+import { fileUploadAction, removeFileAction } from '../../store/actions/upload';
 
 const FormContainer = (props) => {
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const FormContainer = (props) => {
     tags: null,
     count: null
   })
- console.log(formType)
+
   const [state, setState] = useState({
     name: '',
     description: '',

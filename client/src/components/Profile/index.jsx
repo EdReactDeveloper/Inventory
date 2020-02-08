@@ -14,7 +14,7 @@ const Profile = (props) => {
     checks: { isProfilePage },
   } = props
 
-  
+   
   return (
     <div className={style.profile__wrapper}>
 

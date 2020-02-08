@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileForm from '../../../components/Modal/From/Profile';
-import { updateProfileAction, addProfileAction } from '../../../store/actions/profile';
-import { modalHandler } from '../../../store/actions/modal';
-import { FORM_TYPE } from '../../../configs';
-import { isRequired } from '../../../validators';
+import ProfileForm from '../../components/Form/Profile';
+import { updateProfileAction, addProfileAction } from '../../store/actions/profile';
+import { formHandler } from '../../store/actions/form';
+import { FORM_TYPE } from '../../configs';
+import { isRequired } from '../../validators';
 
 
 const FormContainer = (props) => {
   const dispatch = useDispatch()
-  const { formType } = useSelector(state => state.modal.form)
   const { profile, profileLoading } = useSelector(state => state.profile)
-  const {history} = props
+  const { formType, data } = useSelector(state => state.form)
+  const { history } = props
   const [required, setRequired] = useState({
     name: null
   })
@@ -24,11 +24,8 @@ const FormContainer = (props) => {
 
   // initialize form
   useEffect(() => {
-    if (formType === FORM_TYPE.edit) {
-      setState({ ...state, ...profile })
-    }
-  }, [formType])
-
+    setState({ ...state, ...data })
+  }, [data])
 
   // update field
   const onChange = (e) => {
@@ -49,28 +46,40 @@ const FormContainer = (props) => {
     if (fields.valid) {
       const { profileUpdating } = profile
       switch (formType) {
-        case FORM_TYPE.add: dispatch(addProfileAction({state, history})); break;
+        case FORM_TYPE.add: dispatch(addProfileAction({ state, history })); break;
         case FORM_TYPE.edit: dispatch(updateProfileAction(state)); break;
-        default: dispatch(modalHandler()); break;
+        default: dispatch(formHandler()); break;
       }
       setTimeout(() => {
         if (!profileUpdating) {
-          dispatch(modalHandler())
+          dispatch(formHandler())
         }
       }, 100)
     }
   }
 
+  const payload = {
+    data: {
+      state
+    },
+    methods: {
+      changeCheckBox,
+      onChange,
+      submitFrom
+    },
+    loaders: {
+      profileLoading
+    },
+    checks: {
+      required,
+      formType
+    }
+
+  }
 
   // render form
   return <ProfileForm
-    changeCheckBox={changeCheckBox}
-    onChange={onChange}
-    submitFrom={submitFrom}
-    profile={state}
-    profileLoading={profileLoading}
-    required={required}
-    {...props}
+    {...payload}
   />
 
 };

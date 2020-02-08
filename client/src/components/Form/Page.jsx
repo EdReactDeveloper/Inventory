@@ -1,8 +1,8 @@
 import React from 'react';
 import { add } from './formData';
-import Button from '../../misc/Elements/Button';
-import Field from '../../misc/Elements/Input';
-import FileUpload from '../../misc/Elements/Input/Image';
+import Button from '../misc/Elements/Button';
+import Field from '../misc/Elements/Input';
+import FileUpload from '../misc/Elements/Input/Image';
 
 const PageForm = (props) => {
 
