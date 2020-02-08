@@ -4,34 +4,24 @@ import Loader from '../../../misc/Loader/Circle';
 
 import Edit from '../../../../containers/Modal/ModalForm/Page';
 import View from './View';
+import {FORM_TYPE} from '../../../../configs'; 
 
 const ItemInfo = (props) => {
 
   const {
-    data: { page, form },
     loaders: {
       pageLoading,
-    },
-    checks: {
-      editMode
-    }
+    }, 
+    checks:{formType}
   } = props
-
-  const renderPage = () => {
-    if (editMode) {
-      return <Edit {...props}/>
-    }
-    return <View {...props} />
+  console.log(formType)
+  
+  switch(true){
+    case pageLoading: return <div className={style.loader__wrapper}><Loader className={style.loader} /></div>
+    case formType === FORM_TYPE.edit: return <Edit {...props}/>
+    default: return <View {...props} />
   }
 
-  return (
-    <div className={style.info__wrapper}>
-      {pageLoading ? <div className={style.loader__wrapper}><Loader className={style.loader} /></div> :
-        renderPage()
-      }
-
-    </div>
-  );
 };
 
 export default ItemInfo;

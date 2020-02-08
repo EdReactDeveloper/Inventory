@@ -1,9 +1,15 @@
-import {FORM} from './types';
+import {FORM, FORM_CLOSE} from './types';
 
 export const formHandler = (payload) => dispatch =>{
-  dispatch({
-    type: FORM,
-    payload
-  })
+  if(payload){
+    dispatch({
+      type: FORM,
+      payload
+    })
+  }else{
+    dispatch({type: FORM_CLOSE})
+  }
 }
+
+
 

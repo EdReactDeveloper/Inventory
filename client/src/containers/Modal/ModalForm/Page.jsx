@@ -10,9 +10,9 @@ import { fileUploadAction, removeFileAction } from '../../../store/actions/uploa
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.items)
-  const { itemsLoading, fetchingItem, pageLoading, page } = items
-  const { filePath, filename, isUploading } = useSelector(state => state.upload)
-  const { formType } = useSelector(state => state.form.form)
+  const { fetchingItem, pageLoading, page } = items
+  const { filePath, isUploading } = useSelector(state => state.upload)
+  const { formType } = useSelector(state => state.form)
   const { location: { pathname } } = props
   const [uploadPersentage, setUploadPersentage] = useState()
   const [required, setRequired] = useState({
@@ -20,7 +20,7 @@ const FormContainer = (props) => {
     tags: null,
     count: null
   })
-
+ console.log(formType)
   const [state, setState] = useState({
     name: '',
     description: '',
@@ -122,7 +122,8 @@ const FormContainer = (props) => {
       isUploading
     },
     checks: {
-      required
+      required,
+      formType
     }
   }
 

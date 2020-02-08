@@ -1,21 +1,18 @@
-import { FORM } from '../actions/types';
+import { FORM, FORM_CLOSE } from '../actions/types';
 
 const initialState = {
-	editMode: false,
-	form:{
-		formType: '',
-	}
-};	
+	formType: null,
+	instance: null,
+	data: null
+};
 
-
-
-const reducer =  (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
 		case FORM:
-			return { ...state, editMode: !state.editMode, form: payload};
-
+			return { ...state, ...payload };
+		case FORM_CLOSE: return {initialState}
 		default:
 			return state;
 	}
