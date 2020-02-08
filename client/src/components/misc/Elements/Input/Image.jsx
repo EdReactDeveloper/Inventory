@@ -4,9 +4,10 @@ import style from './Input.module.scss';
 const ImageInput = (props) => {
 
   const {
-    data: { uploadPersentage, filePath },
+    data: { uploadPersentage, filePath, state:{img} },
     methods: {
-      uploadFile
+      uploadFile,
+      removeFile
     }, 
     loaders: {
       isUploading
@@ -28,7 +29,8 @@ const ImageInput = (props) => {
       <label htmlFor="customFile">{filename}</label>
       <input type="file" name="customFile" id="customFile" onChange={onChangeHandler} />
       <input type="submit" value="upload" />
-      {!isUploading && filePath && <img className={style.img} src={filePath} alt={filePath}/>}
+      <img className={style.img} src={!isUploading && filePath ? filePath : img} alt={filePath}/> 
+      {img && <button type="button" onClick={()=>removeFile()}>remove img</button>}
     </form>
   );
 };

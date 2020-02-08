@@ -5,13 +5,13 @@ import { addItemAction, updateItemAction } from '../../../store/actions/items';
 import { modalHandler } from '../../../store/actions/modal';
 import { FORM_TYPE, STATUSES } from '../../../configs';
 import { isRequired } from '../../../validators';
-import {fileUploadAction} from '../../../store/actions/upload'; 
+import { fileUploadAction, removeFileAction } from '../../../store/actions/upload';
 
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.items)
   const { itemsLoading, fetchingItem, pageLoading, page } = items
-  const {filePath, filename, isUploading} = useSelector(state => state.upload) 
+  const { filePath, filename, isUploading } = useSelector(state => state.upload)
   const { formType } = useSelector(state => state.modal.form)
   const { location: { pathname } } = props
   const [uploadPersentage, setUploadPersentage] = useState()
@@ -53,11 +53,20 @@ const FormContainer = (props) => {
     setState({ ...state, [e.target.name]: !state.shared })
   }
 
-  const uploadFile = (e, file) =>{
+  const uploadFile = (e, file) => {
     e.preventDefault()
+    const { img } = state
     const formData = new FormData()
     formData.append('file', file)
     dispatch(fileUploadAction(formData, setUploadPersentage))
+    // if (img) {
+    //   dispatch(removeFileAction(img))
+    // }
+  }
+
+  const removeFile = () => {
+    const { img } = state
+    dispatch(removeFileAction(img))
   }
 
   // send form
@@ -88,7 +97,7 @@ const FormContainer = (props) => {
             }
           }, 100);
           break;
-        case FORM_TYPE.edit: dispatch(updateItemAction({...state, img: filePath}));
+        case FORM_TYPE.edit: dispatch(updateItemAction({ ...state, img: filePath }));
           setTimeout(() => {
             if (!pageLoading) {
               dispatch(modalHandler())
@@ -114,7 +123,8 @@ const FormContainer = (props) => {
       onChange,
       submitFrom,
       changeCheckBox,
-      uploadFile
+      uploadFile,
+      removeFile
     },
     loaders: {
       fetchingItem,
