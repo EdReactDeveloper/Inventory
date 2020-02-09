@@ -24,7 +24,14 @@ export const addItemApi  = async (payload) => {
 export const updateItemApi  = async (payload) => {
 	const result = await instance.post(`${baseURL}/edit`, body(payload));
 	return result.data;
+};
+
+export const uploadImgApi  = async (payload) => {
+	const {img, id} = payload
+	const result = await instance.post(`${baseURL}/upload/${id}`, body({img}));
+	return result.data;
 };	
+
 
 export const removeItemApi  = async (payload) =>{
 	let result = null

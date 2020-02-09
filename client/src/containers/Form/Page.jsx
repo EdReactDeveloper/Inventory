@@ -5,7 +5,8 @@ import { addItemAction, updateItemAction } from '../../store/actions/items';
 import { formHandler } from '../../store/actions/form';
 import { FORM_TYPE, STATUSES } from '../../configs';
 import { isRequired } from '../../validators';
-import { fileUploadAction, removeFileAction } from '../../store/actions/upload';
+import { fileUploadAction, uploadImageAction, removeFileAction } from '../../store/actions/upload';
+
 
 const FormContainer = (props) => {
   const dispatch = useDispatch()
@@ -55,10 +56,9 @@ const FormContainer = (props) => {
 
   const uploadFile = (e, file) => {
     e.preventDefault()
-    const { img } = state
     const formData = new FormData()
     formData.append('file', file)
-    dispatch(fileUploadAction(formData, setUploadPersentage))
+    dispatch(fileUploadAction({formData, time: setUploadPersentage, id:page._id}))
     // if (img) {
     //   dispatch(removeFileAction(img))
     // }

@@ -119,6 +119,22 @@ router.post(
 	}
 );
 
+router.post('/upload/:id', async (req, res) => {
+	const { img } = req.body;
+	const { id } = req.params;
+	try {
+		const item = await Item.findById(id);
+		if (!item) {
+			res.status(404).json({ msg: 'page is not found' });
+		}
+		item.img = img;
+		await item.save();
+		res.json(item);
+	} catch (error) {
+		res.status(400).json({ error });
+	}
+});
+
 router.post('/move', async (req, res) => {
 	const { docs, id, path } = req.body;
 	try {
@@ -136,7 +152,7 @@ router.post('/move', async (req, res) => {
 	}
 });
 
-const getApi = async (item, array) => {
+const getChildren = async (item, array) => {
 	array.push(item._id);
 	const id = item._id;
 	const children = await Item.find({ parentId: id });
@@ -145,7 +161,7 @@ const getApi = async (item, array) => {
 	}
 
 	for (let i = 0; i < children.length; i++) {
-		await getApi(children[i], array);
+		await getChildren(children[i], array);
 	}
 };
 
@@ -170,7 +186,7 @@ router.delete('/all/:id', async (req, res) => {
 		const item = await Item.findById(req.params.id);
 		const array = [];
 		if (item) {
-			await getApi(item, array);
+			await getChildren(item, array);
 		}
 		await Item.deleteMany({ _id: { $in: array } });
 		res.json({ id: req.params.id, children: [] });

@@ -17,7 +17,7 @@ import {
 	MOVE_ITEMS_FAIL,
 	UNSELECT_ITEMS
 } from './types';
-import { updateItemApi, addItemApi, removeItemApi, getItemsApi, moveSelectedItemsApi } from '../api/items';
+import { updateItemApi, addItemApi, removeItemApi, getItemsApi, moveSelectedItemsApi, uploadImgApi } from '../api/items';
 import inProgressAction from './inprogress';
 import setNotification from './notification';
 import setAlert from './alerts';
@@ -91,6 +91,15 @@ export const updateItemAction = (payload) => async (dispatch) => {
 	}
 };
 
+// UPLOAD IMAGE
+export const uploadImageAction =(payload) => async dispatch =>{
+	try {
+		const result = await uploadImgApi(payload)
+		dispatch({type: UPDATE_ITEM_SUCCESS, payload: result})
+	} catch (error) {
+		dispatch({ type: UPDATE_ITEM_FAIL, paylod: error });
+	}
+}
 
 // REMOVE ITEM
 export const removeItemAction = ({ id, deleteAll }) => async (dispatch) => {
