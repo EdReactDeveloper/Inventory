@@ -1,7 +1,6 @@
 import React from 'react';
 import style from '../info.module.scss';
 import Loader from '../../../misc/Loader/Circle';
-
 import Edit from '../../../../containers/Form/Page';
 import View from './View';
 import {FORM_TYPE} from '../../../../configs'; 

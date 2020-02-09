@@ -14,7 +14,6 @@ const Profile = (props) => {
     checks: { isProfilePage },
   } = props
 
-   
   return (
     <div className={style.profile__wrapper}>
 
@@ -27,7 +26,7 @@ const Profile = (props) => {
         }
       </div>
       <div className={style.info}>
-        {isProfilePage ? <ProfileInfo {...props} /> : page ? <ItemInfo {...props} /> : <div>loading...</div>}
+        {isProfilePage ? <ProfileInfo {...props} /> : page ? <ItemInfo {...props} /> : <Loader className={style.loader} />}
       </div>
     </div>
   );

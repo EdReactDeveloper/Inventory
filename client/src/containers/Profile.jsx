@@ -73,13 +73,13 @@ const ProfileContainer = (props) => {
       fetchingItem,
       pageLoading,
       inProgress,
+      profileLoading,
+      profileUpdating
     },
     methods: {
       removeItem,
       selectItemHandler,
       moveItemsHandler,
-      profileLoading,
-      profileUpdating
     },
     checks: {
       isProfilePage,
