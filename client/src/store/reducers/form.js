@@ -1,9 +1,13 @@
-import { FORM, FORM_CLOSE } from '../actions/types';
+import { FORM, FORM_CLOSE, UPLOADING, UPLOADING_SUCCESS, UPLOADING_FAIL } from '../actions/types';
 
 const initialState = {
 	formType: null,
 	instance: null,
-	data: null
+	data: null,
+	filename: '',
+	filePath: '',
+	isUploading: false,
+	error: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,8 +15,22 @@ const reducer = (state = initialState, action) => {
 
 	switch (type) {
 		case FORM:
-			return { ...state, ...payload };
-		case FORM_CLOSE: return {initialState}
+			return { ...state, formType: payload.formType, instance: payload.instance, data: payload.data };
+		case FORM_CLOSE:
+			return { initialState };
+
+		case UPLOADING:
+			return { ...state, isUploading: true };
+
+		case UPLOADING_SUCCESS:
+			return { ...state, filename: payload.filename, filePath: payload.filePath, isUploading: false };
+
+		case UPLOADING_FAIL:
+			return {
+				isUploading: false,
+				error: payload
+			};
+
 		default:
 			return state;
 	}

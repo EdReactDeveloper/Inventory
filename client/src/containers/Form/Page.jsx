@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Form from '../../components/Form/Page';
 import { addItemAction, updateItemAction } from '../../store/actions/items';
-import { formHandler } from '../../store/actions/form';
+import { formHandler, fileUploadAction, removeFileAction } from '../../store/actions/form';
 import { FORM_TYPE, STATUSES } from '../../configs';
 import { isRequired } from '../../validators';
-import { fileUploadAction, removeFileAction } from '../../store/actions/upload';
-
 
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.items)
   const { fetchingItem, pageLoading } = items
-  const { filePath, isUploading } = useSelector(state => state.upload)
-  const { formType, data } = useSelector(state => state.form)
+  const { profile } = useSelector(state => state.profile)
+  const { formType, data, filePath, isUploading } = useSelector(state => state.form)
   const { location: { pathname } } = props
   const [uploadPersentage, setUploadPersentage] = useState()
+  const [file, setFile] = useState()
+  const [filename, setFilename] = useState()
   const [required, setRequired] = useState({
     name: null,
     tags: null,
@@ -42,8 +42,20 @@ const FormContainer = (props) => {
   useEffect(() => {
     if (formType === FORM_TYPE.edit) {
       setState({ ...state, ...data })
+      setFilename(data.img)
+    }
+    if (formType === FORM_TYPE.add) {
+      console.log('add')
     }
   }, [formType])
+
+  useEffect(() => {
+    if (filePath) {
+      setFilename(filePath)
+    }
+
+  }, [filePath])
+
 
   // REMOVE IMG 
   // useEffect(()=>{
@@ -51,7 +63,6 @@ const FormContainer = (props) => {
   //     console.log(state)
   //   }
   // }, [formHandler])
-  
 
   // update field
   const onChange = (e) => {
@@ -64,17 +75,33 @@ const FormContainer = (props) => {
     setState({ ...state, [e.target.name]: !state.shared })
   }
 
+  // SELECT FILE
+  const selectImageHandler = (e) => {
+    setFile(e.target.files[0])
+  }
+
+  // UPLOAD FILE
   const uploadFile = (e, file) => {
     e.preventDefault()
-    const {_id} = state
+    let id = state._id
+
+    // if item doesnt exist (adding): create temp file upload
+    if (!id) {
+      const temp = 'TEMP'
+      id = temp + profile._id
+      const extension = file.name.match(/\.(gif|jpg|jpeg|tiff|png)$/i)[0]
+      setFilename(id + extension)
+    }
+
     const formData = new FormData()
     formData.append('file', file)
-      dispatch(fileUploadAction({formData, setUploadPersentage, id: _id}))
+    dispatch(fileUploadAction({ formData, setUploadPersentage, id, formType }))
   }
+
 
   const removeFile = () => {
     const { img } = state
-    if(img){
+    if (img) {
       dispatch(removeFileAction(img))
     }
   }
@@ -86,7 +113,7 @@ const FormContainer = (props) => {
     setRequired({ ...required, ...fields })
 
     if (fields.valid) {
-    
+
       switch (formType) {
         case FORM_TYPE.add: dispatch(addItemAction({
           ...state, img: filePath,
@@ -119,13 +146,16 @@ const FormContainer = (props) => {
       statusArray: STATUSES,
       uploadPersentage,
       filePath,
+      file,
+      filename
     },
     methods: {
       onChange,
       submitFrom,
       changeCheckBox,
       uploadFile,
-      removeFile
+      removeFile,
+      selectImageHandler
     },
     loaders: {
       fetchingItem,

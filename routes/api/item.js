@@ -125,7 +125,12 @@ router.post('/upload/:id', async (req, res) => {
 	try {
 		const item = await Item.findById(id);
 		if (!item) {
-			res.status(404).json({ msg: 'page is not found' });
+			const profile = await Profile.findById(id)
+			if(profile){
+				res.json({msg: 'image is uploaded'})
+			}else{
+				res.status(404).json({ msg: 'page is not found' });
+			}
 		}
 		item.img = img;
 		await item.save();

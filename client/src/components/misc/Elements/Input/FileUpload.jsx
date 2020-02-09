@@ -1,37 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './Input.module.scss';
 import Button from '../Button'
 
 const ImageInput = (props) => {
 
   const {
-    data: { uploadPersentage, filePath, state:{img} },
+    data: { uploadPersentage, state: { img }, file, filename },
     methods: {
       uploadFile,
-      removeFile
-    }, 
+      removeFile,
+      selectImageHandler
+    },
     loaders: {
       isUploading
     }
   } = props
-
-  const [file, setFile] = useState()
-  const [filename, setFilename] = useState()
-
-  const onChangeHandler = (e) => {
-    setFile(e.target.files[0])
-    setFilename(e.target.files[0].name)
-  }
-
-
+  console.log(filename)
   return (
     <form onSubmit={(e) => uploadFile(e, file)} className={style.form__loader}>
-      {uploadPersentage > 0 ? <div>uploaded: {uploadPersentage} %</div> : null}
-      <label htmlFor="customFile">{filename}</label>
-      <input type="file" name="customFile" id="customFile" onChange={onChangeHandler} />
+      {uploadPersentage > 0 ? <div>uploaded: {uploadPersentage} %</div> : <label htmlFor="customFile">{filename}</label>}
+      <input type="file" name="customFile" id="customFile" onChange={selectImageHandler} />
       {file && <Button type="submit" className={style.form__uploadBtn} >upload</Button>}
-      <img className={style.img} src={!isUploading && filePath ? filePath : img} alt={filePath}/> 
-      {img && <button type="button" onClick={()=>removeFile()}>remove img</button>}
+      {!isUploading && filename && <img className={style.img} src={filename} alt='not found' />}
+      {img && <button type="button" onClick={() => removeFile()}>remove img</button>}
     </form>
   );
 };
