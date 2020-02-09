@@ -14,8 +14,8 @@ const instance = axios.create({
 	headers: { 'Content-Type': 'application/json' }
 });
 
-export const fileUploadApi = async (payload, setUploadPersentage) => {
-	const result = await fileInstance.post(`${baseURL}`, payload, {
+export const fileUploadApi = async ({formData, id, setUploadPersentage}) => {
+	const result = await fileInstance.post(`${baseURL}/${id}`, formData, {
 		onUploadProgress: (ProgressEvent) => {
 			setUploadPersentage(parseInt(Math.round(ProgressEvent.loaded * 100 / ProgressEvent.total)));
 			setTimeout(() => setUploadPersentage(0), 3000);

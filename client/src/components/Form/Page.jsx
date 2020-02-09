@@ -3,6 +3,7 @@ import { add } from './formData';
 import Button from '../misc/Elements/Button';
 import Field from '../misc/Elements/Input';
 import FileUpload from '../misc/Elements/Input/Image';
+import style from './form.module.scss';
 
 const PageForm = (props) => {
 
@@ -14,8 +15,8 @@ const PageForm = (props) => {
   } = props
 
   return (
-    <div>
-      <Button type="close">X</Button>
+    <div className={style.form__wrapper}>
+      <Button type="close"/>
       <FileUpload {...props} />
       <form onSubmit={submitFrom}>
         {add({ ...state, required }).map(item => {

@@ -13,7 +13,7 @@ const ItemInfo = (props) => {
     }, 
     checks:{formType}
   } = props
-   
+
   switch(true){
     case pageLoading: return <div className={style.loader__wrapper}><Loader className={style.loader} /></div>
     case formType === FORM_TYPE.edit: return <Edit {...props}/>

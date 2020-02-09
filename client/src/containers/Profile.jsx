@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import Profile from '../components/Profile';
 import { getProfileAction, componentUnmount, removeProfileAction } from '../store/actions/profile';
 import { getItemsAction, removeItemAction, selectItemAction, moveItemsAction, removePageAction } from '../store/actions/items';
+import {formHandler} from '../store/actions/form'; 
+
 import Loader from '../components/Profile/Loader';
 import setAlert from '../store/actions/alerts';
 import NotFound from '../components/404';
@@ -30,7 +32,9 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     dispatch(getItemsAction(id))
-
+    if(formType){
+      dispatch(formHandler())
+    }
   }, [id])
 
   useEffect(() => {

@@ -5,15 +5,15 @@ import { addItemAction, updateItemAction } from '../../store/actions/items';
 import { formHandler } from '../../store/actions/form';
 import { FORM_TYPE, STATUSES } from '../../configs';
 import { isRequired } from '../../validators';
-import { fileUploadAction, uploadImageAction, removeFileAction } from '../../store/actions/upload';
+import { fileUploadAction, removeFileAction } from '../../store/actions/upload';
 
 
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.items)
-  const { fetchingItem, pageLoading, page } = items
+  const { fetchingItem, pageLoading } = items
   const { filePath, isUploading } = useSelector(state => state.upload)
-  const { formType } = useSelector(state => state.form)
+  const { formType, data } = useSelector(state => state.form)
   const { location: { pathname } } = props
   const [uploadPersentage, setUploadPersentage] = useState()
   const [required, setRequired] = useState({
@@ -24,6 +24,7 @@ const FormContainer = (props) => {
 
   const [state, setState] = useState({
     name: '',
+    _id: null,
     description: '',
     tags: '',
     location: '',
@@ -40,9 +41,18 @@ const FormContainer = (props) => {
   // initialize form
   useEffect(() => {
     if (formType === FORM_TYPE.edit) {
-      setState({ ...state, ...page })
+      setState({ ...state, ...data })
     }
   }, [formType])
+
+  // REMOVE IMG 
+  // useEffect(()=>{
+  //   if(formType === FORM_TYPE.add){
+  //     console.log(state)
+  //   }
+  // }, [formHandler])
+  
+
   // update field
   const onChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
@@ -56,17 +66,17 @@ const FormContainer = (props) => {
 
   const uploadFile = (e, file) => {
     e.preventDefault()
+    const {_id} = state
     const formData = new FormData()
     formData.append('file', file)
-    dispatch(fileUploadAction({formData, time: setUploadPersentage, id:page._id}))
-    // if (img) {
-    //   dispatch(removeFileAction(img))
-    // }
+      dispatch(fileUploadAction({formData, setUploadPersentage, id: _id}))
   }
 
   const removeFile = () => {
     const { img } = state
-    dispatch(removeFileAction(img))
+    if(img){
+      dispatch(removeFileAction(img))
+    }
   }
 
   // send form

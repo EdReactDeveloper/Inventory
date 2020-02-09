@@ -36,9 +36,10 @@ const Button = ({ type,
     case 'close':
       return <button
         type="button"
+        className={style.close}
         onClick={() => formHandler()}
       >
-        {props.children}
+        <span/>
       </button>;
     // MOVE
     case 'move':
@@ -57,7 +58,7 @@ const Button = ({ type,
     case 'add':
       return <button
         type='button'
-        onClick={() => modalHandler({ formType: FORM_TYPE.add, instance, parentId })}
+        onClick={() => formHandler({ formType: FORM_TYPE.add, instance, parentId })}
         className={style.add}
       >
         <Icon d={Icons.add} className={style.icon} size='32' />

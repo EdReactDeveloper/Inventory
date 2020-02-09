@@ -2,16 +2,16 @@ import {UPLOADING, UPLOADING_SUCCESS, UPLOADING_FAIL, REMOVE_FILE_SUCCESS, REMOV
 import {fileUploadApi, removeFileApi} from '../api/upload'; 
 import {uploadImgApi} from '../api/items'; 
 
-export const fileUploadAction = ({formData, time, id}) => async dispatch =>{
+export const fileUploadAction = ({formData, setUploadPersentage, id}) => async dispatch =>{
   dispatch({type: UPLOADING})
   try {
-    const result = await fileUploadApi(formData, time)
+    const result = await fileUploadApi({formData, setUploadPersentage, id})
     const {filePath} = result
-    if(filePath){
+    if(filePath && id){
       const item = await uploadImgApi({img: filePath, id})
-      dispatch({type: UPLOADING_SUCCESS, payload: result})
       dispatch({type: UPDATE_ITEM_SUCCESS, payload: item})
     }
+    dispatch({type: UPLOADING_SUCCESS, payload: result})
     
   } catch (error) {
     if(error.response.status === 500){
