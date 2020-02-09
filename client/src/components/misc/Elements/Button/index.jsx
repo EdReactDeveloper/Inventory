@@ -80,7 +80,7 @@ const Button = ({ type,
     case 'submit':
       return <button
         type='submit'
-        className={style.submit}
+        className={`${style.submit} ${className}` }
       >{props.children}</button>
 
     // CLOSE MODAL

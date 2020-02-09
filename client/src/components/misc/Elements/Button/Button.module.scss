@@ -64,22 +64,6 @@
   }
 }
 
-.editAll {
-  background: #00a8ff;
-  border: 2px solid #0097e6;
-  padding: .5rem 3rem;
-  border-radius: 15rem;
-  cursor: pointer;
-  color: #fff;
-  outline: none;
-  transition: all .4s;
-  @media only screen and (max-width: 600px) {
-    opacity: 1;
-  }
-}
-
-
-
 .navigation{
   padding: .5rem 1rem; 
   border: 2px solid #00a8ff;
@@ -252,8 +236,9 @@
   background: #3498db;
   color: #fff;
   padding: 1rem;
-  width: 100%;
+  width: 30rem;
   cursor: pointer;
+  box-sizing: border-box;
   transition: all .2s ease-in-out; 
 
   &:hover{
