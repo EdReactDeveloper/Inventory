@@ -44,9 +44,6 @@ const FormContainer = (props) => {
       setState({ ...state, ...data })
       setFilename(data.img)
     }
-    if (formType === FORM_TYPE.add) {
-      console.log('add')
-    }
   }, [formType])
 
   useEffect(() => {
@@ -54,7 +51,7 @@ const FormContainer = (props) => {
       setFilename(filePath)
     }
 
-  }, [filePath])
+  }, [isUploading])
 
 
   // REMOVE IMG 

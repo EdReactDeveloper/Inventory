@@ -14,7 +14,7 @@ const View = (props) => {
           <ButtonsBlock
             {...props}
           />
-          {img && <img className={style.img} src={img} alt={img}/>}
+          {img && <img className={style.img} src={img} alt='not found'/>}
           <h3>{name}</h3>
           <ul>
             <li>{description}</li>

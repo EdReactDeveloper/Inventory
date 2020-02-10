@@ -10,28 +10,6 @@
   }
 }
 
-.form {
-  &__loader {
-    padding: 1rem 0;
-  }
-
-  &__uploadBtn {
-    background: #2ecc71;
-    border: 1px solid #27ae60;
-    color: #fff;
-    border-radius: 3px;
-    padding: .5rem 1rem;
-    margin: 1rem;
-    cursor: pointer;
-    outline: none;
-
-    &:hover{
-      background: #27ae60;
-    }
-  }
-}
-
-
 .danger {
   color: red;
 }
@@ -59,8 +37,4 @@
       background-color: #4285F4;
     }
   }
-}
-
-.img {
-  width: 30rem;
 }

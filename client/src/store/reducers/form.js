@@ -17,7 +17,7 @@ const reducer = (state = initialState, action) => {
 		case FORM:
 			return { ...state, formType: payload.formType, instance: payload.instance, data: payload.data };
 		case FORM_CLOSE:
-			return { initialState };
+			return { ...initialState };
 
 		case UPLOADING:
 			return { ...state, isUploading: true };

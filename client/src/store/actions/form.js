@@ -32,7 +32,7 @@ export const fileUploadAction = ({formData, setUploadPersentage, id, formType}) 
     // upload image to fs
     const result = await fileUploadApi({formData, setUploadPersentage, id})
     const {filePath} = result
-
+  
     // save image name in db
     if(filePath && id && formType ===FORM_TYPE.edit){
       const item = await uploadImgApi({img: filePath, id})

@@ -1,6 +1,6 @@
 import React from 'react';
-import style from './Input.module.scss';
-import Button from '../Button'
+import style from './fileuploader.module.scss';
+import Button from '../Elements/Button'
 
 const ImageInput = (props) => {
 
@@ -15,7 +15,6 @@ const ImageInput = (props) => {
       isUploading
     }
   } = props
-  console.log(filename)
   return (
     <form onSubmit={(e) => uploadFile(e, file)} className={style.form__loader}>
       {uploadPersentage > 0 ? <div>uploaded: {uploadPersentage} %</div> : <label htmlFor="customFile">{filename}</label>}
