@@ -13,9 +13,45 @@
     cursor: pointer;
     outline: none;
 
-    &:hover{
+    &:hover {
       background: #27ae60;
     }
+  }
+
+  &__deleteBtn {
+    padding: .5rem 1rem;
+    padding-left: 2rem;
+    border: none;
+    cursor: pointer;
+    background: #fff;
+    outline: none;
+    position: relative;
+    transition: all .2s;
+
+    &:hover{
+      text-decoration: underline;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      width: 14px;
+      height: 2px;
+      background: red;
+      position: absolute;
+      top: 12px;
+      left: 0;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+
+    }
+
   }
 }
 

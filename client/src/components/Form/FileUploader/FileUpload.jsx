@@ -5,7 +5,7 @@ import Button from '../../misc/Elements/Button'
 const ImageInput = (props) => {
 
   const {
-    data: { uploadPersentage, state: { img }, file, filePath },
+    data: { uploadPersentage, file, filePath },
     methods: {
       uploadFile,
       removeFile,
@@ -15,13 +15,14 @@ const ImageInput = (props) => {
       isUploading
     }
   } = props
+
   return (
     <form onSubmit={(e) => uploadFile(e, file)} className={style.form__loader}>
-      {uploadPersentage > 0 ? <div>uploaded: {uploadPersentage} %</div> : <label htmlFor="customFile">{filePath}</label>}
+      {uploadPersentage > 0 ? <div>uploaded: {uploadPersentage} %</div> : null}
       <input type="file" name="customFile" id="customFile" onChange={selectImageHandler} />
       {file && <Button type="submit" className={style.form__uploadBtn} >upload</Button>}
       {!isUploading && filePath && <img className={style.img} src={filePath} alt='not found' />}
-      {img && <button type="button" onClick={() => removeFile()}>remove img</button>}
+      {filePath && <button type="button" className={style.form__deleteBtn} onClick={() => removeFile()}>remove img</button>}
     </form>
   );
 };
