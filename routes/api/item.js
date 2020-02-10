@@ -178,8 +178,9 @@ router.post('/move', async (req, res) => {
 	}
 });
 
+// find all items to be deleted
 const getChildren = async (item, array) => {
-	array.push(item._id);
+	array.push({ id: item._id, img: item.img });
 	const id = item._id;
 	const children = await Item.find({ parentId: id });
 	if (children.length === 0) {
@@ -188,6 +189,18 @@ const getChildren = async (item, array) => {
 
 	for (let i = 0; i < children.length; i++) {
 		await getChildren(children[i], array);
+	}
+};
+
+// delete all imgs
+const removeAllImgs = (array) => {
+	for (let i = 0; i < array.length; i++) {
+		const fullPath = `${__dirname}/../../client/public/${array[i]}`;
+		fs.unlink(fullPath, (err) => {
+			if (err) {
+				console.error(err);
+			}
+		});
 	}
 };
 
@@ -214,7 +227,10 @@ router.delete('/all/:id', async (req, res) => {
 		if (item) {
 			await getChildren(item, array);
 		}
-		await Item.deleteMany({ _id: { $in: array } });
+		const items = array.map((x) => x.id);
+		const imgs = array.map((x) => x.img);
+		await Item.deleteMany({ _id: { $in: items } });
+		removeAllImgs(imgs);
 		res.json({ id: req.params.id, children: [] });
 	} catch (error) {
 		res.status(400).json({ error });
