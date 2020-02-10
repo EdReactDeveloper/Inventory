@@ -133,6 +133,7 @@ const reducer = (state = initialState, action) => {
 				error: payload,
 				itemsLoading: false,
 				pageLoading: false,
+				fetchingItem: false,
 				movedItemsFetching: false
 			};
 		}

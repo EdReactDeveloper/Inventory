@@ -4,6 +4,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const Item = require('../../models/Item');
 const Profile = require('../../models/Profile');
+const fs = require('fs');
 
 const getBread = async (page, path) => {
 	if (!page) {
@@ -112,23 +113,43 @@ router.post(
 
 		try {
 			await item.save();
-			res.json(item);
+			// renaming the temp file with the new item id
+			const extension = img.match(/\.(gif|jpg|jpeg|tiff|png)$/i)[0];
+			const filename = `/uploads/${item._id + extension}`;
+			if (img) {
+				fs.rename(
+					`${__dirname}/../../client/public/${img}`,
+					`${__dirname}/../../client/public/${filename}`,
+					async (err) => {
+						try {
+							item.img = filename;
+							await item.save();
+							res.json(item);
+						} catch (error) {
+							console.log('error', error);
+						}
+					}
+				);
+			} else {
+				res.json(item);
+			}
 		} catch (error) {
 			res.status(400).json({ error });
 		}
 	}
 );
 
+// upload img for an existing item or temp img before item is added
 router.post('/upload/:id', async (req, res) => {
 	const { img } = req.body;
 	const { id } = req.params;
 	try {
 		const item = await Item.findById(id);
 		if (!item) {
-			const profile = await Profile.findById(id)
-			if(profile){
-				res.json({msg: 'image is uploaded'})
-			}else{
+			const profile = await Profile.findById(id);
+			if (profile) {
+				res.json({ msg: 'image is uploaded' });
+			} else {
 				res.status(404).json({ msg: 'page is not found' });
 			}
 		}
