@@ -25,9 +25,9 @@ const Item = (props) => {
   const checked = selectedItems.some(item => item.id === _id)
 
   const dropMenu = <Menu className={style.item__menu}>
-    <li><Button type='delete' payload={{ id: _id, instance: FORM_INSTANCE.item, parentId, name }}>remove</Button></li>
     <li><Button type='check' checked={checked} onClick={() => selectItemHandler(selectedItem)} >
       {checked ? 'unselect item' : 'select item'}</Button></li>
+    <li><Button type='delete' payload={{ id: _id, instance: FORM_INSTANCE.item, parentId, name }}>remove</Button></li>
   </Menu>
 
   return (

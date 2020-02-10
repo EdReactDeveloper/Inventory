@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './fileuploader.module.scss';
-import Button from '../Elements/Button'
+import Button from '../../misc/Elements/Button'
 
 const ImageInput = (props) => {
 

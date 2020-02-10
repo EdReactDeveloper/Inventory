@@ -2,7 +2,7 @@ import React from 'react';
 import { add } from './formData';
 import Button from '../misc/Elements/Button';
 import Field from '../misc/Elements/Input';
-import FileUpload from '../misc/FileUploader/FileUpload';
+import FileUpload from './FileUploader/FileUpload';
 import style from './form.module.scss';
 
 const PageForm = (props) => {
