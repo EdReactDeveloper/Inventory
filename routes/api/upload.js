@@ -1,38 +1,54 @@
-const express = require('express')
-const fs = require('fs')
+const express = require('express');
+const fs = require('fs');
 
-const router = express.Router()
- 
-//  
-router.post('/:id', (req, res)=>{
-  if(req.files === null){
-    res.status(400).json({msg: 'no file was uploaded'})
-  }
+const router = express.Router();
+const Item = require('../../models/Item');
 
-  const file = req.files.file
-  const {id} = req.params
-  const extension = file.name.match(/\.(gif|jpg|jpeg|tiff|png)$/i)[0]
-  const filename = id+extension
-  file.mv(`${__dirname}/../../client/public/uploads/${filename}`, err =>{
-    if(err){
-      console.error(err)
-      res.status(500).send(err)
-    }
-    res.json({filename, filePath: `/uploads/${filename}`})
-  })
+const removeImg = (img) => {
+	if (img) {
+		const fullPath = `${__dirname}/../../client/public/${img}`;
+		return fs.unlink(fullPath, (err) => {
+			if (err) {
+				console.error(err);
+			}
+			return img;
+		});
+	}
+	return null;
+};
 
-})
+//  UPLOAD IMG
+router.post('/:id', (req, res) => {
+	if (req.files === null) {
+		res.status(400).json({ msg: 'no file was uploaded' });
+	}
 
-router.post('/delete', (req, res)=>{
-  const {path} = req.body
-  const fullPath = `${__dirname}/../../client/public/${path}`
-    fs.unlink(fullPath, err =>{
-      if(err){
-        console.error(err)
-      }
-      res.json(path)
-    })
- 
-})
+	const file = req.files.file;
+	const { id } = req.params;
+	const extension = file.name.match(/\.(gif|jpg|jpeg|tiff|png)$/i)[0];
+	const filename = id + extension;
+	file.mv(`${__dirname}/../../client/public/uploads/${filename}`, (err) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send(err);
+		}
+		res.json({ filename, filePath: `/uploads/${filename}` });
+	});
+});
 
-module.exports = router; 
+// REMOVE IMG
+router.post('/delete/:id', async (req, res) => {
+	const { img } = req.body;
+	const { id } = req.params;
+	try {
+		const item = await Item.findById(id);
+		item.img = '';
+		removeImg(img);
+		await item.save();
+		res.json(item);
+	} catch (error) {
+		res.status(400).json();
+	}
+});
+
+module.exports = router;

@@ -15,7 +15,6 @@ const FormContainer = (props) => {
   const { location: { pathname } } = props
   const [uploadPersentage, setUploadPersentage] = useState()
   const [file, setFile] = useState()
-  const [filename, setFilename] = useState()
   const [required, setRequired] = useState({
     name: null,
     tags: null,
@@ -42,24 +41,10 @@ const FormContainer = (props) => {
   useEffect(() => {
     if (formType === FORM_TYPE.edit) {
       setState({ ...state, ...data })
-      setFilename(data.img)
+      // setFilename(data.img)
     }
   }, [formType])
 
-  useEffect(() => {
-    if (filePath) {
-      setFilename(filePath)
-    }
-
-  }, [isUploading])
-
-
-  // REMOVE IMG 
-  // useEffect(()=>{
-  //   if(formType === FORM_TYPE.add){
-  //     console.log(state)
-  //   }
-  // }, [formHandler])
 
   // update field
   const onChange = (e) => {
@@ -86,8 +71,6 @@ const FormContainer = (props) => {
     if (!id) {
       const temp = 'TEMP'
       id = temp + profile._id
-      const extension = file.name.match(/\.(gif|jpg|jpeg|tiff|png)$/i)[0]
-      setFilename(id + extension)
     }
 
     const formData = new FormData()
@@ -97,9 +80,9 @@ const FormContainer = (props) => {
 
 
   const removeFile = () => {
-    const { img } = state
+    const { img, _id } = state
     if (img) {
-      dispatch(removeFileAction(img))
+      dispatch(removeFileAction({img, id: _id }))
     }
   }
 
@@ -144,7 +127,6 @@ const FormContainer = (props) => {
       uploadPersentage,
       filePath,
       file,
-      filename
     },
     methods: {
       onChange,

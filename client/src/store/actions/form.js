@@ -12,6 +12,7 @@ import {fileUploadApi, removeFileApi} from '../api/upload';
 import {uploadImgApi} from '../api/items'; 
 import {FORM_TYPE} from '../../configs'; 
 
+// OPEN / CLOSE FORM
 export const formHandler = (payload) => dispatch =>{
   if(payload){
     dispatch({type: FORM_CLOSE})
@@ -25,6 +26,7 @@ export const formHandler = (payload) => dispatch =>{
 }
 
 
+// UPLOAD IMAGE
 export const fileUploadAction = ({formData, setUploadPersentage, id, formType}) => async dispatch =>{
   dispatch({type: UPLOADING})
   try {
@@ -51,11 +53,13 @@ export const fileUploadAction = ({formData, setUploadPersentage, id, formType}) 
   }
 } 
 
-export const removeFileAction = (file) => async dispatch =>{
+// REMOVE IMAGE
+export const removeFileAction = (payload) => async dispatch =>{
   dispatch({type: UPLOADING})
   try {
-    const result = await removeFileApi(file)
-    dispatch({type: REMOVE_FILE_SUCCESS, payload: result})
+    const item = await removeFileApi(payload)
+    dispatch({type: REMOVE_FILE_SUCCESS})
+    dispatch({type: UPDATE_ITEM_SUCCESS, payload: item})
   } catch (error) {
     if(error.response.status === 500){
       console.log('there was a problem with the server')

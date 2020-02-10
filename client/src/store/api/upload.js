@@ -25,7 +25,6 @@ export const fileUploadApi = async ({formData, id, setUploadPersentage}) => {
 };
 
 export const removeFileApi = async (payload) => {
-	const path = {path: payload}
-	const result = await instance.post(`${baseURL}/delete`, body(path))
+	const result = await instance.post(`${baseURL}/delete/${payload.id}`, body(payload))
 	return result.data
 }

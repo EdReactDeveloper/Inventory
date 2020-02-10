@@ -1,4 +1,4 @@
-import { FORM, FORM_CLOSE, UPLOADING, UPLOADING_SUCCESS, UPLOADING_FAIL } from '../actions/types';
+import { FORM, FORM_CLOSE, UPLOADING, UPLOADING_SUCCESS, UPLOADING_FAIL, REMOVE_FILE_SUCCESS } from '../actions/types';
 
 const initialState = {
 	formType: null,
@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
 
 	switch (type) {
 		case FORM:
-			return { ...state, formType: payload.formType, instance: payload.instance, data: payload.data };
+			return { ...state, formType: payload.formType, instance: payload.instance, data: payload.data, filePath: payload.data.img };
 		case FORM_CLOSE:
 			return { ...initialState };
 
@@ -24,6 +24,10 @@ const reducer = (state = initialState, action) => {
 
 		case UPLOADING_SUCCESS:
 			return { ...state, filename: payload.filename, filePath: payload.filePath, isUploading: false };
+
+		case REMOVE_FILE_SUCCESS: {
+			return {...state, filename: '', filePath: '', isUploading: false}
+		}	
 
 		case UPLOADING_FAIL:
 			return {
