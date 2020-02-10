@@ -18,10 +18,10 @@ import {
 	UNSELECT_ITEMS
 } from './types';
 import { updateItemApi, addItemApi, removeItemApi, getItemsApi, moveSelectedItemsApi, uploadImgApi } from '../api/items';
+import {removeFileAction} from './form'; 
 import inProgressAction from './inprogress';
 import setNotification from './notification';
 import setAlert from './alerts';
-
 
 // SELECT
 export const selectItemAction = (payload) => (dispatch) => {
@@ -107,6 +107,7 @@ export const removeItemAction = ({ id, deleteAll }) => async (dispatch) => {
 	dispatch(inProgressAction(true, id));
 	try {
 		const result = await removeItemApi(payload);
+		
 		dispatch(inProgressAction(false, id));
 		dispatch(setNotification('item removed!'));
 		dispatch({ type: REMOVE_ITEM_SUCCESS, payload: result });
