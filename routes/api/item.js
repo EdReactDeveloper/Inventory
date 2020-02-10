@@ -114,9 +114,9 @@ router.post(
 		try {
 			await item.save();
 			// renaming the temp file with the new item id
-			const extension = img.match(/\.(gif|jpg|jpeg|tiff|png)$/i)[0];
-			const filename = `/uploads/${item._id + extension}`;
 			if (img) {
+				const extension = img.match(/\.(gif|jpg|jpeg|tiff|png)$/i)[0];
+				const filename = `/uploads/${item._id + extension}`;
 				fs.rename(
 					`${__dirname}/../../client/public/${img}`,
 					`${__dirname}/../../client/public/${filename}`,

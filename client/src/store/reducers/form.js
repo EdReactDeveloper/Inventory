@@ -15,7 +15,13 @@ const reducer = (state = initialState, action) => {
 
 	switch (type) {
 		case FORM:
-			return { ...state, formType: payload.formType, instance: payload.instance, data: payload.data, filePath: payload.data.img };
+			return {
+				...state,
+				formType: payload.formType,
+				instance: payload.instance,
+				data: payload.page,
+				filePath: payload.page && payload.page.img
+			};
 		case FORM_CLOSE:
 			return { ...initialState };
 
@@ -26,8 +32,8 @@ const reducer = (state = initialState, action) => {
 			return { ...state, filename: payload.filename, filePath: payload.filePath, isUploading: false };
 
 		case REMOVE_FILE_SUCCESS: {
-			return {...state, filename: '', filePath: '', isUploading: false}
-		}	
+			return { ...state, filename: '', filePath: '', isUploading: false };
+		}
 
 		case UPLOADING_FAIL:
 			return {

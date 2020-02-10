@@ -13,7 +13,7 @@ const Buttons = (props) => {
     <div>
       <Menu>
         <li>
-          <Button type="edit" data={page} payload={{ instance }}>edit this item</Button>
+          <Button type="edit" page={page} payload={{ instance }}>edit this item</Button>
         </li>
         <li>
           <Button type="delete"

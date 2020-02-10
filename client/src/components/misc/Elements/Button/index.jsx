@@ -9,14 +9,13 @@ import { FORM_TYPE } from '../../../../configs';
 
 const Button = ({ type,
   payload = '',
-  modalHandler,
-  formHandler,
-  selectedItems,
-  onClick,
+  modalHandler, // opens modal window
+  formHandler, // opens edit/add form
+  selectedItems, // items selected to be moved
+  onClick, 
   onChange,
-  data,
+  page,
   className,
-  checked,
   ...props }) => {
 
   const { parentId, instance, id, name } = payload
@@ -27,7 +26,7 @@ const Button = ({ type,
       return <button
         type="button"
         className={style.edit}
-        onClick={() => formHandler({ formType: FORM_TYPE.edit, instance, data })}
+        onClick={() => formHandler({ formType: FORM_TYPE.edit, instance, page })}
       >
         <Icon d={Icons.edit} className={style.icon} size='32' />
         {props.children}
