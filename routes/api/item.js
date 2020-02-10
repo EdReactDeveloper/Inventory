@@ -204,16 +204,28 @@ const removeAllImgs = (array) => {
 	}
 };
 
+const removeOneImg = (img)=>{
+	if(img){
+		const fullPath = `${__dirname}/../../client/public/${img}`;
+		fs.unlink(fullPath, (err) => {
+			if (err) {
+				console.error(err);
+			}
+		});
+	}
+}
+
 router.delete('/:id', async (req, res) => {
 	try {
 		const item = await Item.findById(req.params.id);
-
+		const {img} = item
 		const children = await Item.find({ parentId: item._id });
 		await Item.updateMany({ parentId: item._id }, { $set: { parentId: item.parentId } });
 		for (let i = 0; i < children.length; i++) {
 			children[i].parentId = item._id;
 		}
 		await Item.findByIdAndRemove(item._id);
+		removeOneImg(img)
 		res.json({ id: req.params.id, children });
 	} catch (error) {
 		res.status(400).json({ error });
