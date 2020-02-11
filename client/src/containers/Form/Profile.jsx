@@ -38,23 +38,21 @@ const FormContainer = (props) => {
     setState({ ...state, [e.target.name]: !state.hidden })
   }
 
-  // send form
-  const submitFrom = (e) => {
+  // sumbit form
+  const submitFormHandler = (e) => {
     e.preventDefault()
+    // 1.field validation check
     const fields = isRequired(state, required)
     setRequired({ ...required, ...fields })
+
+    // 2.submit form
     if (fields.valid) {
-      const { profileUpdating } = profile
       switch (formType) {
         case FORM_TYPE.add: dispatch(addProfileAction({ state, history })); break;
         case FORM_TYPE.edit: dispatch(updateProfileAction(state)); break;
         default: dispatch(formHandler()); break;
       }
-      setTimeout(() => {
-        if (!profileUpdating) {
-          dispatch(formHandler())
-        }
-      }, 100)
+      dispatch(formHandler())
     }
   }
 
@@ -65,7 +63,7 @@ const FormContainer = (props) => {
     methods: {
       changeCheckBox,
       onChange,
-      submitFrom
+      submitFormHandler
     },
     loaders: {
       profileLoading
@@ -74,7 +72,6 @@ const FormContainer = (props) => {
       required,
       formType
     }
-
   }
 
   // render form

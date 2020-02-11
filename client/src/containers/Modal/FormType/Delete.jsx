@@ -13,10 +13,12 @@ const FormContainer = (props) => {
   const { id, parentId, instance, name } = useSelector(state => state.modal.form)
   const [deleteAll, setOption] = useState(true)
 
+  // CHECKBOX HANDLER
   const onChangeHandler = () => {
     setOption(!deleteAll)
   }
 
+  // SUBMIT DELETE
   const removeItem = (e) => {
     e.preventDefault()
     switch (instance) {

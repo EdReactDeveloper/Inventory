@@ -10,15 +10,15 @@ const ProfileForm = (props) => {
       state
     },
     methods: {
-      submitFrom
+      submitFormHandler
     },
     loaders: {
       profileLoading
     }
   } = props
-
+  console.log(props)
   return (
-    <form onSubmit={submitFrom}>
+    <form onSubmit={(e)=>submitFormHandler(e)}>
       {renderProfile(state).map(item => {
         return <Field {...props} item={item} key={item.name}/>
       })

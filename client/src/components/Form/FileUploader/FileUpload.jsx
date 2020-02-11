@@ -8,7 +8,7 @@ const ImageInput = (props) => {
     data: { uploadPersentage, file, filePath },
     methods: {
       uploadFile,
-      removeFile,
+      removeFileHandler,
       selectImageHandler
     },
     loaders: {
@@ -22,7 +22,7 @@ const ImageInput = (props) => {
       <input type="file" name="customFile" id="customFile" onChange={selectImageHandler} />
       {file && <Button type="submit" className={style.form__uploadBtn} >upload</Button>}
       {!isUploading && filePath && <img className={style.img} src={filePath} alt='not found' />}
-      {filePath && <button type="button" className={style.form__deleteBtn} onClick={() => removeFile()}>remove img</button>}
+      {filePath && <button type="button" className={style.form__deleteBtn} onClick={() => removeFileHandler()}>remove img</button>}
     </form>
   );
 };

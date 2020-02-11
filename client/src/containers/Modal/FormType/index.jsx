@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import DeleteForm from './Delete';
 import { FORM_TYPE } from '../../../configs';
 
+// MODAL FORM TYPE WRAPPER
 const FormContainer = (props) => {
 
   const { formType } = useSelector(state => state.modal.form)

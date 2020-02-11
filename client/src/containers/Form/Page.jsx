@@ -9,7 +9,7 @@ import { isRequired } from '../../validators';
 const FormContainer = (props) => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.items)
-  const { fetchingItem, pageLoading } = items
+  const { fetchingItem } = items
   const { profile } = useSelector(state => state.profile)
   const { formType, data, filePath, isUploading } = useSelector(state => state.form)
   const { location: { pathname } } = props
@@ -37,49 +37,48 @@ const FormContainer = (props) => {
     img: ''
   })
 
-  // initialize form
+  // INITIALIZE
   useEffect(() => {
     if (formType === FORM_TYPE.edit) {
       setState({ ...state, ...data })
-      // setFilename(data.img)
     }
   }, [formType])
 
 
-  // update field
+  // FIELD HANDLER
   const onChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
     setRequired({ ...required, [e.target.name]: null })
   }
 
-  // update checkbox
+  // CHECKBOX
   const changeCheckBox = (e) => {
     setState({ ...state, [e.target.name]: !state.shared })
   }
 
-  // SELECT FILE
+  // SELECT IMG
   const selectImageHandler = (e) => {
     setFile(e.target.files[0])
   }
 
-  // UPLOAD FILE
+  // UPLOAD IMG
   const uploadFile = (e, file) => {
     e.preventDefault()
     let id = state._id
-
-    // if item doesnt exist (adding): create temp file upload
+    // if item doesnt exist (add form): upload temp img file
     if (!id) {
       const temp = 'TEMP'
       id = temp + profile._id
     }
-
+    // convert file 
     const formData = new FormData()
     formData.append('file', file)
+
     dispatch(fileUploadAction({ formData, setUploadPersentage, id, formType }))
   }
 
-
-  const removeFile = () => {
+  // REMOVE IMG
+  const removeFileHandler = () => {
     const { img, _id } = state
     if (img) {
       dispatch(removeFileAction({img, id: _id }))
@@ -88,40 +87,28 @@ const FormContainer = (props) => {
     }
   }
 
-  // send form
-  const submitFrom = (e) => {
+  // SUBMIT
+  const submitFromHandler = (e) => {
     e.preventDefault()
+    // 1.field validation check
     const fields = isRequired(state, required)
     setRequired({ ...required, ...fields })
 
+    // 2.submit form
     if (fields.valid) {
-
       switch (formType) {
         case FORM_TYPE.add: dispatch(addItemAction({
           ...state, img: filePath,
           parentId: pathname.split('/').slice(-1).join('')
-        }));
-          setTimeout(() => {
-            if (!fetchingItem) {
-              dispatch(formHandler())
-            }
-          }, 100);
-          break;
-        case FORM_TYPE.edit: dispatch(updateItemAction({ ...state, img: filePath }));
-          setTimeout(() => {
-            if (!pageLoading) {
-              dispatch(formHandler())
-            }
-          }, 100);
-          break;
+        }));break;
+        case FORM_TYPE.edit: dispatch(updateItemAction({ ...state, img: filePath }));break;
         default: dispatch(formHandler()); break;
       }
+      dispatch(formHandler())
     }
-
   }
 
-  // render form
-
+  // PASS FORM PROPS
   const payload = {
     data: {
       state,
@@ -132,10 +119,10 @@ const FormContainer = (props) => {
     },
     methods: {
       onChange,
-      submitFrom,
+      submitFromHandler,
       changeCheckBox,
       uploadFile,
-      removeFile,
+      removeFileHandler,
       selectImageHandler
     },
     loaders: {

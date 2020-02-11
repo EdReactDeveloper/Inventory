@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Profile from '../components/Profile';
-import { getProfileAction, componentUnmount, removeProfileAction } from '../store/actions/profile';
-import { getItemsAction, removeItemAction, selectItemAction, moveItemsAction, removePageAction } from '../store/actions/items';
+import { getProfileAction, componentUnmount} from '../store/actions/profile';
+import { getItemsAction, moveItemsAction} from '../store/actions/items';
 import {formHandler} from '../store/actions/form'; 
 
 import Loader from '../components/Profile/Loader';
-import setAlert from '../store/actions/alerts';
 import NotFound from '../components/404';
 
 const ProfileContainer = (props) => {
@@ -21,7 +20,6 @@ const ProfileContainer = (props) => {
   const { formType } = useSelector(state => state.form);
  
   // props
-  const { history } = props
   const { match: { params: { id } } } = props
   const isProfilePage = id === profile._id
   const isItemPage = id === page._id
@@ -43,24 +41,7 @@ const ProfileContainer = (props) => {
     };
   }, [])
 
-  // methods
-  const removeItem = (payload) => {
-    const { type, id, parentId } = payload
-    switch (type) {
-      case 'page': dispatch(removePageAction({ id, parentId, history })); break;
-      case 'item': dispatch(removeItemAction({ id })); break;
-      case 'profile': dispatch(removeProfileAction({ id, history })); break;
-      default: dispatch(setAlert('nothing to remove', 'danger'))
-    }
-
-  }
-
-  const selectItemHandler = (payload) => {
-    dispatch(selectItemAction(payload))
-  }
-
   const moveItemsHandler = (payload) => {
-    // payload = 
     dispatch(moveItemsAction(payload))
   }
 
@@ -81,8 +62,6 @@ const ProfileContainer = (props) => {
       profileUpdating
     },
     methods: {
-      removeItem,
-      selectItemHandler,
       moveItemsHandler,
     },
     checks: {

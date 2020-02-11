@@ -8,7 +8,7 @@ const List = (props) => {
     data: { list, profile },
     loaders: { fetchingItem } } = props
 
-  const renderItems = () => {
+  const renderList = () => {
     if (list) {
       return list.map(item => {
         return <Item key={item._id} item={item} {...props} />
@@ -21,7 +21,7 @@ const List = (props) => {
     <ul>
       {fetchingItem && <Loader />}
       {profile.profileLoading ? <div>loading data...</div> :
-        renderItems()
+        renderList()
       }
     </ul>
   );

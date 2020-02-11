@@ -8,6 +8,7 @@ const SearchPageContainer = (props) => {
   const dispatch = useDispatch()
   const {data, loading, decodedQuery} = useSelector(state => state.search)
   const {location:{search}} = props
+  
   useEffect(()=>{
     if(search.length > 0){
       const query = search.replace('?query=', '')

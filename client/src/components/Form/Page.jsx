@@ -9,7 +9,7 @@ const PageForm = (props) => {
 
   const {
     data: { state },
-    methods: { submitFrom },
+    methods: { submitFromHandler },
     loaders: { fetchingItem },
     checks: { required }
   } = props
@@ -18,7 +18,7 @@ const PageForm = (props) => {
     <div className={style.form__wrapper}>
       <Button type="close"/>
       <FileUpload {...props} />
-      <form onSubmit={submitFrom}>
+      <form onSubmit={submitFromHandler}>
         {add({ ...state, required }).map(item => {
           return <Field {...props} item={item} key={item.name} />
         }
