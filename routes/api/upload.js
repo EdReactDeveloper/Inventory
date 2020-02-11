@@ -40,12 +40,16 @@ router.post('/:id', (req, res) => {
 router.post('/delete/:id', async (req, res) => {
 	const { img } = req.body;
 	const { id } = req.params;
-	try {
-		const item = await Item.findById(id);
-		item.img = '';
-		removeImg(img);
-		await item.save();
-		res.json(item);
+	removeImg(img);
+	try { 
+		const item = await Item.findById(id); // for edit form
+		if (item) {
+			item.img = '';
+			await item.save();
+			res.json(item);
+		} else { // for add form
+			res.json(null)
+		}		
 	} catch (error) {
 		res.status(400).json();
 	}

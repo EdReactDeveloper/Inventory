@@ -83,6 +83,8 @@ const FormContainer = (props) => {
     const { img, _id } = state
     if (img) {
       dispatch(removeFileAction({img, id: _id }))
+    }else{
+      dispatch(removeFileAction({img: filePath, id: profile._id }))
     }
   }
 

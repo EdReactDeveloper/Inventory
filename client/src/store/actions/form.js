@@ -59,7 +59,9 @@ export const removeFileAction = (payload) => async dispatch =>{
   try {
     const item = await removeFileApi(payload)
     dispatch({type: REMOVE_FILE_SUCCESS})
-    dispatch({type: UPDATE_ITEM_SUCCESS, payload: item})
+    if(item){ // for edit page form
+      dispatch({type: UPDATE_ITEM_SUCCESS, payload: item})
+    }
   } catch (error) {
     if(error.response.status === 500){
       console.log('there was a problem with the server')
