@@ -79,11 +79,11 @@ const FormContainer = (props) => {
 
   // REMOVE IMG
   const removeFileHandler = () => {
-    const { img, _id } = state
-    if (img) {
-      dispatch(removeFileAction({img, id: _id }))
-    }else{
-      dispatch(removeFileAction({img: filePath, id: profile._id }))
+    const { _id } = state
+    switch (formType) {
+      case FORM_TYPE.edit: dispatch(removeFileAction({ img: filePath, id: _id })); break;
+      case FORM_TYPE.add: dispatch(removeFileAction({ img: filePath, id: profile._id })); break;
+      default: dispatch(removeFileAction({ img: filePath, id: profile._id })); break;
     }
   }
 
@@ -97,11 +97,8 @@ const FormContainer = (props) => {
     // 2.submit form
     if (fields.valid) {
       switch (formType) {
-        case FORM_TYPE.add: dispatch(addItemAction({
-          ...state, img: filePath,
-          parentId: pathname.split('/').slice(-1).join('')
-        }));break;
-        case FORM_TYPE.edit: dispatch(updateItemAction({ ...state, img: filePath }));break;
+        case FORM_TYPE.add: dispatch(addItemAction({ ...state, img: filePath, parentId: pathname.split('/').slice(-1).join('') })); break;
+        case FORM_TYPE.edit: dispatch(updateItemAction({ ...state, img: filePath })); break;
         default: dispatch(formHandler()); break;
       }
       dispatch(formHandler())

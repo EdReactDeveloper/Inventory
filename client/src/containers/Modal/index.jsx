@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux'; 
 import ModalWrapper from '../../components/Modal'
-import Form from './ModalForm'; 
+import Form from './FormType'; 
 import {modalHandler} from '../../store/actions/modal'; 
 
 class ModalContainer extends Component {

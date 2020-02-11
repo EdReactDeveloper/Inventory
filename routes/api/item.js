@@ -172,7 +172,7 @@ router.post('/move', async (req, res) => {
 });
 
 
-// DELETE ONE FILE
+// DELETE ONE DOC
 router.delete('/:id', async (req, res) => {
 	try {
 		const item = await Item.findById(req.params.id);

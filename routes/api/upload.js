@@ -9,7 +9,7 @@ const removeImg = (img) => {
 		const fullPath = `${__dirname}/../../client/public/${img}`;
 		return fs.unlink(fullPath, (err) => {
 			if (err) {
-				console.error(err);
+				console.error('error in removeImg ', err);
 			}
 			return img;
 		});
@@ -44,14 +44,13 @@ router.post('/:id', (req, res) => {
 router.post('/delete/:id', async (req, res) => {
 	const { img } = req.body;
 	const { id } = req.params;
-
-	// 1. remove img from fs
-	removeImg(img);
-
+	
 	try { 
-		// 2. remove img path from doc
 		const item = await Item.findById(id); // for edit form
 		if (item) {
+			// 1. remove img from fs
+			removeImg(img);
+			// 2. remove img path from doc
 			item.img = '';
 			await item.save();
 			res.json(item);
@@ -59,7 +58,8 @@ router.post('/delete/:id', async (req, res) => {
 			res.json(null)
 		}		
 	} catch (error) {
-		res.status(400).json();
+		console.log(error)
+		res.status(400).json(error);
 	}
 });
 
