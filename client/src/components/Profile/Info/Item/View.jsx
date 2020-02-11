@@ -1,27 +1,21 @@
 import React from 'react';
-import style from './info.module.scss';
-import Loader from '../../misc/Loader/Circle';
-import ButtonsBlock from '../Tools/PageTools';
-import { formatDate } from '../../misc/utilFuncs';
+import ButtonsBlock from '../../Tools/PageTools';
+import style from '../info.module.scss';
+import { formatDate } from '../../../misc/utilFuncs';
 
-const ItemInfo = (props) => {
-
+const View = (props) => {
   const {
-    data: { page },
-    loaders: {
-      pageLoading,
-    }
-  } = props
+    data: {page},
 
+  } = props
   const { name, description, location, status, tags, count, type, shared, updated, created, img } = page
+  
   return (
-    <div className={style.info__wrapper}>
-      {pageLoading ? <div className={style.loader__wrapper}><Loader className={style.loader} /></div> :
-        <div>
+    <div>
           <ButtonsBlock
             {...props}
           />
-          {img && <img className={style.img} src={img} alt={img}/>}
+          {img && <img className={style.img} src={img} alt='not found'/>}
           <h3>{name}</h3>
           <ul>
             <li>{description}</li>
@@ -35,10 +29,7 @@ const ItemInfo = (props) => {
             {created !== updated && <li><span>updated on: </span><span>{formatDate(updated)}</span></li>}
           </ul>
         </div>
-      }
-
-    </div>
   );
 };
 
-export default ItemInfo;
+export default View;

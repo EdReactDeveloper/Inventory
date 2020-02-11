@@ -20,21 +20,24 @@ const Item = (props) => {
       inProgress
     }
   } = props
-
+  const defaultImg = '/uploads/notfound.png'
   const selectedItem = { id: _id, name, parentId }
   const checked = selectedItems.some(item => item.id === _id)
 
   const dropMenu = <Menu className={style.item__menu}>
-    <li><Button type='delete' payload={{ id: _id, instance: FORM_INSTANCE.item, parentId, name }}>remove</Button></li>
     <li><Button type='check' checked={checked} onClick={() => selectItemHandler(selectedItem)} >
       {checked ? 'unselect item' : 'select item'}</Button></li>
+    <li><Button type='delete' payload={{ id: _id, instance: FORM_INSTANCE.item, parentId, name }}>remove</Button></li>
   </Menu>
 
   return (
     <li className={`${style.item_wrapper} ${checked ? style.item__selected : ''}`}>
       {inProgress.some(item => item === _id) ? <Loader className={style.loader__item} /> :
         <>
-          <img src={img} alt={img} className={style.item__img} />
+          {img ? 
+          <img src={img} alt='not found' className={style.item__img} />
+          : <img src={defaultImg} alt='not found' className={style.item__img} />
+        }
           {checked ?
             (<div className={style.item__info}>
               <h4>{name}</h4>

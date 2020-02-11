@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import Profile from '../components/Profile';
 import { getProfileAction, componentUnmount, removeProfileAction } from '../store/actions/profile';
 import { getItemsAction, removeItemAction, selectItemAction, moveItemsAction, removePageAction } from '../store/actions/items';
+import {formHandler} from '../store/actions/form'; 
+
 import Loader from '../components/Profile/Loader';
 import setAlert from '../store/actions/alerts';
 import NotFound from '../components/404';
@@ -16,7 +18,8 @@ const ProfileContainer = (props) => {
   const items = useSelector(state => state.items)
   const { list, page, bread, itemsLoading, fetchingItem, pageLoading, selectedItems } = items
   const { inProgress } = useSelector(state => state.inProgress)
-
+  const { formType } = useSelector(state => state.form);
+ 
   // props
   const { history } = props
   const { match: { params: { id } } } = props
@@ -29,7 +32,9 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     dispatch(getItemsAction(id))
-
+    if(formType){
+      dispatch(formHandler())
+    }
   }, [id])
 
   useEffect(() => {
@@ -72,17 +77,18 @@ const ProfileContainer = (props) => {
       fetchingItem,
       pageLoading,
       inProgress,
+      profileLoading,
+      profileUpdating
     },
     methods: {
       removeItem,
       selectItemHandler,
       moveItemsHandler,
-      profileLoading,
-      profileUpdating
     },
     checks: {
       isProfilePage,
-      isItemPage
+      isItemPage,
+      formType
     }
   }
 

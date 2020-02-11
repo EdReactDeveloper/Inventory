@@ -98,7 +98,7 @@ const reducer = (state = initialState, action) => {
 		case UPDATE_ITEM_SUCCESS: {
 			return {
 				...state,
-				page: payload,
+				page: {...payload},
 				pageLoading: false
 			};
 		}
@@ -133,6 +133,7 @@ const reducer = (state = initialState, action) => {
 				error: payload,
 				itemsLoading: false,
 				pageLoading: false,
+				fetchingItem: false,
 				movedItemsFetching: false
 			};
 		}

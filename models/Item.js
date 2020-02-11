@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const Item = new Schema({
 	userId: {
@@ -14,7 +15,6 @@ const Item = new Schema({
 	img: { type: String },
 	updated: { type: Date, required: true },
 	created: { type: Date, defualt: Date.now, required: true },
-	path: { type: String, required: true }, // /id/id/id - url to the object
 	category: { type: String }, // filter by category
 	status: { type: String, required: true }, // filter by status
 	type: { type: String }, // ???
@@ -22,11 +22,9 @@ const Item = new Schema({
 	count: { type: Number },
 	checked: { type: Boolean }, // ???
 	shared: { type: Boolean },
-	sharedWith: { type: Array },
+	sharedWith: { type: Array }
 });
 
-Item.methods = function(array){
-	
-}
+Item.methods = function(array) {};
 
 module.exports = mongoose.model('Item', Item);

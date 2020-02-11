@@ -1,6 +1,5 @@
 import { combineReducers} from 'redux';
 import { connectRouter } from 'connected-react-router';
-import {reduxForm} from 'redux-form'; 
 import auth from './auth';
 import modal from './modal';
 import dropdown from './dropdown';
@@ -10,7 +9,7 @@ import search from './search';
 import profile from './profile'; 
 import items from './items'; 
 import notification from './notification';
-import upload from './upload'; 
+import form from './form'; 
 
 const createRootReducer = history =>{
 	 return combineReducers({
@@ -24,8 +23,7 @@ const createRootReducer = history =>{
 		profile,
 		items,
 		notification,
-		upload,
-		form: reduxForm
+		form
 	});
 }
 
