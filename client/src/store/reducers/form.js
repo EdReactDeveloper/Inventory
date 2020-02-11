@@ -1,4 +1,4 @@
-import { FORM, FORM_CLOSE, UPLOADING, UPLOADING_SUCCESS, UPLOADING_FAIL, REMOVE_FILE_SUCCESS } from '../actions/types';
+import { FORM, FORM_CLOSE, UPLOADING, UPLOADING_SUCCESS, UPLOADING_FAIL, REMOVE_FILE_SUCCESS } from '../actions/types/form';
 
 const initialState = {
 	formType: null,

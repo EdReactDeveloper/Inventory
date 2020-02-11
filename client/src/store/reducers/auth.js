@@ -3,11 +3,12 @@ import {
 	LOGIN_FAIL,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
-	GET_USER_SUCCESS,
-	GET_USER_FAIL,
 	LOGOUT_SUCCESS,
 	LOGOUT_FAIL
-} from '../actions/types';
+} from '../actions/types/auth';
+
+import {GET_USER_SUCCESS,
+	GET_USER_FAIL} from '../actions/types/user';
 
 const initialState = {
 	user: null,

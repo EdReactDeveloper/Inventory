@@ -16,9 +16,9 @@ import {
 	MOVE_ITEMS_SUCCESS,
 	MOVE_ITEMS_FAIL,
 	UNSELECT_ITEMS
-} from './types';
+} from './types/items';
+
 import { updateItemApi, addItemApi, removeItemApi, getItemsApi, moveSelectedItemsApi, uploadImgApi } from '../api/items';
-import {removeFileAction} from './form'; 
 import inProgressAction from './inprogress';
 import setNotification from './notification';
 import setAlert from './alerts';

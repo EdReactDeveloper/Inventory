@@ -9,10 +9,12 @@ import {
 	UPDATE_PROFILE,
 	UPDATE_PROFILE_SUCCESS,
 	UPDATE_PROFILE_FAIL,
-	CLEAN_UP
-} from './types';
+} from './types/profile';
+import {CLEAN_UP} from './types/utils'; 
+
 import { getProfileApi, updateProfileApi, addProfileApi, removeProfileApi } from '../api/profile';
 
+// GET PROFILE
 export const getProfileAction = () => async (dispatch) => {
 	dispatch({ type: GET_PROFILE });
 	try {
@@ -23,6 +25,7 @@ export const getProfileAction = () => async (dispatch) => {
 	}
 };
 
+// CREATE PROFILE
 export const addProfileAction = ({state, history}) => async (dispatch) => {
 	dispatch({ type: ADD_PROFILE });
 	try {
@@ -34,6 +37,7 @@ export const addProfileAction = ({state, history}) => async (dispatch) => {
 	}
 };
 
+// UPDATE PROFILE
 export const updateProfileAction = (payload) => async (dispatch) => {
 	dispatch({ type: UPDATE_PROFILE });
 	try {
@@ -44,10 +48,12 @@ export const updateProfileAction = (payload) => async (dispatch) => {
 	}
 };
 
+// CLEAR UP PROFILE DATA ON UNMOUNT
 export const componentUnmount = () => (dispatch) => {
 	dispatch({ type: CLEAN_UP });
 };
 
+// REMOVE PROFILE
 export const removeProfileAction = ({id, history}) => async (dispatch) => {
 	dispatch({ type: ADD_PROFILE });
 	try {

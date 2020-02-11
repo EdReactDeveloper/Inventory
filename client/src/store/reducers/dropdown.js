@@ -1,4 +1,4 @@
-import { DROPDOWN } from '../actions/types';
+import { DROPDOWN } from '../actions/types/dropdown';
 
 const initialState = {
 	isOpen: false

@@ -1,4 +1,4 @@
-import { IN_PROGRESS } from '../actions/types';
+import { IN_PROGRESS } from '../actions/types/inprogress';
 
 const initialState = {
 	inProgress: []

@@ -1,4 +1,4 @@
-import { MODAL } from '../actions/types';
+import { MODAL } from '../actions/types/modal';
 
 const initialState = {
 	isOpen: false,

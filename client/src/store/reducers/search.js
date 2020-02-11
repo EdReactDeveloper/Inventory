@@ -1,4 +1,4 @@
-import { GET_QUERY_SUCCESS, GET_QUERY_FAIL, GET_QUERY_LOADING } from '../actions/types';
+import { GET_QUERY_SUCCESS, GET_QUERY_FAIL, GET_QUERY_LOADING } from '../actions/types/search';
 
 const initialState = {
 	data: [],

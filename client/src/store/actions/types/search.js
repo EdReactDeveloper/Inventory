@@ -1,0 +1,5 @@
+// SEARCH 
+export const GET_QUERY_SUCCESS = 'GET_QUERY_SUCCESS';
+export const GET_QUERY_LOADING = 'GET_QUERY_LOADING';
+export const GET_QUERY_FAIL = 'GET_QUERY_FAIL';
+

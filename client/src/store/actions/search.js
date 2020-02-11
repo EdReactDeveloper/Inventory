@@ -1,4 +1,4 @@
-import { GET_QUERY_SUCCESS, GET_QUERY_FAIL, GET_QUERY_LOADING } from './types';
+import { GET_QUERY_SUCCESS, GET_QUERY_FAIL, GET_QUERY_LOADING } from './types/search';
 import { getSearchResults } from '../api/search';
 
 export const getSearchAction = (query) => async (dispatch) => {

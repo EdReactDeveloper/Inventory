@@ -8,8 +8,8 @@ import {
 	UPDATE_PROFILE,
 	UPDATE_PROFILE_SUCCESS,
 	UPDATE_PROFILE_FAIL,
-	CLEAN_UP
-} from '../actions/types';
+} from '../actions/types/profile';
+import {CLEAN_UP} from '../actions/types/utils';
 
 const initialState = {
 	profile: {},

@@ -8,7 +8,6 @@ import {
 	UPDATE_ITEM_SUCCESS,
 	UPDATE_ITEM_FAIL,
 	UPDATE_ITEM,
-	CLEAN_UP,
 	REMOVE_ITEM,
 	REMOVE_ITEM_SUCCESS,
 	REMOVE_ITEM_FAIL,
@@ -17,7 +16,8 @@ import {
 	MOVE_ITEMS_SUCCESS,
 	MOVE_ITEMS_FAIL,
 	UNSELECT_ITEMS
-} from '../actions/types';
+} from '../actions/types/items';
+import {CLEAN_UP} from '../actions/types/utils';
 
 const initialState = {
 	list: [],

@@ -1,4 +1,4 @@
-import { GET_USER_SUCCESS, GET_USER_FAIL } from './types';
+import { GET_USER_SUCCESS, GET_USER_FAIL } from './types/user';
 import getUser from '../api/user'; 
 
 const getUserAction = () => async (dispatch) => {

@@ -1,5 +1,6 @@
-import { IN_PROGRESS } from './types';
+import { IN_PROGRESS } from './types/inprogress';
 
+// LOADER FOR LIST ITEMS
 const inProgressAction = (isFetching, id) => (dispatch) => {
 	dispatch({
 		type: IN_PROGRESS,

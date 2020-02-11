@@ -5,10 +5,11 @@ import {
 	REGISTER_FAIL,
 	LOGOUT_SUCCESS,
 	LOGOUT_FAIL
-} from './types';
+} from './types/auth';
 import auth from '../api/auth';
 import setAlert from './alerts'; 
 
+// LOGIN
 export const loginAction = ({email, password}) => async (dispatch) => {
 	try {
 		const result = await auth('login', { email, password });
@@ -22,6 +23,7 @@ export const loginAction = ({email, password}) => async (dispatch) => {
 	}
 };
 
+// REGISTER
 export const register = ({email, password, history}) => async (dispatch) => {
 	try {
 		const result = await auth('register', { email, password });
@@ -36,6 +38,7 @@ export const register = ({email, password, history}) => async (dispatch) => {
 	}
 };
 
+// LOGOUT
 export const logout = () => async (dispatch) => {
 	try {
 		await auth('logout');

@@ -1,4 +1,4 @@
-import { SET_NOTE, REMOVE_NOTE, MOVE_NOTE } from '../actions/types';
+import { SET_NOTE, REMOVE_NOTE, MOVE_NOTE } from '../actions/types/notification';
 
 const initialState = {
 	notes: [],

@@ -6,8 +6,9 @@ import {
   UPLOADING_FAIL, 
   REMOVE_FILE_SUCCESS, 
   REMOVE_FILE_FAIL, 
-  UPDATE_ITEM_SUCCESS
-} from './types'; 
+} from './types/form';
+import {UPDATE_ITEM_SUCCESS} from './types/items'; 
+ 
 import {fileUploadApi, removeFileApi} from '../api/upload'; 
 import {uploadImgApi} from '../api/items'; 
 import {FORM_TYPE} from '../../configs'; 
