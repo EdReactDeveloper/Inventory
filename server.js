@@ -53,7 +53,6 @@ app.use('/api/user', require('./routes/api/user'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/item', require('./routes/api/item'));
 app.use('/api/profile', require('./routes/api/profile'));
-app.use('/api/bread', require('./routes/api/bread'));
 app.use('/api/search', require('./routes/api/search'));
 app.use('/api/upload', require('./routes/api/upload')); 
 
