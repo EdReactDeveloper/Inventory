@@ -6,14 +6,17 @@ const body = (payload) => {
 	return JSON.stringify(payload);
 };
 
+// UPLOAD FILES 
 const fileInstance = axios.create({
 	headers: { 'Content-Type': 'multipart/form-data' }
 });
 
+// SEND JSON DATA
 const instance = axios.create({
 	headers: { 'Content-Type': 'application/json' }
 });
 
+// UPLOAD FILE
 export const fileUploadApi = async ({formData, id, setUploadPersentage}) => {
 	const result = await fileInstance.post(`${baseURL}/${id}`, formData, {
 		onUploadProgress: (ProgressEvent) => {
@@ -24,6 +27,7 @@ export const fileUploadApi = async ({formData, id, setUploadPersentage}) => {
 	return result.data;
 };
 
+// REMOVE FILE
 export const removeFileApi = async (payload) => {
 	const result = await instance.post(`${baseURL}/delete/${payload.id}`, body(payload))
 	return result.data
