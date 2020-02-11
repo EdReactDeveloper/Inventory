@@ -5,6 +5,8 @@ const router = express.Router();
 const Profile = require('../../models/Profile');
 const Item = require('../../models/Item'); 
 
+
+// GET USER'S PROFILE
 router.get('/me', async (req, res) => {
 	try {
 		const profile = await Profile.findOne({user: req.session.user._id})
@@ -43,6 +45,7 @@ router.post('/add', [
 			description: payload.description,
 			hidden: payload.hien
 		})
+
 		const result = await profile.save()
 		res.json(result)
 	} catch (error) {
@@ -50,16 +53,18 @@ router.post('/add', [
 	}
 })
 
+
 // UPADATE
 router.post('/:id', [
 	check('name', 'min length is 3 chars, max length is 25 chars').isLength({min: 3, max: 25})
 ], async(req, res)=>{
+
 	const errors = validationResult(req)
 	if(!errors.isEmpty()){
 		res.status(400).json({errors: errors.array()})
 	}
-	const payload = req.body
 
+	const payload = req.body
 	try {
 		let profile = await Profile.findOne({user: req.session.user._id})
 		if(profile){
@@ -75,7 +80,8 @@ router.post('/:id', [
 
 })
 
-// REMOVE
+
+// REMOVE PROFILE TEMPORARY
 router.delete('/:id', async (req,res)=>{
 	const profile = await Profile.findById(req.params.id)
 	if(profile.removed){
@@ -87,10 +93,10 @@ router.delete('/:id', async (req,res)=>{
 		await profile.save()
 		res.json(profile.removed)
 	}
+})
 
-}
-)
 
+// RESTORE TEMPORARY REMOVED PROFILE
 router.post('/restore', async (req,res)=>{
 	const {id} = req.body.payload
 	const profile = await Profile.findById(id)
@@ -101,8 +107,6 @@ router.post('/restore', async (req,res)=>{
 	}
 
 	res.status(404).json({msg: 'profile is not found'})
-}
-)
-
+})
 
 module.exports = router;

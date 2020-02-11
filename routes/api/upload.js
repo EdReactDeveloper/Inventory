@@ -25,8 +25,12 @@ router.post('/:id', (req, res) => {
 
 	const file = req.files.file;
 	const { id } = req.params;
+	
+	// 1. create new img name
 	const extension = file.name.match(/\.(gif|jpg|jpeg|tiff|png)$/i)[0];
 	const filename = id + extension;
+
+	// 2. upload new img
 	file.mv(`${__dirname}/../../client/public/uploads/${filename}`, (err) => {
 		if (err) {
 			console.error(err);
@@ -40,8 +44,12 @@ router.post('/:id', (req, res) => {
 router.post('/delete/:id', async (req, res) => {
 	const { img } = req.body;
 	const { id } = req.params;
+
+	// 1. remove img from fs
 	removeImg(img);
+
 	try { 
+		// 2. remove img path from doc
 		const item = await Item.findById(id); // for edit form
 		if (item) {
 			item.img = '';

@@ -5,6 +5,8 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 
+
+// REGISTER
 router.post(
 	'/register',
 	[
@@ -40,6 +42,8 @@ router.post(
 	}
 );
 
+
+// LOGIN
 router.post(
 	'/login',
 	[
@@ -74,6 +78,8 @@ router.post(
 	}
 );
 
+
+// LOGOUT
 router.post('/logout', (req, res,) => {
 	req.session.destroy(() => {
 		return res.redirect('/');

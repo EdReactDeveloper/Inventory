@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../../models/Item');
 
+// FIND DOCS BY NAME, LOCATION, TAGS
 router.get('/', async (req, res) => {
 	const { query } = req.query;
 	const reqexp = new RegExp(query);
