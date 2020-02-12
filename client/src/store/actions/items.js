@@ -33,7 +33,7 @@ export const moveItemsAction = ({ id, items, path }) => async (dispatch) => {
 	dispatch({ type: MOVE_ITEMS });
 	const docs = [];
 	for (let i = 0; i < items.length; i++) {
-		if (items[i].parentId !== id) {
+		if (items[i].parentId !== id || items[i]._id !== id) {
 			docs.push(items[i].id);
 		}
 	}
