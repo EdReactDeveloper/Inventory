@@ -1,6 +1,6 @@
 
 .list{
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 
@@ -49,6 +49,7 @@
   & figure{
     width: 16rem;
     overflow: hidden;
+    border-radius: 8px 0 0 8px;
   }
   &__img{
     height: 100%;
