@@ -10,7 +10,7 @@ const Field = (props) => {
     },
     checks: { required }
   } = props
-  
+
   let field = null
   switch (item.field) {
 
@@ -50,7 +50,7 @@ const Field = (props) => {
     <label key={item.name} htmlFor={item.name} className={style.heading}>
       <h4>{item.heading}</h4>
       {field}
-      <div className={style.danger}>{required[item.name]}</div>
+      {item.field !== 'checkbox' && <div className={style.danger}>{required[item.name]}</div>}
     </label>
   )
 };

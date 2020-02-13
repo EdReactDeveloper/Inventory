@@ -1,9 +1,13 @@
 .form{
   &__wrapper{
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 2rem;
+
+    & input, & textarea, & select{
+      width: 26rem;
+    }
     
     & form{
       width: 100%;

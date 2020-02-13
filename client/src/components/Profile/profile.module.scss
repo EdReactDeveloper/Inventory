@@ -18,42 +18,6 @@
   }
 }
 
-.item {
-  &_wrapper {
-    display: flex;
-    border: 1px solid #ccc;
-    margin: 1rem 0;
-    height: 10rem;
-  }
-
-  &__info{
-    padding: 1rem 2rem;
-  }
-
-  &__menu{
-    margin-left: auto;
-    padding: 0 1rem;
-  }
-
-  &__img{
-    height: 100%;
-    max-width: 15rem;
-  }
-
-  &__selected{
-    border: 2px solid #44bd32;
-  }
-
-  &__details {
-    margin-left: 1rem;
-    
-    & span {
-      font-size: 1.4rem;
-      color: #bbb;
-    }
-  }
-}
-
 .bread {
   padding: 1rem 0;
   display: flex;
@@ -103,13 +67,11 @@
 
 .content {
   padding: 2rem;
-  min-width: 32rem;
-  flex-grow: 1;
+  width: calc(100% - 28rem);
 }
 
 .info {
-  width: 32rem;
-  padding: 2rem;
+  width: 28rem;
   border-left: 1px solid #ccc;
 }
 

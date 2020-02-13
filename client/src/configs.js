@@ -17,3 +17,9 @@ export const DELETE_FORM_VALUE = {
 	one: 'ONE',
 	all: 'ALL'
 };
+
+export const ITEM_STYLE = {
+	update: 'UPDATE',
+	add: 'ADD',
+	delete: 'DELETE'
+}

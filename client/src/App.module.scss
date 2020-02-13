@@ -29,21 +29,11 @@ body {
   font-size: 1.6rem;
   line-height: 1.6;
   color: #666;
+  background: #f6f6f6;
 }
 
 .app{
   width: 100%;
-}
-
-.board {
-  display: grid;
-  grid-template-columns: 30rem 1fr;
-  grid-template-rows: 7rem 1fr;
-  height: 100%;
-  @media only screen and (max-width: 600px) {
-    display: flex;
-    flex-direction: column;
-  }
 }
 
 .wrapper {
@@ -53,10 +43,18 @@ body {
 }
 
 .container {
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-flow: column wrap;
+  -ms-flex-flow: column wrap;
+  flex-flow: column wrap;
   margin: 0 auto;
-
-  @media (max-width: 1240px) {
-    padding: 0 2rem;
-    margin: 0;
-  }
+  max-width: 1366px;
+  min-height: 100%;
+  min-width: 1000px;
+  z-index: 1;
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 import ButtonsBlock from '../../Tools/PageTools';
+import style from '../info.module.scss'; 
 
 const View = (props) => {
   const { data: {profile: { name, description }} } = props
   return (
-    <div>
+    <div className={style.info}>
       <ButtonsBlock
         {...props}
       />

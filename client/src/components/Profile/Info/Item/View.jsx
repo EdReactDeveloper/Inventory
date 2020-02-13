@@ -11,7 +11,7 @@ const View = (props) => {
   const { name, description, location, status, tags, count, type, shared, updated, created, img } = page
   
   return (
-    <div>
+    <div className={style.info}>
           <ButtonsBlock
             {...props}
           />

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import style from '../profile.module.scss';
+import style from './list.module.scss';
 import Button from '../../misc/Elements/Button';
-import Loader from '../../misc/Loader/Lines';
+import ItemLoader from './ItemLoader';
 import Menu from '../../Menu';
-import { FORM_INSTANCE } from '../../../configs';
+import { FORM_INSTANCE, ITEM_STYLE } from '../../../configs';
+import {formatTitle} from '../../misc/utilFuncs';
 
 const Item = (props) => {
 
@@ -31,34 +32,38 @@ const Item = (props) => {
   </Menu>
 
   return (
-    <li className={`${style.item_wrapper} ${checked ? style.item__selected : ''}`}>
-      {inProgress.some(item => item === _id) ? <Loader className={style.loader__item} /> :
-        <>
-          {img ? 
-          <img src={img} alt='not found' className={style.item__img} />
-          : <img src={defaultImg} alt='not found' className={style.item__img} />
-        }
-          {checked ?
-            (<div className={style.item__info}>
-              <h4>{name}</h4>
-              <div className={style.item__details}><span>tags:</span> {tags}</div>
-              <div className={style.item__details}><span>status:</span> {status}</div>
-            </div>) :
-            (
-              <div className={style.item__info}>
-                <Link to={_id}>
-                  <h4>{name}</h4>
-                  <div className={style.item__details}><span>tags:</span> {tags}</div>
-                  <div className={style.item__details}><span>status:</span> {status}</div>
-                </Link>
-              </div>
-            )
+    <>
+      {inProgress.some(item => item === _id) ? <ItemLoader type={ITEM_STYLE.delete} /> :
+        <li className={`${style.item} ${checked ? style.item__selected : ''}`}>
+          <>
+          <figure>
+            {img ?
+              <img src={img} alt='not found' className={style.item__img} />
+              : <img src={defaultImg} alt='not found' className={style.item__img} />
+            }
+            </figure>
+            {checked ?
+              (<div className={style.item__info}>
+                <h4>{formatTitle(name, 17)}</h4>
+                <div className={style.item__details}><span>tags:</span> {tags}</div>
+                <div className={style.item__details}><span>status:</span> {status}</div>
+              </div>) :
+              (
+                <div className={style.item__info}>
+                  <Link to={_id}>
+                    <h4>{formatTitle(name, 17)}</h4>
+                    <div className={style.item__details}><span>tags:</span> {tags}</div>
+                    <div className={style.item__details}><span>status:</span> {status}</div>
+                  </Link>
+                </div>
+              )
 
-          }
-        </>
+            }
+            {dropMenu}
+          </>
+        </li>
       }
-      {dropMenu}
-    </li>
+    </>
   );
 };
 
