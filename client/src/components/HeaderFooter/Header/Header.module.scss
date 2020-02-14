@@ -16,6 +16,11 @@ header {
   padding: 0 15px 0 30px;
     text-align: left;
     width: 100%;
+
+    & form{
+      display: flex;
+      flex-direction: row;
+    }
 }
 
 .logo {
