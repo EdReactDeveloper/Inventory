@@ -10,8 +10,8 @@ const SearchPageContainer = (props) => {
   const {location:{search}} = props
   
   useEffect(()=>{
-    if(search.length > 0){
-      const query = search.replace('?query=', '')
+    const query = search.replace('?query=', '')
+    if(query.trim().length > 0){
       dispatch(getSearchAction(query))
     }
   }, [dispatch, search])

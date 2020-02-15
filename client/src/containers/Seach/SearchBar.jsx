@@ -21,7 +21,9 @@ const SearchFieldContainer = (props) => {
 
   const searchSubmitHandler = (e) =>{
     e.preventDefault()
-    history.push(`/search?query=${query}`)
+    if(query.length > 0){
+      history.push(`/search?query=${query}`)
+    }
   }
 
   const payload = {
