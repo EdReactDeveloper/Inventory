@@ -2,10 +2,13 @@
   padding: 2rem;
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .list{
-  width: 50%;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
 }
 
 .input{
@@ -24,7 +27,6 @@
   }
   padding: 1rem;
   margin: 1rem 0;
-  width: 100%;
   & h3{
     color: #0097e6;
 

@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     min-height: calc(100vh - 20rem);
+    width: 100%;
   }
 
 .loader {
@@ -69,9 +70,8 @@
 
 .info {
   width: 30rem;
-  padding-top: 3rem;
+  padding: 3rem 0;
   border-radius: 8px;
-  height: 100%;
   word-break: break-all;
 }
 
