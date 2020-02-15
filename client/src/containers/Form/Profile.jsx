@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileForm from '../../components/Form/Profile';
+import ProfileForm from '../../components/Form/ProfileForm';
 import { updateProfileAction, addProfileAction } from '../../store/actions/profile';
 import { formHandler } from '../../store/actions/form';
 import { FORM_TYPE } from '../../configs';
@@ -9,7 +9,7 @@ import { isRequired } from '../../validators';
 
 const FormContainer = (props) => {
   const dispatch = useDispatch()
-  const { profile, profileLoading } = useSelector(state => state.profile)
+  const { profileLoading } = useSelector(state => state.profile)
   const { formType, data } = useSelector(state => state.form)
   const { history } = props
   const [required, setRequired] = useState({

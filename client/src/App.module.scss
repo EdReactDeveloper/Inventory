@@ -1,6 +1,7 @@
 html {
   font-size: 62.5%;
-  @media only screen and (max-width: 800px){
+
+  @media only screen and (max-width: 800px) {
     font-size: 50%;
   }
 }
@@ -32,25 +33,17 @@ body {
   background: #f6f6f6;
 }
 
-.app{
+.app {
   width: 100%;
 }
 
-.wrapper {
-  min-height: calc(100vh - 20rem);
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  height: 100%;
 }
 
-.container {
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-flow: column wrap;
-  -ms-flex-flow: column wrap;
-  flex-flow: column wrap;
-  margin: 0 auto;
-  max-width: 1180px;
-  z-index: 1;
+main{
+  min-height: calc(100vh - 20rem);
 }

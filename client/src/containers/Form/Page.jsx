@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Form from '../../components/Form/Page';
+import Form from '../../components/Form/PageForm';
 import { addItemAction, updateItemAction } from '../../store/actions/items';
 import { formHandler, fileUploadAction, removeFileAction } from '../../store/actions/form';
 import { FORM_TYPE, STATUSES } from '../../configs';

@@ -4,8 +4,8 @@ import Loader from '../misc/Loader/Circle';
 
 const ProfileLoader = () => {
   return (
-    <div className={style.profile__loader__wrapper}>
-      <Loader className={style.profile__loader} />
+    <div className={style.loader__wrapper}>
+      <Loader className={style.loader} />
     </div>
   );
 };

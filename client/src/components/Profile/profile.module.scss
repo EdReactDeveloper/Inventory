@@ -1,11 +1,10 @@
-.profile {
-  &__wrapper {
+.wrapper {
     display: flex;
     justify-content: space-between;
-    height: 100%;
+    min-height: calc(100vh - 20rem);
   }
 
-  &__loader {
+.loader {
     font-size: 7px;
 
     &__wrapper {
@@ -15,7 +14,6 @@
       justify-content: center;
       align-items: center;
     }
-  }
 }
 
 .bread {
@@ -65,20 +63,20 @@
 }
 
 .content {
-  padding: 2rem;
+  padding: 2rem 2rem 0 0;
   width: calc(100% - 28rem);
 }
 
 .info {
   width: 30rem;
-  margin-top: 3rem;
+  padding-top: 3rem;
   border-radius: 8px;
   height: 100%;
 }
 
 .loader {
   font-size: 7px;
-  margin: 10rem;
+  margin: 20rem auto;
 
   &__wrapper {
     display: flex;

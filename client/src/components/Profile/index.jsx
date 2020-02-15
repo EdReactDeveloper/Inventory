@@ -6,8 +6,8 @@ import ItemInfo from './Info/Item';
 import List from './List';
 import Loader from '../misc/Loader/Circle';
 import Tools from './Tools/ListTools';
-import {FORM_TYPE} from '../../configs'; 
-import Edit from '../../containers/Form/Page'; 
+import { FORM_TYPE } from '../../configs';
+import Edit from '../../containers/Form/Page';
 
 const Profile = (props) => {
   const {
@@ -16,24 +16,23 @@ const Profile = (props) => {
     checks: { isProfilePage, formType, isItemPage },
   } = props
 
-  const renderInfo = () =>{
-    switch(true){
+  const renderInfo = () => {
+    switch (true) {
       case isProfilePage: return <ProfileInfo {...props} />
       case isItemPage: return <ItemInfo {...props} />
       default: return <Loader className={style.loader} />
     }
   }
 
-  const renderList = () =>{
-    switch(formType){
-      case FORM_TYPE.add: return <Edit {...props}/>
+  const renderList = () => {
+    switch (formType) {
+      case FORM_TYPE.add: return <Edit {...props} />
       default: return <List {...props} />
     }
   }
 
   return (
-    <div className={style.profile__wrapper}>
-
+    <>
       <div className={style.content}>
         {list && profile && !itemsLoading ? <>
           <BreadCrumbs {...props} />
@@ -43,9 +42,9 @@ const Profile = (props) => {
         }
       </div>
       <div className={style.info}>
-      {renderInfo()}
+        {renderInfo()}
       </div>
-    </div>
+    </>
   );
 };
 

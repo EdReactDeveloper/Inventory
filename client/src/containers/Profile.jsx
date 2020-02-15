@@ -5,7 +5,7 @@ import Profile from '../components/Profile';
 import { getProfileAction, componentUnmount} from '../store/actions/profile';
 import { getItemsAction, moveItemsAction} from '../store/actions/items';
 import {formHandler} from '../store/actions/form'; 
-
+import style from '../components/Profile/profile.module.scss'; 
 import Loader from '../components/Profile/Loader';
 import NotFound from '../components/404';
 
@@ -71,12 +71,13 @@ const ProfileContainer = (props) => {
     }
   }
 
-  switch (true) {
+   switch (true) {
     case profile.removed: return <Redirect to='/' />
-    case isProfilePage || isItemPage: return <Profile {...props} {...payload} />
-    case profileLoading || itemsLoading: return <Loader />;
-    default: return <NotFound {...props} />
+    case isProfilePage || isItemPage: return <div className={style.wrapper}><Profile {...props} {...payload} /></div>
+    case profileLoading || itemsLoading: return <div className={style.wrapper}><Loader /></div>;
+    default: return <div className={style.wrapper}><NotFound {...props} /></div>
   }
+
 
 
 };

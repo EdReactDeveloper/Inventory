@@ -26,7 +26,7 @@ const Routes = ({ loading }) => {
           <Notification />
           <Route path="/" component={Modal} />
           <ErrorBoundry>
-            <div className={style.wrapper}>
+            <main className={style.container}>
               <Switch>
                 <PrivateRoute path='/search' component={Search} />
                 <AuthRoute exact path="/login" component={Login} />
@@ -35,7 +35,7 @@ const Routes = ({ loading }) => {
                 <PrivateRoute exact path='/profile/:id' component={Profile} />
                 <PrivateRoute component={NotFound} />
               </Switch>
-            </div>
+            </main>
           </ErrorBoundry>
         </HeaderFooter>
       )}

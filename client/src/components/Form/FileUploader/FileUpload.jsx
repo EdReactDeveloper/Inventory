@@ -17,7 +17,7 @@ const ImageInput = (props) => {
   } = props
 
   return (
-    <form onSubmit={(e) => uploadFile(e, file)} className={style.form__loader}>
+    <form onSubmit={(e) => uploadFile(e, file)} >
       {uploadPersentage > 0 ? <div>uploaded: {uploadPersentage} %</div> : null}
       <input type="file" name="customFile" id="customFile" onChange={selectImageHandler} />
       {file && <Button type="submit" className={style.form__uploadBtn} >upload</Button>}

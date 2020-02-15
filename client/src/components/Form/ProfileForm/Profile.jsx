@@ -1,7 +1,7 @@
 import React from 'react';
-import { renderProfile } from './formData';
-import Button from '../misc/Elements/Button';
-import Field from '../misc/Elements/Input';
+import { renderProfile } from '../formData';
+import Button from '../../misc/Elements/Button';
+import Field from '../../misc/Elements/Input';
 
 const ProfileForm = (props) => {
 
@@ -16,7 +16,6 @@ const ProfileForm = (props) => {
       profileLoading
     }
   } = props
-  console.log(props)
   return (
     <form onSubmit={(e)=>submitFormHandler(e)}>
       {renderProfile(state).map(item => {
