@@ -23,3 +23,8 @@ export const ITEM_STYLE = {
 	add: 'ADD',
 	delete: 'DELETE'
 }
+
+export const LOADER_STYLE = {
+	lines: 'LINES',
+	circle: 'CIRCLE'
+}
