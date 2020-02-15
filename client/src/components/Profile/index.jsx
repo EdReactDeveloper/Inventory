@@ -7,7 +7,7 @@ import List from './List';
 import Loader from '../misc/Loader/Circle';
 import Tools from './Tools/ListTools';
 import { FORM_TYPE } from '../../configs';
-import Edit from '../../containers/Form/Page';
+import Form from '../../containers/Form/Page';
 
 const Profile = (props) => {
   const {
@@ -26,7 +26,7 @@ const Profile = (props) => {
 
   const renderList = () => {
     switch (formType) {
-      case FORM_TYPE.add: return <Edit {...props} />
+      case FORM_TYPE.add: return <Form {...props} />
       default: return <List {...props} />
     }
   }

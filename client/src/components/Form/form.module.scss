@@ -6,12 +6,11 @@
   box-sizing: border-box;
   padding: 1rem;
   border: 1px solid #ccc;
-}
 
-form{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  form{
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .edit{
@@ -20,6 +19,5 @@ form{
 
 .add{
   width: 30rem;
-
 }
 
